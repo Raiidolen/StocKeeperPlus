@@ -19,7 +19,8 @@ DROP TABLE IF EXISTS "User" CASCADE;
 CREATE TABLE "User" (
     mail VARCHAR(255) PRIMARY KEY,
     username VARCHAR(100) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL
+    password VARCHAR(255) NOT NULL,
+    isAdmin BOOLEAN NOT NULL
 );
 
 -- TABLE: Store
