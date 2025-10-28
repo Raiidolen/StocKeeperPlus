@@ -18,7 +18,7 @@ export const getProduct = async (req, res)=> {
     }
 };
 
-export const getAllProduct = async (req, res)=> {
+export const getAllProduct = async (_req, res)=> {
     try {
         const products = await prisma.product.findMany();
         if(products){
@@ -34,13 +34,15 @@ export const getAllProduct = async (req, res)=> {
 
 export const addProduct = async (req, res) => {
     try {
-        const {label, description, caloricIntake, timeToMake} = req.val;
+        const {label, expirationDate, quantity, nutriScore, storageType, diet} = req.val;
         const {id} = await prisma.product.create({
             data: {
                 label,
-                description,
-                caloricIntake,
-                timeToMake
+                expirationDate,
+                quantity,
+                nutriScore,
+                storageType,
+                diet
             },
             select: {
                 id: true
@@ -55,13 +57,15 @@ export const addProduct = async (req, res) => {
 
 export const updateProduct = async (req, res) => {
     try {
-        const {label, description, caloricIntake, timeToMake} = req.val;
+        const {label, expirationDate, quantity, nutriScore, storageType, diet} = req.val;
         await prisma.product.update({
             data: {
                 label,
-                description,
-                caloricIntake,
-                timeToMake
+                expirationDate,
+                quantity,
+                nutriScore,
+                storageType,
+                diet
             },
             where: {
                 id
