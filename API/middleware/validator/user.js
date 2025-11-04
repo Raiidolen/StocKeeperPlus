@@ -1,7 +1,7 @@
 import vine from '@vinejs/vine';
 
 const userIDSchema = vine.object({
-    id: vine.number()
+    mail: vine.string().trim()
 });
 
 const userToAddSchema = vine.object({

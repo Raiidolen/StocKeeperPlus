@@ -64,7 +64,7 @@ export const updateUser = async (req, res) => {
                 isAdmin
             },
             where: {
-                id
+                mail
             }
         });
         res.sendStatus(204);
