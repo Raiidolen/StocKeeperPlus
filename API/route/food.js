@@ -6,7 +6,7 @@ import {
     getFood,
     getAllFood,
     deleteFood
-}  from  '../controler/foodORM.js'
+}  from  '../controller/foodORM.js'
 import {foodValidatorMiddlewares as PVM} from '../middleware/validation.js';
 
 const router = Router();
