@@ -1,5 +1,6 @@
 import prisma from '../database/databaseORM.js';
 
+
 export const getUser = async (req, res)=> {
     try {
         const user = await prisma.user.findUnique({
@@ -17,6 +18,7 @@ export const getUser = async (req, res)=> {
         res.sendStatus(500);
     }
 };
+
 
 export const getAllUser = async (_req, res)=> {
     try {
