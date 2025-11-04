@@ -11,6 +11,7 @@ const foodToAddSchema = vine.object({
     nutriScore: vine.string().maxLength(1),
     storageType: vine.string(),
     diet: vine.string(),
+    user_mail: vine.string()
 });
 
 const foodToUpdateSchema = vine.object({
@@ -21,6 +22,7 @@ const foodToUpdateSchema = vine.object({
     nutriScore: vine.string().maxLength(1).optional(),
     storageType: vine.string().optional(),
     diet: vine.string().optional(),
+    user_mail: vine.string().optional()
 });
 
 
