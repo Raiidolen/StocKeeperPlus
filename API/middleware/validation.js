@@ -3,7 +3,7 @@ import * as foodValidator from './validator/food.js';
 export const foodValidatorMiddlewares = {
     searchedFood: async (req, res, next) => {
         try {
-            req.val  = await foodValidator.searchedFood.validate(req.params);
+            req.val  = await foodValidator.searchedFood.validate(req.body);
             next();
         } catch (e) {
             res.status(400).send(e.messages);
@@ -27,7 +27,7 @@ export const foodValidatorMiddlewares = {
     },
     foodToDelete: async(req, res, next) => {
         try {
-            req.val  = await foodValidator.foodToDelete.validate(req.params);
+            req.val  = await foodValidator.foodToDelete.validate(req.body);
             next();
         } catch (e) {
             res.status(400).send(e.messages);

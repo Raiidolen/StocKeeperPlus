@@ -34,15 +34,16 @@ export const getAllFood = async (_req, res)=> {
 
 export const addFood = async (req, res) => {
     try {
-        const {label, expirationDate, quantity, nutriScore, storageType, diet} = req.val;
+        const {label, expirationdate, quantity, nutriscore, storagetype, diet, user_mail} = req.val;
         const {id} = await prisma.food.create({
             data: {
                 label,
-                expirationDate,
+                expirationdate,
                 quantity,
-                nutriScore,
-                storageType,
-                diet
+                nutriscore,
+                storagetype,
+                diet,
+                user_mail
             },
             select: {
                 id: true
@@ -56,16 +57,18 @@ export const addFood = async (req, res) => {
 };
 
 export const updateFood = async (req, res) => {
+    console.log(req.body);
     try {
-        const {label, expirationDate, quantity, nutriScore, storageType, diet} = req.val;
+        const {id, label, expirationdate, quantity, nutriscore, storagetype, diet, user_mail} = req.val;
         await prisma.food.update({
             data: {
                 label,
-                expirationDate,
+                expirationdate,
                 quantity,
-                nutriScore,
-                storageType,
-                diet
+                nutriscore,
+                storagetype,
+                diet,
+                user_mail
             },
             where: {
                 id
