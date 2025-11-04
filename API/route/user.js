@@ -7,14 +7,14 @@ import {
     getAllUser,
     deleteUser
 }  from  '../controller/userORM.js'
-//import {userValidatorMiddlewares as PVM} from '../middleware/validation.js';
+import {userValidatorMiddleware as PVM} from '../middleware/userValidation.js';
 
 const router = Router();
 
-router.post('/', addUser);
-router.patch('/', updateUser);
-router.get('/', getUser);
+router.post('/', PVM.userToAdd, addUser);
+router.patch('/', PVM.userToUpdate, updateUser);
+router.get('/', PVM.searchedUser, getUser);
 router.get('/all/', getAllUser);
-router.delete('/:id', deleteUser);
+router.delete('/', PVM.userToDelete, deleteUser);
 
 export default router;
