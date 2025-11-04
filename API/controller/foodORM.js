@@ -1,14 +1,14 @@
 import prisma from '../database/databaseORM.js';
 
-export const getProduct = async (req, res)=> {
+export const getFood = async (req, res)=> {
     try {
-        const product = await prisma.product.findUnique({
+        const food = await prisma.food.findUnique({
             where: {
                 id: req.val.id
             }
         });
-        if(product){
-            res.send(product);
+        if(food){
+            res.send(food);
         } else {
             res.sendStatus(404);
         }
@@ -18,11 +18,11 @@ export const getProduct = async (req, res)=> {
     }
 };
 
-export const getAllProduct = async (_req, res)=> {
+export const getAllFood = async (_req, res)=> {
     try {
-        const products = await prisma.product.findMany();
-        if(products){
-            res.send(products);
+        const foods = await prisma.food.findMany();
+        if(foods){
+            res.send(foods);
         } else {
             res.sendStatus(404);
         }
@@ -32,10 +32,10 @@ export const getAllProduct = async (_req, res)=> {
     }
 }
 
-export const addProduct = async (req, res) => {
+export const addFood = async (req, res) => {
     try {
         const {label, expirationDate, quantity, nutriScore, storageType, diet} = req.val;
-        const {id} = await prisma.product.create({
+        const {id} = await prisma.food.create({
             data: {
                 label,
                 expirationDate,
@@ -55,10 +55,10 @@ export const addProduct = async (req, res) => {
     }
 };
 
-export const updateProduct = async (req, res) => {
+export const updateFood = async (req, res) => {
     try {
         const {label, expirationDate, quantity, nutriScore, storageType, diet} = req.val;
-        await prisma.product.update({
+        await prisma.food.update({
             data: {
                 label,
                 expirationDate,
@@ -78,10 +78,10 @@ export const updateProduct = async (req, res) => {
     }
 };
 
-export const deleteProduct = async (req, res) => {
+export const deleteFood = async (req, res) => {
     try {
         const {id} = req.val;
-        await prisma.product.delete({
+        await prisma.food.delete({
             where: {
                 id
             }

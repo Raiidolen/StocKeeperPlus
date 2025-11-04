@@ -1,0 +1,20 @@
+import Router from 'express';
+
+import {
+    addFood,
+    updateFood,
+    getFood,
+    getAllFood,
+    deleteFood
+}  from  '../controler/foodORM.js'
+import {foodValidatorMiddlewares as PVM} from '../middleware/validation.js';
+
+const router = Router();
+
+router.post('/', PVM.foodToAdd, addFood);
+router.patch('/', PVM.foodToUpdate, updateFood);
+router.get('/:id', PVM.searchedFood, getFood);
+router.get('/', getAllFood);
+router.delete('/:id', PVM.foodToDelete, deleteFood);
+
+export default router;

@@ -1,10 +1,10 @@
 import vine from '@vinejs/vine';
 
-const productIDSchema = vine.object({
+const foodIDSchema = vine.object({
     id: vine.number()
 });
 
-const productToAddSchema = vine.object({
+const foodToAddSchema = vine.object({
     label: vine.string().trim(),
     expirationDate: vine.date(),
     quantity: vine.number(),
@@ -13,7 +13,7 @@ const productToAddSchema = vine.object({
     diet: vine.string(),
 });
 
-const productToUpdateSchema = vine.object({
+const foodToUpdateSchema = vine.object({
     id: vine.number(),
     label: vine.string().trim().optionnal(),
     expirationDate: vine.date().optionnal(),
@@ -25,7 +25,7 @@ const productToUpdateSchema = vine.object({
 
 
 export const
-    searchedProduct = vine.compile(productIDSchema),
-    productToAdd = vine.compile(productToAddSchema),
-    productToUpdate = vine.compile(productToUpdateSchema),
-    productToDelete = vine.compile(productIDSchema);
+    searchedFood = vine.compile(foodIDSchema),
+    foodToAdd = vine.compile(foodToAddSchema),
+    foodToUpdate = vine.compile(foodToUpdateSchema),
+    foodToDelete = vine.compile(foodIDSchema);
