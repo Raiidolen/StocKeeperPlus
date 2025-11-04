@@ -1,33 +1,33 @@
-import * as productValidator from './validator/product.js';
+import * as foodValidator from './validator/food.js';
 
-export const productValidatorMiddlewares = {
-    searchedProduct : async (req, res, next) => {
+export const foodValidatorMiddlewares = {
+    searchedFood: async (req, res, next) => {
         try {
-            req.val  = await productValidator.searchedProduct.validate(req.params);
+            req.val  = await foodValidator.searchedFood.validate(req.params);
             next();
         } catch (e) {
             res.status(400).send(e.messages);
         }
     },
-    productToAdd: async(req, res, next) => {
+    foodToAdd: async(req, res, next) => {
         try {
-            req.val  = await productValidator.productToAdd.validate(req.body);
+            req.val  = await foodValidator.foodToAdd.validate(req.body);
             next();
         } catch (e) {
             res.status(400).send(e.messages);
         }
     },
-    productToUpdate: async(req, res, next) => {
+    foodToUpdate: async(req, res, next) => {
         try {
-            req.val  = await productValidator.productToUpdate.validate(req.body);
+            req.val  = await foodValidator.foodToUpdate.validate(req.body);
             next();
         } catch (e) {
             res.status(400).send(e.messages);
         }
     },
-    productToDelete: async(req, res, next) => {
+    foodToDelete: async(req, res, next) => {
         try {
-            req.val  = await productValidator.productToDelete.validate(req.params);
+            req.val  = await foodValidator.foodToDelete.validate(req.params);
             next();
         } catch (e) {
             res.status(400).send(e.messages);
