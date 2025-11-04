@@ -8,7 +8,7 @@ import {
     getAllStores, 
     getStoresWithInRange
 } from '../controller/storeORM.js';
-import {storeValidatorMiddlewares as SVM} from '../middleware/validation.js';
+import {storeValidatorMiddlewares as SVM} from '../middleware/validationStore.js';
 
 const router = Router();
 
