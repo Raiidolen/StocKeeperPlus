@@ -5,7 +5,7 @@ export const getUser = async (req, res)=> {
     try {
         const user = await prisma.user.findUnique({
             where: {
-                mail: req.body.mail
+                mail: req.val.mail
             }
         });
         if(user){
@@ -18,7 +18,6 @@ export const getUser = async (req, res)=> {
         res.sendStatus(500);
     }
 };
-
 
 export const getAllUser = async (_req, res)=> {
     try {
@@ -36,7 +35,7 @@ export const getAllUser = async (_req, res)=> {
 
 export const addUser = async (req, res) => {
     try {
-        const {mail, username, password, isadmin} = req.body;
+        const {mail, username, password, isadmin} = req.val;
         const {idMail} = await prisma.user.create({
             data: {
                 mail,
@@ -57,7 +56,7 @@ export const addUser = async (req, res) => {
 
 export const updateUser = async (req, res) => {
     try {
-        const {mail, username, password, isAdmin} = req.body;
+        const {mail, username, password, isAdmin} = req.val;
         await prisma.user.update({
             data: {
                 mail,
@@ -66,7 +65,7 @@ export const updateUser = async (req, res) => {
                 isAdmin
             },
             where: {
-                id
+                mail
             }
         });
         res.sendStatus(204);
@@ -78,7 +77,7 @@ export const updateUser = async (req, res) => {
 
 export const deleteUser = async (req, res) => {
     try {
-        const {mail} = req.body;
+        const {mail} = req.val;
         await prisma.user.delete({
             where: {
                 mail
