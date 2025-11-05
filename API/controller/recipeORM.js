@@ -20,8 +20,43 @@ export const getRecipe = async (req, res) => {
 }
 
 export const addRecipe = async (req, res) => {
-    try {
-        const {label, description, caloricintake, timetomake, ingredientamount} = req.val;
+  try {
+    const { label, description, caloricIntake, timeToMake, ingredients } = req.val;
+    // ingredients = [{ label, diet, nutriScore, quantity }]
+
+    // 1️⃣ Création de la recette (on ne sélectionne que l'id)
+    const recipe = await prisma.recipe.create({
+      data: { label, description, caloricIntake, timeToMake },
+      select: { id: true },
+    });
+
+    await Promise.all(
+      ingredients.map(async (ing) => {
+        let food = await prisma.food.findFirst({
+          where: { label: ing.label },
+        });
+
+        if (!food) {
+          food = await prisma.food.create({
+            data: {
+              label: ing.label,
+              diet: ing.diet,
+              nutriScore: ing.nutriScore,
+            },
+            select: { id: true },
+          });
+        }
+
+        await prisma.ingredientamount.create({
+          data: {
+            recipeId: recipe.id,
+            foodId: food.id,
+            quantity: ing.quantity,
+          },
+        });
+      })
+    );
+    res.status(201).json({ id: recipe.id });
     }
     catch(err){
         console.error(err);
