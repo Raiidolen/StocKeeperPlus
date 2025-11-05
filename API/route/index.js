@@ -10,5 +10,4 @@ router.use("/auth", authRouter);
 router.use('/user', userRouter);
 router.use('/food', foodRouter);
 router.use('/foodUser', foodUserRouter);
-
 export default router;
