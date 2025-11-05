@@ -6,23 +6,15 @@ const foodIDSchema = vine.object({
 
 const foodToAddSchema = vine.object({
     label: vine.string().trim(),
-    expirationdate: vine.date(),
-    quantity: vine.number().min(1),
-    nutriscore: vine.string().maxLength(1),
-    storagetype: vine.string(),
-    diet: vine.string(),
-    user_mail: vine.string()
+    diet: vine.string().trim().optional(),
+    nutriscore: vine.string().trim().maxLength(1).optional()
 });
 
 const foodToUpdateSchema = vine.object({
     id: vine.number(),
     label: vine.string().trim().optional(),
-    expirationdate: vine.date().optional(),
-    quantity: vine.number().min(1).optional(),
-    nutriscore: vine.string().maxLength(1).optional(),
-    storagetype: vine.string().optional(),
-    diet: vine.string().optional(),
-    user_mail: vine.string().optional()
+    diet: vine.string().trim().optional(),
+    nutriscore: vine.string().trim().maxLength(1).optional()
 });
 
 
