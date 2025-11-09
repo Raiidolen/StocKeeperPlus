@@ -173,7 +173,7 @@ export type UserWhereInput = {
   username?: Prisma.StringFilter<"User"> | string
   password?: Prisma.StringFilter<"User"> | string
   isadmin?: Prisma.BoolFilter<"User"> | boolean
-  food?: Prisma.FoodListRelationFilter
+  fooduser?: Prisma.FooduserListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -181,7 +181,7 @@ export type UserOrderByWithRelationInput = {
   username?: Prisma.SortOrder
   password?: Prisma.SortOrder
   isadmin?: Prisma.SortOrder
-  food?: Prisma.foodOrderByRelationAggregateInput
+  fooduser?: Prisma.fooduserOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -192,7 +192,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   password?: Prisma.StringFilter<"User"> | string
   isadmin?: Prisma.BoolFilter<"User"> | boolean
-  food?: Prisma.FoodListRelationFilter
+  fooduser?: Prisma.FooduserListRelationFilter
 }, "mail" | "username">
 
 export type UserOrderByWithAggregationInput = {
@@ -220,7 +220,7 @@ export type UserCreateInput = {
   username: string
   password: string
   isadmin: boolean
-  food?: Prisma.foodCreateNestedManyWithoutUserInput
+  fooduser?: Prisma.fooduserCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -228,7 +228,7 @@ export type UserUncheckedCreateInput = {
   username: string
   password: string
   isadmin: boolean
-  food?: Prisma.foodUncheckedCreateNestedManyWithoutUserInput
+  fooduser?: Prisma.fooduserUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -236,7 +236,7 @@ export type UserUpdateInput = {
   username?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   isadmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  food?: Prisma.foodUpdateManyWithoutUserNestedInput
+  fooduser?: Prisma.fooduserUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -244,7 +244,7 @@ export type UserUncheckedUpdateInput = {
   username?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   isadmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  food?: Prisma.foodUncheckedUpdateManyWithoutUserNestedInput
+  fooduser?: Prisma.fooduserUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -289,9 +289,9 @@ export type UserMinOrderByAggregateInput = {
   isadmin?: Prisma.SortOrder
 }
 
-export type UserNullableScalarRelationFilter = {
-  is?: Prisma.UserWhereInput | null
-  isNot?: Prisma.UserWhereInput | null
+export type UserScalarRelationFilter = {
+  is?: Prisma.UserWhereInput
+  isNot?: Prisma.UserWhereInput
 }
 
 export type StringFieldUpdateOperationsInput = {
@@ -302,60 +302,58 @@ export type BoolFieldUpdateOperationsInput = {
   set?: boolean
 }
 
-export type UserCreateNestedOneWithoutFoodInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutFoodInput, Prisma.UserUncheckedCreateWithoutFoodInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFoodInput
+export type UserCreateNestedOneWithoutFooduserInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutFooduserInput, Prisma.UserUncheckedCreateWithoutFooduserInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFooduserInput
   connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUpdateOneWithoutFoodNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutFoodInput, Prisma.UserUncheckedCreateWithoutFoodInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFoodInput
-  upsert?: Prisma.UserUpsertWithoutFoodInput
-  disconnect?: Prisma.UserWhereInput | boolean
-  delete?: Prisma.UserWhereInput | boolean
+export type UserUpdateOneRequiredWithoutFooduserNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutFooduserInput, Prisma.UserUncheckedCreateWithoutFooduserInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFooduserInput
+  upsert?: Prisma.UserUpsertWithoutFooduserInput
   connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutFoodInput, Prisma.UserUpdateWithoutFoodInput>, Prisma.UserUncheckedUpdateWithoutFoodInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutFooduserInput, Prisma.UserUpdateWithoutFooduserInput>, Prisma.UserUncheckedUpdateWithoutFooduserInput>
 }
 
-export type UserCreateWithoutFoodInput = {
+export type UserCreateWithoutFooduserInput = {
   mail: string
   username: string
   password: string
   isadmin: boolean
 }
 
-export type UserUncheckedCreateWithoutFoodInput = {
+export type UserUncheckedCreateWithoutFooduserInput = {
   mail: string
   username: string
   password: string
   isadmin: boolean
 }
 
-export type UserCreateOrConnectWithoutFoodInput = {
+export type UserCreateOrConnectWithoutFooduserInput = {
   where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutFoodInput, Prisma.UserUncheckedCreateWithoutFoodInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutFooduserInput, Prisma.UserUncheckedCreateWithoutFooduserInput>
 }
 
-export type UserUpsertWithoutFoodInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutFoodInput, Prisma.UserUncheckedUpdateWithoutFoodInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutFoodInput, Prisma.UserUncheckedCreateWithoutFoodInput>
+export type UserUpsertWithoutFooduserInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutFooduserInput, Prisma.UserUncheckedUpdateWithoutFooduserInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutFooduserInput, Prisma.UserUncheckedCreateWithoutFooduserInput>
   where?: Prisma.UserWhereInput
 }
 
-export type UserUpdateToOneWithWhereWithoutFoodInput = {
+export type UserUpdateToOneWithWhereWithoutFooduserInput = {
   where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutFoodInput, Prisma.UserUncheckedUpdateWithoutFoodInput>
+  data: Prisma.XOR<Prisma.UserUpdateWithoutFooduserInput, Prisma.UserUncheckedUpdateWithoutFooduserInput>
 }
 
-export type UserUpdateWithoutFoodInput = {
+export type UserUpdateWithoutFooduserInput = {
   mail?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   isadmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
-export type UserUncheckedUpdateWithoutFoodInput = {
+export type UserUncheckedUpdateWithoutFooduserInput = {
   mail?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
@@ -368,11 +366,11 @@ export type UserUncheckedUpdateWithoutFoodInput = {
  */
 
 export type UserCountOutputType = {
-  food: number
+  fooduser: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  food?: boolean | UserCountOutputTypeCountFoodArgs
+  fooduser?: boolean | UserCountOutputTypeCountFooduserArgs
 }
 
 /**
@@ -388,8 +386,8 @@ export type UserCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensi
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountFoodArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.foodWhereInput
+export type UserCountOutputTypeCountFooduserArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.fooduserWhereInput
 }
 
 
@@ -398,7 +396,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   username?: boolean
   password?: boolean
   isadmin?: boolean
-  food?: boolean | Prisma.User$foodArgs<ExtArgs>
+  fooduser?: boolean | Prisma.User$fooduserArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -425,7 +423,7 @@ export type UserSelectScalar = {
 
 export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"mail" | "username" | "password" | "isadmin", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  food?: boolean | Prisma.User$foodArgs<ExtArgs>
+  fooduser?: boolean | Prisma.User$fooduserArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -434,7 +432,7 @@ export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "User"
   objects: {
-    food: Prisma.$foodPayload<ExtArgs>[]
+    fooduser: Prisma.$fooduserPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     mail: string
@@ -835,7 +833,7 @@ readonly fields: UserFieldRefs;
  */
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  food<T extends Prisma.User$foodArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$foodArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$foodPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  fooduser<T extends Prisma.User$fooduserArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$fooduserArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$fooduserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1257,27 +1255,27 @@ export type UserDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
- * User.food
+ * User.fooduser
  */
-export type User$foodArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$fooduserArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the food
+   * Select specific fields to fetch from the fooduser
    */
-  select?: Prisma.foodSelect<ExtArgs> | null
+  select?: Prisma.fooduserSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the food
+   * Omit specific fields from the fooduser
    */
-  omit?: Prisma.foodOmit<ExtArgs> | null
+  omit?: Prisma.fooduserOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.foodInclude<ExtArgs> | null
-  where?: Prisma.foodWhereInput
-  orderBy?: Prisma.foodOrderByWithRelationInput | Prisma.foodOrderByWithRelationInput[]
-  cursor?: Prisma.foodWhereUniqueInput
+  include?: Prisma.fooduserInclude<ExtArgs> | null
+  where?: Prisma.fooduserWhereInput
+  orderBy?: Prisma.fooduserOrderByWithRelationInput | Prisma.fooduserOrderByWithRelationInput[]
+  cursor?: Prisma.fooduserWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.FoodScalarFieldEnum | Prisma.FoodScalarFieldEnum[]
+  distinct?: Prisma.FooduserScalarFieldEnum | Prisma.FooduserScalarFieldEnum[]
 }
 
 /**

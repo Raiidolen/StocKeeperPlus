@@ -23,7 +23,7 @@ CREATE TABLE "User" (
     mail VARCHAR(255) PRIMARY KEY,     -- Email unique
     username VARCHAR(100) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
-    isAdmin BOOLEAN NOT NULL
+    isadmin BOOLEAN NOT NULL
 );
 
 -- TABLE: Store

@@ -394,7 +394,8 @@ export const ModelName = {
   foodstore: 'foodstore',
   ingredientamount: 'ingredientamount',
   recipe: 'recipe',
-  store: 'store'
+  store: 'store',
+  fooduser: 'fooduser'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -410,7 +411,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "food" | "foodstore" | "ingredientamount" | "recipe" | "store"
+    modelProps: "user" | "food" | "foodstore" | "ingredientamount" | "recipe" | "store" | "fooduser"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -858,6 +859,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    fooduser: {
+      payload: Prisma.$fooduserPayload<ExtArgs>
+      fields: Prisma.fooduserFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.fooduserFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$fooduserPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.fooduserFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$fooduserPayload>
+        }
+        findFirst: {
+          args: Prisma.fooduserFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$fooduserPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.fooduserFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$fooduserPayload>
+        }
+        findMany: {
+          args: Prisma.fooduserFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$fooduserPayload>[]
+        }
+        create: {
+          args: Prisma.fooduserCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$fooduserPayload>
+        }
+        createMany: {
+          args: Prisma.fooduserCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.fooduserCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$fooduserPayload>[]
+        }
+        delete: {
+          args: Prisma.fooduserDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$fooduserPayload>
+        }
+        update: {
+          args: Prisma.fooduserUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$fooduserPayload>
+        }
+        deleteMany: {
+          args: Prisma.fooduserDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.fooduserUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.fooduserUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$fooduserPayload>[]
+        }
+        upsert: {
+          args: Prisma.fooduserUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$fooduserPayload>
+        }
+        aggregate: {
+          args: Prisma.FooduserAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFooduser>
+        }
+        groupBy: {
+          args: Prisma.fooduserGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FooduserGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.fooduserCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FooduserCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -910,20 +985,17 @@ export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof User
 export const FoodScalarFieldEnum = {
   id: 'id',
   label: 'label',
-  expirationdate: 'expirationdate',
-  quantity: 'quantity',
-  storagetype: 'storagetype',
   diet: 'diet',
-  nutriscore: 'nutriscore',
-  user_mail: 'user_mail'
+  nutriscore: 'nutriscore'
 } as const
 
 export type FoodScalarFieldEnum = (typeof FoodScalarFieldEnum)[keyof typeof FoodScalarFieldEnum]
 
 
 export const FoodstoreScalarFieldEnum = {
-  food_id: 'food_id',
-  store_id: 'store_id',
+  food: 'food',
+  store: 'store',
+  quantity: 'quantity',
   price: 'price'
 } as const
 
@@ -931,8 +1003,8 @@ export type FoodstoreScalarFieldEnum = (typeof FoodstoreScalarFieldEnum)[keyof t
 
 
 export const IngredientamountScalarFieldEnum = {
-  recipe_id: 'recipe_id',
-  food_id: 'food_id',
+  recipe: 'recipe',
+  food: 'food',
   quantity: 'quantity'
 } as const
 
@@ -944,6 +1016,7 @@ export const RecipeScalarFieldEnum = {
   label: 'label',
   description: 'description',
   caloricintake: 'caloricintake',
+  nbeaters: 'nbeaters',
   timetomake: 'timetomake'
 } as const
 
@@ -958,6 +1031,17 @@ export const StoreScalarFieldEnum = {
 } as const
 
 export type StoreScalarFieldEnum = (typeof StoreScalarFieldEnum)[keyof typeof StoreScalarFieldEnum]
+
+
+export const FooduserScalarFieldEnum = {
+  food: 'food',
+  user_mail: 'user_mail',
+  quantity: 'quantity',
+  storagetype: 'storagetype',
+  expirationdate: 'expirationdate'
+} as const
+
+export type FooduserScalarFieldEnum = (typeof FooduserScalarFieldEnum)[keyof typeof FooduserScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1026,20 +1110,6 @@ export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel,
 
 
 /**
- * Reference to a field of type 'DateTime'
- */
-export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
-    
-
-
-/**
- * Reference to a field of type 'DateTime[]'
- */
-export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
-    
-
-
-/**
  * Reference to a field of type 'Decimal'
  */
 export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
@@ -1050,6 +1120,20 @@ export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel,
  * Reference to a field of type 'Decimal[]'
  */
 export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
+    
+
+
+/**
+ * Reference to a field of type 'DateTime'
+ */
+export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+/**
+ * Reference to a field of type 'DateTime[]'
+ */
+export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
     
 
 
@@ -1159,6 +1243,7 @@ export type GlobalOmitConfig = {
   ingredientamount?: Prisma.ingredientamountOmit
   recipe?: Prisma.recipeOmit
   store?: Prisma.storeOmit
+  fooduser?: Prisma.fooduserOmit
 }
 
 /* Types for Logging */

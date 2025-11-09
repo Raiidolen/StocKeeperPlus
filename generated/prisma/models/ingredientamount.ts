@@ -26,64 +26,64 @@ export type AggregateIngredientamount = {
 }
 
 export type IngredientamountAvgAggregateOutputType = {
-  recipe_id: number | null
-  food_id: number | null
+  recipe: number | null
+  food: number | null
   quantity: number | null
 }
 
 export type IngredientamountSumAggregateOutputType = {
-  recipe_id: number | null
-  food_id: number | null
+  recipe: number | null
+  food: number | null
   quantity: number | null
 }
 
 export type IngredientamountMinAggregateOutputType = {
-  recipe_id: number | null
-  food_id: number | null
+  recipe: number | null
+  food: number | null
   quantity: number | null
 }
 
 export type IngredientamountMaxAggregateOutputType = {
-  recipe_id: number | null
-  food_id: number | null
+  recipe: number | null
+  food: number | null
   quantity: number | null
 }
 
 export type IngredientamountCountAggregateOutputType = {
-  recipe_id: number
-  food_id: number
+  recipe: number
+  food: number
   quantity: number
   _all: number
 }
 
 
 export type IngredientamountAvgAggregateInputType = {
-  recipe_id?: true
-  food_id?: true
+  recipe?: true
+  food?: true
   quantity?: true
 }
 
 export type IngredientamountSumAggregateInputType = {
-  recipe_id?: true
-  food_id?: true
+  recipe?: true
+  food?: true
   quantity?: true
 }
 
 export type IngredientamountMinAggregateInputType = {
-  recipe_id?: true
-  food_id?: true
+  recipe?: true
+  food?: true
   quantity?: true
 }
 
 export type IngredientamountMaxAggregateInputType = {
-  recipe_id?: true
-  food_id?: true
+  recipe?: true
+  food?: true
   quantity?: true
 }
 
 export type IngredientamountCountAggregateInputType = {
-  recipe_id?: true
-  food_id?: true
+  recipe?: true
+  food?: true
   quantity?: true
   _all?: true
 }
@@ -175,8 +175,8 @@ export type ingredientamountGroupByArgs<ExtArgs extends runtime.Types.Extensions
 }
 
 export type IngredientamountGroupByOutputType = {
-  recipe_id: number
-  food_id: number
+  recipe: number
+  food: number
   quantity: number
   _count: IngredientamountCountAggregateOutputType | null
   _avg: IngredientamountAvgAggregateOutputType | null
@@ -204,36 +204,36 @@ export type ingredientamountWhereInput = {
   AND?: Prisma.ingredientamountWhereInput | Prisma.ingredientamountWhereInput[]
   OR?: Prisma.ingredientamountWhereInput[]
   NOT?: Prisma.ingredientamountWhereInput | Prisma.ingredientamountWhereInput[]
-  recipe_id?: Prisma.IntFilter<"ingredientamount"> | number
-  food_id?: Prisma.IntFilter<"ingredientamount"> | number
+  recipe?: Prisma.IntFilter<"ingredientamount"> | number
+  food?: Prisma.IntFilter<"ingredientamount"> | number
   quantity?: Prisma.IntFilter<"ingredientamount"> | number
-  food?: Prisma.XOR<Prisma.FoodScalarRelationFilter, Prisma.foodWhereInput>
-  recipe?: Prisma.XOR<Prisma.RecipeScalarRelationFilter, Prisma.recipeWhereInput>
+  food_ingredientamount_foodTofood?: Prisma.XOR<Prisma.FoodScalarRelationFilter, Prisma.foodWhereInput>
+  recipe_ingredientamount_recipeTorecipe?: Prisma.XOR<Prisma.RecipeScalarRelationFilter, Prisma.recipeWhereInput>
 }
 
 export type ingredientamountOrderByWithRelationInput = {
-  recipe_id?: Prisma.SortOrder
-  food_id?: Prisma.SortOrder
+  recipe?: Prisma.SortOrder
+  food?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
-  food?: Prisma.foodOrderByWithRelationInput
-  recipe?: Prisma.recipeOrderByWithRelationInput
+  food_ingredientamount_foodTofood?: Prisma.foodOrderByWithRelationInput
+  recipe_ingredientamount_recipeTorecipe?: Prisma.recipeOrderByWithRelationInput
 }
 
 export type ingredientamountWhereUniqueInput = Prisma.AtLeast<{
-  recipe_id_food_id?: Prisma.ingredientamountRecipe_idFood_idCompoundUniqueInput
+  recipe_food?: Prisma.ingredientamountRecipeFoodCompoundUniqueInput
   AND?: Prisma.ingredientamountWhereInput | Prisma.ingredientamountWhereInput[]
   OR?: Prisma.ingredientamountWhereInput[]
   NOT?: Prisma.ingredientamountWhereInput | Prisma.ingredientamountWhereInput[]
-  recipe_id?: Prisma.IntFilter<"ingredientamount"> | number
-  food_id?: Prisma.IntFilter<"ingredientamount"> | number
+  recipe?: Prisma.IntFilter<"ingredientamount"> | number
+  food?: Prisma.IntFilter<"ingredientamount"> | number
   quantity?: Prisma.IntFilter<"ingredientamount"> | number
-  food?: Prisma.XOR<Prisma.FoodScalarRelationFilter, Prisma.foodWhereInput>
-  recipe?: Prisma.XOR<Prisma.RecipeScalarRelationFilter, Prisma.recipeWhereInput>
-}, "recipe_id_food_id">
+  food_ingredientamount_foodTofood?: Prisma.XOR<Prisma.FoodScalarRelationFilter, Prisma.foodWhereInput>
+  recipe_ingredientamount_recipeTorecipe?: Prisma.XOR<Prisma.RecipeScalarRelationFilter, Prisma.recipeWhereInput>
+}, "recipe_food">
 
 export type ingredientamountOrderByWithAggregationInput = {
-  recipe_id?: Prisma.SortOrder
-  food_id?: Prisma.SortOrder
+  recipe?: Prisma.SortOrder
+  food?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   _count?: Prisma.ingredientamountCountOrderByAggregateInput
   _avg?: Prisma.ingredientamountAvgOrderByAggregateInput
@@ -246,38 +246,38 @@ export type ingredientamountScalarWhereWithAggregatesInput = {
   AND?: Prisma.ingredientamountScalarWhereWithAggregatesInput | Prisma.ingredientamountScalarWhereWithAggregatesInput[]
   OR?: Prisma.ingredientamountScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ingredientamountScalarWhereWithAggregatesInput | Prisma.ingredientamountScalarWhereWithAggregatesInput[]
-  recipe_id?: Prisma.IntWithAggregatesFilter<"ingredientamount"> | number
-  food_id?: Prisma.IntWithAggregatesFilter<"ingredientamount"> | number
+  recipe?: Prisma.IntWithAggregatesFilter<"ingredientamount"> | number
+  food?: Prisma.IntWithAggregatesFilter<"ingredientamount"> | number
   quantity?: Prisma.IntWithAggregatesFilter<"ingredientamount"> | number
 }
 
 export type ingredientamountCreateInput = {
   quantity: number
-  food: Prisma.foodCreateNestedOneWithoutIngredientamountInput
-  recipe: Prisma.recipeCreateNestedOneWithoutIngredientamountInput
+  food_ingredientamount_foodTofood: Prisma.foodCreateNestedOneWithoutIngredientamount_ingredientamount_foodTofoodInput
+  recipe_ingredientamount_recipeTorecipe: Prisma.recipeCreateNestedOneWithoutIngredientamount_ingredientamount_recipeTorecipeInput
 }
 
 export type ingredientamountUncheckedCreateInput = {
-  recipe_id: number
-  food_id: number
+  recipe: number
+  food: number
   quantity: number
 }
 
 export type ingredientamountUpdateInput = {
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
-  food?: Prisma.foodUpdateOneRequiredWithoutIngredientamountNestedInput
-  recipe?: Prisma.recipeUpdateOneRequiredWithoutIngredientamountNestedInput
+  food_ingredientamount_foodTofood?: Prisma.foodUpdateOneRequiredWithoutIngredientamount_ingredientamount_foodTofoodNestedInput
+  recipe_ingredientamount_recipeTorecipe?: Prisma.recipeUpdateOneRequiredWithoutIngredientamount_ingredientamount_recipeTorecipeNestedInput
 }
 
 export type ingredientamountUncheckedUpdateInput = {
-  recipe_id?: Prisma.IntFieldUpdateOperationsInput | number
-  food_id?: Prisma.IntFieldUpdateOperationsInput | number
+  recipe?: Prisma.IntFieldUpdateOperationsInput | number
+  food?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type ingredientamountCreateManyInput = {
-  recipe_id: number
-  food_id: number
+  recipe: number
+  food: number
   quantity: number
 }
 
@@ -286,8 +286,8 @@ export type ingredientamountUpdateManyMutationInput = {
 }
 
 export type ingredientamountUncheckedUpdateManyInput = {
-  recipe_id?: Prisma.IntFieldUpdateOperationsInput | number
-  food_id?: Prisma.IntFieldUpdateOperationsInput | number
+  recipe?: Prisma.IntFieldUpdateOperationsInput | number
+  food?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
@@ -301,301 +301,301 @@ export type ingredientamountOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
-export type ingredientamountRecipe_idFood_idCompoundUniqueInput = {
-  recipe_id: number
-  food_id: number
+export type ingredientamountRecipeFoodCompoundUniqueInput = {
+  recipe: number
+  food: number
 }
 
 export type ingredientamountCountOrderByAggregateInput = {
-  recipe_id?: Prisma.SortOrder
-  food_id?: Prisma.SortOrder
+  recipe?: Prisma.SortOrder
+  food?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
 }
 
 export type ingredientamountAvgOrderByAggregateInput = {
-  recipe_id?: Prisma.SortOrder
-  food_id?: Prisma.SortOrder
+  recipe?: Prisma.SortOrder
+  food?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
 }
 
 export type ingredientamountMaxOrderByAggregateInput = {
-  recipe_id?: Prisma.SortOrder
-  food_id?: Prisma.SortOrder
+  recipe?: Prisma.SortOrder
+  food?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
 }
 
 export type ingredientamountMinOrderByAggregateInput = {
-  recipe_id?: Prisma.SortOrder
-  food_id?: Prisma.SortOrder
+  recipe?: Prisma.SortOrder
+  food?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
 }
 
 export type ingredientamountSumOrderByAggregateInput = {
-  recipe_id?: Prisma.SortOrder
-  food_id?: Prisma.SortOrder
+  recipe?: Prisma.SortOrder
+  food?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
 }
 
-export type ingredientamountCreateNestedManyWithoutFoodInput = {
-  create?: Prisma.XOR<Prisma.ingredientamountCreateWithoutFoodInput, Prisma.ingredientamountUncheckedCreateWithoutFoodInput> | Prisma.ingredientamountCreateWithoutFoodInput[] | Prisma.ingredientamountUncheckedCreateWithoutFoodInput[]
-  connectOrCreate?: Prisma.ingredientamountCreateOrConnectWithoutFoodInput | Prisma.ingredientamountCreateOrConnectWithoutFoodInput[]
-  createMany?: Prisma.ingredientamountCreateManyFoodInputEnvelope
+export type ingredientamountCreateNestedManyWithoutFood_ingredientamount_foodTofoodInput = {
+  create?: Prisma.XOR<Prisma.ingredientamountCreateWithoutFood_ingredientamount_foodTofoodInput, Prisma.ingredientamountUncheckedCreateWithoutFood_ingredientamount_foodTofoodInput> | Prisma.ingredientamountCreateWithoutFood_ingredientamount_foodTofoodInput[] | Prisma.ingredientamountUncheckedCreateWithoutFood_ingredientamount_foodTofoodInput[]
+  connectOrCreate?: Prisma.ingredientamountCreateOrConnectWithoutFood_ingredientamount_foodTofoodInput | Prisma.ingredientamountCreateOrConnectWithoutFood_ingredientamount_foodTofoodInput[]
+  createMany?: Prisma.ingredientamountCreateManyFood_ingredientamount_foodTofoodInputEnvelope
   connect?: Prisma.ingredientamountWhereUniqueInput | Prisma.ingredientamountWhereUniqueInput[]
 }
 
-export type ingredientamountUncheckedCreateNestedManyWithoutFoodInput = {
-  create?: Prisma.XOR<Prisma.ingredientamountCreateWithoutFoodInput, Prisma.ingredientamountUncheckedCreateWithoutFoodInput> | Prisma.ingredientamountCreateWithoutFoodInput[] | Prisma.ingredientamountUncheckedCreateWithoutFoodInput[]
-  connectOrCreate?: Prisma.ingredientamountCreateOrConnectWithoutFoodInput | Prisma.ingredientamountCreateOrConnectWithoutFoodInput[]
-  createMany?: Prisma.ingredientamountCreateManyFoodInputEnvelope
+export type ingredientamountUncheckedCreateNestedManyWithoutFood_ingredientamount_foodTofoodInput = {
+  create?: Prisma.XOR<Prisma.ingredientamountCreateWithoutFood_ingredientamount_foodTofoodInput, Prisma.ingredientamountUncheckedCreateWithoutFood_ingredientamount_foodTofoodInput> | Prisma.ingredientamountCreateWithoutFood_ingredientamount_foodTofoodInput[] | Prisma.ingredientamountUncheckedCreateWithoutFood_ingredientamount_foodTofoodInput[]
+  connectOrCreate?: Prisma.ingredientamountCreateOrConnectWithoutFood_ingredientamount_foodTofoodInput | Prisma.ingredientamountCreateOrConnectWithoutFood_ingredientamount_foodTofoodInput[]
+  createMany?: Prisma.ingredientamountCreateManyFood_ingredientamount_foodTofoodInputEnvelope
   connect?: Prisma.ingredientamountWhereUniqueInput | Prisma.ingredientamountWhereUniqueInput[]
 }
 
-export type ingredientamountUpdateManyWithoutFoodNestedInput = {
-  create?: Prisma.XOR<Prisma.ingredientamountCreateWithoutFoodInput, Prisma.ingredientamountUncheckedCreateWithoutFoodInput> | Prisma.ingredientamountCreateWithoutFoodInput[] | Prisma.ingredientamountUncheckedCreateWithoutFoodInput[]
-  connectOrCreate?: Prisma.ingredientamountCreateOrConnectWithoutFoodInput | Prisma.ingredientamountCreateOrConnectWithoutFoodInput[]
-  upsert?: Prisma.ingredientamountUpsertWithWhereUniqueWithoutFoodInput | Prisma.ingredientamountUpsertWithWhereUniqueWithoutFoodInput[]
-  createMany?: Prisma.ingredientamountCreateManyFoodInputEnvelope
+export type ingredientamountUpdateManyWithoutFood_ingredientamount_foodTofoodNestedInput = {
+  create?: Prisma.XOR<Prisma.ingredientamountCreateWithoutFood_ingredientamount_foodTofoodInput, Prisma.ingredientamountUncheckedCreateWithoutFood_ingredientamount_foodTofoodInput> | Prisma.ingredientamountCreateWithoutFood_ingredientamount_foodTofoodInput[] | Prisma.ingredientamountUncheckedCreateWithoutFood_ingredientamount_foodTofoodInput[]
+  connectOrCreate?: Prisma.ingredientamountCreateOrConnectWithoutFood_ingredientamount_foodTofoodInput | Prisma.ingredientamountCreateOrConnectWithoutFood_ingredientamount_foodTofoodInput[]
+  upsert?: Prisma.ingredientamountUpsertWithWhereUniqueWithoutFood_ingredientamount_foodTofoodInput | Prisma.ingredientamountUpsertWithWhereUniqueWithoutFood_ingredientamount_foodTofoodInput[]
+  createMany?: Prisma.ingredientamountCreateManyFood_ingredientamount_foodTofoodInputEnvelope
   set?: Prisma.ingredientamountWhereUniqueInput | Prisma.ingredientamountWhereUniqueInput[]
   disconnect?: Prisma.ingredientamountWhereUniqueInput | Prisma.ingredientamountWhereUniqueInput[]
   delete?: Prisma.ingredientamountWhereUniqueInput | Prisma.ingredientamountWhereUniqueInput[]
   connect?: Prisma.ingredientamountWhereUniqueInput | Prisma.ingredientamountWhereUniqueInput[]
-  update?: Prisma.ingredientamountUpdateWithWhereUniqueWithoutFoodInput | Prisma.ingredientamountUpdateWithWhereUniqueWithoutFoodInput[]
-  updateMany?: Prisma.ingredientamountUpdateManyWithWhereWithoutFoodInput | Prisma.ingredientamountUpdateManyWithWhereWithoutFoodInput[]
+  update?: Prisma.ingredientamountUpdateWithWhereUniqueWithoutFood_ingredientamount_foodTofoodInput | Prisma.ingredientamountUpdateWithWhereUniqueWithoutFood_ingredientamount_foodTofoodInput[]
+  updateMany?: Prisma.ingredientamountUpdateManyWithWhereWithoutFood_ingredientamount_foodTofoodInput | Prisma.ingredientamountUpdateManyWithWhereWithoutFood_ingredientamount_foodTofoodInput[]
   deleteMany?: Prisma.ingredientamountScalarWhereInput | Prisma.ingredientamountScalarWhereInput[]
 }
 
-export type ingredientamountUncheckedUpdateManyWithoutFoodNestedInput = {
-  create?: Prisma.XOR<Prisma.ingredientamountCreateWithoutFoodInput, Prisma.ingredientamountUncheckedCreateWithoutFoodInput> | Prisma.ingredientamountCreateWithoutFoodInput[] | Prisma.ingredientamountUncheckedCreateWithoutFoodInput[]
-  connectOrCreate?: Prisma.ingredientamountCreateOrConnectWithoutFoodInput | Prisma.ingredientamountCreateOrConnectWithoutFoodInput[]
-  upsert?: Prisma.ingredientamountUpsertWithWhereUniqueWithoutFoodInput | Prisma.ingredientamountUpsertWithWhereUniqueWithoutFoodInput[]
-  createMany?: Prisma.ingredientamountCreateManyFoodInputEnvelope
+export type ingredientamountUncheckedUpdateManyWithoutFood_ingredientamount_foodTofoodNestedInput = {
+  create?: Prisma.XOR<Prisma.ingredientamountCreateWithoutFood_ingredientamount_foodTofoodInput, Prisma.ingredientamountUncheckedCreateWithoutFood_ingredientamount_foodTofoodInput> | Prisma.ingredientamountCreateWithoutFood_ingredientamount_foodTofoodInput[] | Prisma.ingredientamountUncheckedCreateWithoutFood_ingredientamount_foodTofoodInput[]
+  connectOrCreate?: Prisma.ingredientamountCreateOrConnectWithoutFood_ingredientamount_foodTofoodInput | Prisma.ingredientamountCreateOrConnectWithoutFood_ingredientamount_foodTofoodInput[]
+  upsert?: Prisma.ingredientamountUpsertWithWhereUniqueWithoutFood_ingredientamount_foodTofoodInput | Prisma.ingredientamountUpsertWithWhereUniqueWithoutFood_ingredientamount_foodTofoodInput[]
+  createMany?: Prisma.ingredientamountCreateManyFood_ingredientamount_foodTofoodInputEnvelope
   set?: Prisma.ingredientamountWhereUniqueInput | Prisma.ingredientamountWhereUniqueInput[]
   disconnect?: Prisma.ingredientamountWhereUniqueInput | Prisma.ingredientamountWhereUniqueInput[]
   delete?: Prisma.ingredientamountWhereUniqueInput | Prisma.ingredientamountWhereUniqueInput[]
   connect?: Prisma.ingredientamountWhereUniqueInput | Prisma.ingredientamountWhereUniqueInput[]
-  update?: Prisma.ingredientamountUpdateWithWhereUniqueWithoutFoodInput | Prisma.ingredientamountUpdateWithWhereUniqueWithoutFoodInput[]
-  updateMany?: Prisma.ingredientamountUpdateManyWithWhereWithoutFoodInput | Prisma.ingredientamountUpdateManyWithWhereWithoutFoodInput[]
+  update?: Prisma.ingredientamountUpdateWithWhereUniqueWithoutFood_ingredientamount_foodTofoodInput | Prisma.ingredientamountUpdateWithWhereUniqueWithoutFood_ingredientamount_foodTofoodInput[]
+  updateMany?: Prisma.ingredientamountUpdateManyWithWhereWithoutFood_ingredientamount_foodTofoodInput | Prisma.ingredientamountUpdateManyWithWhereWithoutFood_ingredientamount_foodTofoodInput[]
   deleteMany?: Prisma.ingredientamountScalarWhereInput | Prisma.ingredientamountScalarWhereInput[]
 }
 
-export type ingredientamountCreateNestedManyWithoutRecipeInput = {
-  create?: Prisma.XOR<Prisma.ingredientamountCreateWithoutRecipeInput, Prisma.ingredientamountUncheckedCreateWithoutRecipeInput> | Prisma.ingredientamountCreateWithoutRecipeInput[] | Prisma.ingredientamountUncheckedCreateWithoutRecipeInput[]
-  connectOrCreate?: Prisma.ingredientamountCreateOrConnectWithoutRecipeInput | Prisma.ingredientamountCreateOrConnectWithoutRecipeInput[]
-  createMany?: Prisma.ingredientamountCreateManyRecipeInputEnvelope
+export type ingredientamountCreateNestedManyWithoutRecipe_ingredientamount_recipeTorecipeInput = {
+  create?: Prisma.XOR<Prisma.ingredientamountCreateWithoutRecipe_ingredientamount_recipeTorecipeInput, Prisma.ingredientamountUncheckedCreateWithoutRecipe_ingredientamount_recipeTorecipeInput> | Prisma.ingredientamountCreateWithoutRecipe_ingredientamount_recipeTorecipeInput[] | Prisma.ingredientamountUncheckedCreateWithoutRecipe_ingredientamount_recipeTorecipeInput[]
+  connectOrCreate?: Prisma.ingredientamountCreateOrConnectWithoutRecipe_ingredientamount_recipeTorecipeInput | Prisma.ingredientamountCreateOrConnectWithoutRecipe_ingredientamount_recipeTorecipeInput[]
+  createMany?: Prisma.ingredientamountCreateManyRecipe_ingredientamount_recipeTorecipeInputEnvelope
   connect?: Prisma.ingredientamountWhereUniqueInput | Prisma.ingredientamountWhereUniqueInput[]
 }
 
-export type ingredientamountUncheckedCreateNestedManyWithoutRecipeInput = {
-  create?: Prisma.XOR<Prisma.ingredientamountCreateWithoutRecipeInput, Prisma.ingredientamountUncheckedCreateWithoutRecipeInput> | Prisma.ingredientamountCreateWithoutRecipeInput[] | Prisma.ingredientamountUncheckedCreateWithoutRecipeInput[]
-  connectOrCreate?: Prisma.ingredientamountCreateOrConnectWithoutRecipeInput | Prisma.ingredientamountCreateOrConnectWithoutRecipeInput[]
-  createMany?: Prisma.ingredientamountCreateManyRecipeInputEnvelope
+export type ingredientamountUncheckedCreateNestedManyWithoutRecipe_ingredientamount_recipeTorecipeInput = {
+  create?: Prisma.XOR<Prisma.ingredientamountCreateWithoutRecipe_ingredientamount_recipeTorecipeInput, Prisma.ingredientamountUncheckedCreateWithoutRecipe_ingredientamount_recipeTorecipeInput> | Prisma.ingredientamountCreateWithoutRecipe_ingredientamount_recipeTorecipeInput[] | Prisma.ingredientamountUncheckedCreateWithoutRecipe_ingredientamount_recipeTorecipeInput[]
+  connectOrCreate?: Prisma.ingredientamountCreateOrConnectWithoutRecipe_ingredientamount_recipeTorecipeInput | Prisma.ingredientamountCreateOrConnectWithoutRecipe_ingredientamount_recipeTorecipeInput[]
+  createMany?: Prisma.ingredientamountCreateManyRecipe_ingredientamount_recipeTorecipeInputEnvelope
   connect?: Prisma.ingredientamountWhereUniqueInput | Prisma.ingredientamountWhereUniqueInput[]
 }
 
-export type ingredientamountUpdateManyWithoutRecipeNestedInput = {
-  create?: Prisma.XOR<Prisma.ingredientamountCreateWithoutRecipeInput, Prisma.ingredientamountUncheckedCreateWithoutRecipeInput> | Prisma.ingredientamountCreateWithoutRecipeInput[] | Prisma.ingredientamountUncheckedCreateWithoutRecipeInput[]
-  connectOrCreate?: Prisma.ingredientamountCreateOrConnectWithoutRecipeInput | Prisma.ingredientamountCreateOrConnectWithoutRecipeInput[]
-  upsert?: Prisma.ingredientamountUpsertWithWhereUniqueWithoutRecipeInput | Prisma.ingredientamountUpsertWithWhereUniqueWithoutRecipeInput[]
-  createMany?: Prisma.ingredientamountCreateManyRecipeInputEnvelope
+export type ingredientamountUpdateManyWithoutRecipe_ingredientamount_recipeTorecipeNestedInput = {
+  create?: Prisma.XOR<Prisma.ingredientamountCreateWithoutRecipe_ingredientamount_recipeTorecipeInput, Prisma.ingredientamountUncheckedCreateWithoutRecipe_ingredientamount_recipeTorecipeInput> | Prisma.ingredientamountCreateWithoutRecipe_ingredientamount_recipeTorecipeInput[] | Prisma.ingredientamountUncheckedCreateWithoutRecipe_ingredientamount_recipeTorecipeInput[]
+  connectOrCreate?: Prisma.ingredientamountCreateOrConnectWithoutRecipe_ingredientamount_recipeTorecipeInput | Prisma.ingredientamountCreateOrConnectWithoutRecipe_ingredientamount_recipeTorecipeInput[]
+  upsert?: Prisma.ingredientamountUpsertWithWhereUniqueWithoutRecipe_ingredientamount_recipeTorecipeInput | Prisma.ingredientamountUpsertWithWhereUniqueWithoutRecipe_ingredientamount_recipeTorecipeInput[]
+  createMany?: Prisma.ingredientamountCreateManyRecipe_ingredientamount_recipeTorecipeInputEnvelope
   set?: Prisma.ingredientamountWhereUniqueInput | Prisma.ingredientamountWhereUniqueInput[]
   disconnect?: Prisma.ingredientamountWhereUniqueInput | Prisma.ingredientamountWhereUniqueInput[]
   delete?: Prisma.ingredientamountWhereUniqueInput | Prisma.ingredientamountWhereUniqueInput[]
   connect?: Prisma.ingredientamountWhereUniqueInput | Prisma.ingredientamountWhereUniqueInput[]
-  update?: Prisma.ingredientamountUpdateWithWhereUniqueWithoutRecipeInput | Prisma.ingredientamountUpdateWithWhereUniqueWithoutRecipeInput[]
-  updateMany?: Prisma.ingredientamountUpdateManyWithWhereWithoutRecipeInput | Prisma.ingredientamountUpdateManyWithWhereWithoutRecipeInput[]
+  update?: Prisma.ingredientamountUpdateWithWhereUniqueWithoutRecipe_ingredientamount_recipeTorecipeInput | Prisma.ingredientamountUpdateWithWhereUniqueWithoutRecipe_ingredientamount_recipeTorecipeInput[]
+  updateMany?: Prisma.ingredientamountUpdateManyWithWhereWithoutRecipe_ingredientamount_recipeTorecipeInput | Prisma.ingredientamountUpdateManyWithWhereWithoutRecipe_ingredientamount_recipeTorecipeInput[]
   deleteMany?: Prisma.ingredientamountScalarWhereInput | Prisma.ingredientamountScalarWhereInput[]
 }
 
-export type ingredientamountUncheckedUpdateManyWithoutRecipeNestedInput = {
-  create?: Prisma.XOR<Prisma.ingredientamountCreateWithoutRecipeInput, Prisma.ingredientamountUncheckedCreateWithoutRecipeInput> | Prisma.ingredientamountCreateWithoutRecipeInput[] | Prisma.ingredientamountUncheckedCreateWithoutRecipeInput[]
-  connectOrCreate?: Prisma.ingredientamountCreateOrConnectWithoutRecipeInput | Prisma.ingredientamountCreateOrConnectWithoutRecipeInput[]
-  upsert?: Prisma.ingredientamountUpsertWithWhereUniqueWithoutRecipeInput | Prisma.ingredientamountUpsertWithWhereUniqueWithoutRecipeInput[]
-  createMany?: Prisma.ingredientamountCreateManyRecipeInputEnvelope
+export type ingredientamountUncheckedUpdateManyWithoutRecipe_ingredientamount_recipeTorecipeNestedInput = {
+  create?: Prisma.XOR<Prisma.ingredientamountCreateWithoutRecipe_ingredientamount_recipeTorecipeInput, Prisma.ingredientamountUncheckedCreateWithoutRecipe_ingredientamount_recipeTorecipeInput> | Prisma.ingredientamountCreateWithoutRecipe_ingredientamount_recipeTorecipeInput[] | Prisma.ingredientamountUncheckedCreateWithoutRecipe_ingredientamount_recipeTorecipeInput[]
+  connectOrCreate?: Prisma.ingredientamountCreateOrConnectWithoutRecipe_ingredientamount_recipeTorecipeInput | Prisma.ingredientamountCreateOrConnectWithoutRecipe_ingredientamount_recipeTorecipeInput[]
+  upsert?: Prisma.ingredientamountUpsertWithWhereUniqueWithoutRecipe_ingredientamount_recipeTorecipeInput | Prisma.ingredientamountUpsertWithWhereUniqueWithoutRecipe_ingredientamount_recipeTorecipeInput[]
+  createMany?: Prisma.ingredientamountCreateManyRecipe_ingredientamount_recipeTorecipeInputEnvelope
   set?: Prisma.ingredientamountWhereUniqueInput | Prisma.ingredientamountWhereUniqueInput[]
   disconnect?: Prisma.ingredientamountWhereUniqueInput | Prisma.ingredientamountWhereUniqueInput[]
   delete?: Prisma.ingredientamountWhereUniqueInput | Prisma.ingredientamountWhereUniqueInput[]
   connect?: Prisma.ingredientamountWhereUniqueInput | Prisma.ingredientamountWhereUniqueInput[]
-  update?: Prisma.ingredientamountUpdateWithWhereUniqueWithoutRecipeInput | Prisma.ingredientamountUpdateWithWhereUniqueWithoutRecipeInput[]
-  updateMany?: Prisma.ingredientamountUpdateManyWithWhereWithoutRecipeInput | Prisma.ingredientamountUpdateManyWithWhereWithoutRecipeInput[]
+  update?: Prisma.ingredientamountUpdateWithWhereUniqueWithoutRecipe_ingredientamount_recipeTorecipeInput | Prisma.ingredientamountUpdateWithWhereUniqueWithoutRecipe_ingredientamount_recipeTorecipeInput[]
+  updateMany?: Prisma.ingredientamountUpdateManyWithWhereWithoutRecipe_ingredientamount_recipeTorecipeInput | Prisma.ingredientamountUpdateManyWithWhereWithoutRecipe_ingredientamount_recipeTorecipeInput[]
   deleteMany?: Prisma.ingredientamountScalarWhereInput | Prisma.ingredientamountScalarWhereInput[]
 }
 
-export type ingredientamountCreateWithoutFoodInput = {
+export type ingredientamountCreateWithoutFood_ingredientamount_foodTofoodInput = {
   quantity: number
-  recipe: Prisma.recipeCreateNestedOneWithoutIngredientamountInput
+  recipe_ingredientamount_recipeTorecipe: Prisma.recipeCreateNestedOneWithoutIngredientamount_ingredientamount_recipeTorecipeInput
 }
 
-export type ingredientamountUncheckedCreateWithoutFoodInput = {
-  recipe_id: number
+export type ingredientamountUncheckedCreateWithoutFood_ingredientamount_foodTofoodInput = {
+  recipe: number
   quantity: number
 }
 
-export type ingredientamountCreateOrConnectWithoutFoodInput = {
+export type ingredientamountCreateOrConnectWithoutFood_ingredientamount_foodTofoodInput = {
   where: Prisma.ingredientamountWhereUniqueInput
-  create: Prisma.XOR<Prisma.ingredientamountCreateWithoutFoodInput, Prisma.ingredientamountUncheckedCreateWithoutFoodInput>
+  create: Prisma.XOR<Prisma.ingredientamountCreateWithoutFood_ingredientamount_foodTofoodInput, Prisma.ingredientamountUncheckedCreateWithoutFood_ingredientamount_foodTofoodInput>
 }
 
-export type ingredientamountCreateManyFoodInputEnvelope = {
-  data: Prisma.ingredientamountCreateManyFoodInput | Prisma.ingredientamountCreateManyFoodInput[]
+export type ingredientamountCreateManyFood_ingredientamount_foodTofoodInputEnvelope = {
+  data: Prisma.ingredientamountCreateManyFood_ingredientamount_foodTofoodInput | Prisma.ingredientamountCreateManyFood_ingredientamount_foodTofoodInput[]
   skipDuplicates?: boolean
 }
 
-export type ingredientamountUpsertWithWhereUniqueWithoutFoodInput = {
+export type ingredientamountUpsertWithWhereUniqueWithoutFood_ingredientamount_foodTofoodInput = {
   where: Prisma.ingredientamountWhereUniqueInput
-  update: Prisma.XOR<Prisma.ingredientamountUpdateWithoutFoodInput, Prisma.ingredientamountUncheckedUpdateWithoutFoodInput>
-  create: Prisma.XOR<Prisma.ingredientamountCreateWithoutFoodInput, Prisma.ingredientamountUncheckedCreateWithoutFoodInput>
+  update: Prisma.XOR<Prisma.ingredientamountUpdateWithoutFood_ingredientamount_foodTofoodInput, Prisma.ingredientamountUncheckedUpdateWithoutFood_ingredientamount_foodTofoodInput>
+  create: Prisma.XOR<Prisma.ingredientamountCreateWithoutFood_ingredientamount_foodTofoodInput, Prisma.ingredientamountUncheckedCreateWithoutFood_ingredientamount_foodTofoodInput>
 }
 
-export type ingredientamountUpdateWithWhereUniqueWithoutFoodInput = {
+export type ingredientamountUpdateWithWhereUniqueWithoutFood_ingredientamount_foodTofoodInput = {
   where: Prisma.ingredientamountWhereUniqueInput
-  data: Prisma.XOR<Prisma.ingredientamountUpdateWithoutFoodInput, Prisma.ingredientamountUncheckedUpdateWithoutFoodInput>
+  data: Prisma.XOR<Prisma.ingredientamountUpdateWithoutFood_ingredientamount_foodTofoodInput, Prisma.ingredientamountUncheckedUpdateWithoutFood_ingredientamount_foodTofoodInput>
 }
 
-export type ingredientamountUpdateManyWithWhereWithoutFoodInput = {
+export type ingredientamountUpdateManyWithWhereWithoutFood_ingredientamount_foodTofoodInput = {
   where: Prisma.ingredientamountScalarWhereInput
-  data: Prisma.XOR<Prisma.ingredientamountUpdateManyMutationInput, Prisma.ingredientamountUncheckedUpdateManyWithoutFoodInput>
+  data: Prisma.XOR<Prisma.ingredientamountUpdateManyMutationInput, Prisma.ingredientamountUncheckedUpdateManyWithoutFood_ingredientamount_foodTofoodInput>
 }
 
 export type ingredientamountScalarWhereInput = {
   AND?: Prisma.ingredientamountScalarWhereInput | Prisma.ingredientamountScalarWhereInput[]
   OR?: Prisma.ingredientamountScalarWhereInput[]
   NOT?: Prisma.ingredientamountScalarWhereInput | Prisma.ingredientamountScalarWhereInput[]
-  recipe_id?: Prisma.IntFilter<"ingredientamount"> | number
-  food_id?: Prisma.IntFilter<"ingredientamount"> | number
+  recipe?: Prisma.IntFilter<"ingredientamount"> | number
+  food?: Prisma.IntFilter<"ingredientamount"> | number
   quantity?: Prisma.IntFilter<"ingredientamount"> | number
 }
 
-export type ingredientamountCreateWithoutRecipeInput = {
+export type ingredientamountCreateWithoutRecipe_ingredientamount_recipeTorecipeInput = {
   quantity: number
-  food: Prisma.foodCreateNestedOneWithoutIngredientamountInput
+  food_ingredientamount_foodTofood: Prisma.foodCreateNestedOneWithoutIngredientamount_ingredientamount_foodTofoodInput
 }
 
-export type ingredientamountUncheckedCreateWithoutRecipeInput = {
-  food_id: number
+export type ingredientamountUncheckedCreateWithoutRecipe_ingredientamount_recipeTorecipeInput = {
+  food: number
   quantity: number
 }
 
-export type ingredientamountCreateOrConnectWithoutRecipeInput = {
+export type ingredientamountCreateOrConnectWithoutRecipe_ingredientamount_recipeTorecipeInput = {
   where: Prisma.ingredientamountWhereUniqueInput
-  create: Prisma.XOR<Prisma.ingredientamountCreateWithoutRecipeInput, Prisma.ingredientamountUncheckedCreateWithoutRecipeInput>
+  create: Prisma.XOR<Prisma.ingredientamountCreateWithoutRecipe_ingredientamount_recipeTorecipeInput, Prisma.ingredientamountUncheckedCreateWithoutRecipe_ingredientamount_recipeTorecipeInput>
 }
 
-export type ingredientamountCreateManyRecipeInputEnvelope = {
-  data: Prisma.ingredientamountCreateManyRecipeInput | Prisma.ingredientamountCreateManyRecipeInput[]
+export type ingredientamountCreateManyRecipe_ingredientamount_recipeTorecipeInputEnvelope = {
+  data: Prisma.ingredientamountCreateManyRecipe_ingredientamount_recipeTorecipeInput | Prisma.ingredientamountCreateManyRecipe_ingredientamount_recipeTorecipeInput[]
   skipDuplicates?: boolean
 }
 
-export type ingredientamountUpsertWithWhereUniqueWithoutRecipeInput = {
+export type ingredientamountUpsertWithWhereUniqueWithoutRecipe_ingredientamount_recipeTorecipeInput = {
   where: Prisma.ingredientamountWhereUniqueInput
-  update: Prisma.XOR<Prisma.ingredientamountUpdateWithoutRecipeInput, Prisma.ingredientamountUncheckedUpdateWithoutRecipeInput>
-  create: Prisma.XOR<Prisma.ingredientamountCreateWithoutRecipeInput, Prisma.ingredientamountUncheckedCreateWithoutRecipeInput>
+  update: Prisma.XOR<Prisma.ingredientamountUpdateWithoutRecipe_ingredientamount_recipeTorecipeInput, Prisma.ingredientamountUncheckedUpdateWithoutRecipe_ingredientamount_recipeTorecipeInput>
+  create: Prisma.XOR<Prisma.ingredientamountCreateWithoutRecipe_ingredientamount_recipeTorecipeInput, Prisma.ingredientamountUncheckedCreateWithoutRecipe_ingredientamount_recipeTorecipeInput>
 }
 
-export type ingredientamountUpdateWithWhereUniqueWithoutRecipeInput = {
+export type ingredientamountUpdateWithWhereUniqueWithoutRecipe_ingredientamount_recipeTorecipeInput = {
   where: Prisma.ingredientamountWhereUniqueInput
-  data: Prisma.XOR<Prisma.ingredientamountUpdateWithoutRecipeInput, Prisma.ingredientamountUncheckedUpdateWithoutRecipeInput>
+  data: Prisma.XOR<Prisma.ingredientamountUpdateWithoutRecipe_ingredientamount_recipeTorecipeInput, Prisma.ingredientamountUncheckedUpdateWithoutRecipe_ingredientamount_recipeTorecipeInput>
 }
 
-export type ingredientamountUpdateManyWithWhereWithoutRecipeInput = {
+export type ingredientamountUpdateManyWithWhereWithoutRecipe_ingredientamount_recipeTorecipeInput = {
   where: Prisma.ingredientamountScalarWhereInput
-  data: Prisma.XOR<Prisma.ingredientamountUpdateManyMutationInput, Prisma.ingredientamountUncheckedUpdateManyWithoutRecipeInput>
+  data: Prisma.XOR<Prisma.ingredientamountUpdateManyMutationInput, Prisma.ingredientamountUncheckedUpdateManyWithoutRecipe_ingredientamount_recipeTorecipeInput>
 }
 
-export type ingredientamountCreateManyFoodInput = {
-  recipe_id: number
+export type ingredientamountCreateManyFood_ingredientamount_foodTofoodInput = {
+  recipe: number
   quantity: number
 }
 
-export type ingredientamountUpdateWithoutFoodInput = {
+export type ingredientamountUpdateWithoutFood_ingredientamount_foodTofoodInput = {
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
-  recipe?: Prisma.recipeUpdateOneRequiredWithoutIngredientamountNestedInput
+  recipe_ingredientamount_recipeTorecipe?: Prisma.recipeUpdateOneRequiredWithoutIngredientamount_ingredientamount_recipeTorecipeNestedInput
 }
 
-export type ingredientamountUncheckedUpdateWithoutFoodInput = {
-  recipe_id?: Prisma.IntFieldUpdateOperationsInput | number
-  quantity?: Prisma.IntFieldUpdateOperationsInput | number
-}
-
-export type ingredientamountUncheckedUpdateManyWithoutFoodInput = {
-  recipe_id?: Prisma.IntFieldUpdateOperationsInput | number
+export type ingredientamountUncheckedUpdateWithoutFood_ingredientamount_foodTofoodInput = {
+  recipe?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
-export type ingredientamountCreateManyRecipeInput = {
-  food_id: number
+export type ingredientamountUncheckedUpdateManyWithoutFood_ingredientamount_foodTofoodInput = {
+  recipe?: Prisma.IntFieldUpdateOperationsInput | number
+  quantity?: Prisma.IntFieldUpdateOperationsInput | number
+}
+
+export type ingredientamountCreateManyRecipe_ingredientamount_recipeTorecipeInput = {
+  food: number
   quantity: number
 }
 
-export type ingredientamountUpdateWithoutRecipeInput = {
+export type ingredientamountUpdateWithoutRecipe_ingredientamount_recipeTorecipeInput = {
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
-  food?: Prisma.foodUpdateOneRequiredWithoutIngredientamountNestedInput
+  food_ingredientamount_foodTofood?: Prisma.foodUpdateOneRequiredWithoutIngredientamount_ingredientamount_foodTofoodNestedInput
 }
 
-export type ingredientamountUncheckedUpdateWithoutRecipeInput = {
-  food_id?: Prisma.IntFieldUpdateOperationsInput | number
+export type ingredientamountUncheckedUpdateWithoutRecipe_ingredientamount_recipeTorecipeInput = {
+  food?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
-export type ingredientamountUncheckedUpdateManyWithoutRecipeInput = {
-  food_id?: Prisma.IntFieldUpdateOperationsInput | number
+export type ingredientamountUncheckedUpdateManyWithoutRecipe_ingredientamount_recipeTorecipeInput = {
+  food?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 
 
 export type ingredientamountSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  recipe_id?: boolean
-  food_id?: boolean
+  recipe?: boolean
+  food?: boolean
   quantity?: boolean
-  food?: boolean | Prisma.foodDefaultArgs<ExtArgs>
-  recipe?: boolean | Prisma.recipeDefaultArgs<ExtArgs>
+  food_ingredientamount_foodTofood?: boolean | Prisma.foodDefaultArgs<ExtArgs>
+  recipe_ingredientamount_recipeTorecipe?: boolean | Prisma.recipeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["ingredientamount"]>
 
 export type ingredientamountSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  recipe_id?: boolean
-  food_id?: boolean
+  recipe?: boolean
+  food?: boolean
   quantity?: boolean
-  food?: boolean | Prisma.foodDefaultArgs<ExtArgs>
-  recipe?: boolean | Prisma.recipeDefaultArgs<ExtArgs>
+  food_ingredientamount_foodTofood?: boolean | Prisma.foodDefaultArgs<ExtArgs>
+  recipe_ingredientamount_recipeTorecipe?: boolean | Prisma.recipeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["ingredientamount"]>
 
 export type ingredientamountSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  recipe_id?: boolean
-  food_id?: boolean
+  recipe?: boolean
+  food?: boolean
   quantity?: boolean
-  food?: boolean | Prisma.foodDefaultArgs<ExtArgs>
-  recipe?: boolean | Prisma.recipeDefaultArgs<ExtArgs>
+  food_ingredientamount_foodTofood?: boolean | Prisma.foodDefaultArgs<ExtArgs>
+  recipe_ingredientamount_recipeTorecipe?: boolean | Prisma.recipeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["ingredientamount"]>
 
 export type ingredientamountSelectScalar = {
-  recipe_id?: boolean
-  food_id?: boolean
+  recipe?: boolean
+  food?: boolean
   quantity?: boolean
 }
 
-export type ingredientamountOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"recipe_id" | "food_id" | "quantity", ExtArgs["result"]["ingredientamount"]>
+export type ingredientamountOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"recipe" | "food" | "quantity", ExtArgs["result"]["ingredientamount"]>
 export type ingredientamountInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  food?: boolean | Prisma.foodDefaultArgs<ExtArgs>
-  recipe?: boolean | Prisma.recipeDefaultArgs<ExtArgs>
+  food_ingredientamount_foodTofood?: boolean | Prisma.foodDefaultArgs<ExtArgs>
+  recipe_ingredientamount_recipeTorecipe?: boolean | Prisma.recipeDefaultArgs<ExtArgs>
 }
 export type ingredientamountIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  food?: boolean | Prisma.foodDefaultArgs<ExtArgs>
-  recipe?: boolean | Prisma.recipeDefaultArgs<ExtArgs>
+  food_ingredientamount_foodTofood?: boolean | Prisma.foodDefaultArgs<ExtArgs>
+  recipe_ingredientamount_recipeTorecipe?: boolean | Prisma.recipeDefaultArgs<ExtArgs>
 }
 export type ingredientamountIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  food?: boolean | Prisma.foodDefaultArgs<ExtArgs>
-  recipe?: boolean | Prisma.recipeDefaultArgs<ExtArgs>
+  food_ingredientamount_foodTofood?: boolean | Prisma.foodDefaultArgs<ExtArgs>
+  recipe_ingredientamount_recipeTorecipe?: boolean | Prisma.recipeDefaultArgs<ExtArgs>
 }
 
 export type $ingredientamountPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "ingredientamount"
   objects: {
-    food: Prisma.$foodPayload<ExtArgs>
-    recipe: Prisma.$recipePayload<ExtArgs>
+    food_ingredientamount_foodTofood: Prisma.$foodPayload<ExtArgs>
+    recipe_ingredientamount_recipeTorecipe: Prisma.$recipePayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    recipe_id: number
-    food_id: number
+    recipe: number
+    food: number
     quantity: number
   }, ExtArgs["result"]["ingredientamount"]>
   composites: {}
@@ -680,8 +680,8 @@ export interface ingredientamountDelegate<ExtArgs extends runtime.Types.Extensio
    * // Get first 10 Ingredientamounts
    * const ingredientamounts = await prisma.ingredientamount.findMany({ take: 10 })
    * 
-   * // Only select the `recipe_id`
-   * const ingredientamountWithRecipe_idOnly = await prisma.ingredientamount.findMany({ select: { recipe_id: true } })
+   * // Only select the `recipe`
+   * const ingredientamountWithRecipeOnly = await prisma.ingredientamount.findMany({ select: { recipe: true } })
    * 
    */
   findMany<T extends ingredientamountFindManyArgs>(args?: Prisma.SelectSubset<T, ingredientamountFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ingredientamountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -725,9 +725,9 @@ export interface ingredientamountDelegate<ExtArgs extends runtime.Types.Extensio
    *   ]
    * })
    * 
-   * // Create many Ingredientamounts and only return the `recipe_id`
-   * const ingredientamountWithRecipe_idOnly = await prisma.ingredientamount.createManyAndReturn({
-   *   select: { recipe_id: true },
+   * // Create many Ingredientamounts and only return the `recipe`
+   * const ingredientamountWithRecipeOnly = await prisma.ingredientamount.createManyAndReturn({
+   *   select: { recipe: true },
    *   data: [
    *     // ... provide data here
    *   ]
@@ -816,9 +816,9 @@ export interface ingredientamountDelegate<ExtArgs extends runtime.Types.Extensio
    *   ]
    * })
    * 
-   * // Update zero or more Ingredientamounts and only return the `recipe_id`
-   * const ingredientamountWithRecipe_idOnly = await prisma.ingredientamount.updateManyAndReturn({
-   *   select: { recipe_id: true },
+   * // Update zero or more Ingredientamounts and only return the `recipe`
+   * const ingredientamountWithRecipeOnly = await prisma.ingredientamount.updateManyAndReturn({
+   *   select: { recipe: true },
    *   where: {
    *     // ... provide filter here
    *   },
@@ -991,8 +991,8 @@ readonly fields: ingredientamountFieldRefs;
  */
 export interface Prisma__ingredientamountClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  food<T extends Prisma.foodDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.foodDefaultArgs<ExtArgs>>): Prisma.Prisma__foodClient<runtime.Types.Result.GetResult<Prisma.$foodPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  recipe<T extends Prisma.recipeDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.recipeDefaultArgs<ExtArgs>>): Prisma.Prisma__recipeClient<runtime.Types.Result.GetResult<Prisma.$recipePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  food_ingredientamount_foodTofood<T extends Prisma.foodDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.foodDefaultArgs<ExtArgs>>): Prisma.Prisma__foodClient<runtime.Types.Result.GetResult<Prisma.$foodPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  recipe_ingredientamount_recipeTorecipe<T extends Prisma.recipeDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.recipeDefaultArgs<ExtArgs>>): Prisma.Prisma__recipeClient<runtime.Types.Result.GetResult<Prisma.$recipePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1022,8 +1022,8 @@ export interface Prisma__ingredientamountClient<T, Null = never, ExtArgs extends
  * Fields of the ingredientamount model
  */
 export interface ingredientamountFieldRefs {
-  readonly recipe_id: Prisma.FieldRef<"ingredientamount", 'Int'>
-  readonly food_id: Prisma.FieldRef<"ingredientamount", 'Int'>
+  readonly recipe: Prisma.FieldRef<"ingredientamount", 'Int'>
+  readonly food: Prisma.FieldRef<"ingredientamount", 'Int'>
   readonly quantity: Prisma.FieldRef<"ingredientamount", 'Int'>
 }
     
