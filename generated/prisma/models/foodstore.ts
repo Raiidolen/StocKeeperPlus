@@ -26,64 +26,74 @@ export type AggregateFoodstore = {
 }
 
 export type FoodstoreAvgAggregateOutputType = {
-  food_id: number | null
-  store_id: number | null
+  food: number | null
+  store: number | null
+  quantity: number | null
   price: runtime.Decimal | null
 }
 
 export type FoodstoreSumAggregateOutputType = {
-  food_id: number | null
-  store_id: number | null
+  food: number | null
+  store: number | null
+  quantity: number | null
   price: runtime.Decimal | null
 }
 
 export type FoodstoreMinAggregateOutputType = {
-  food_id: number | null
-  store_id: number | null
+  food: number | null
+  store: number | null
+  quantity: number | null
   price: runtime.Decimal | null
 }
 
 export type FoodstoreMaxAggregateOutputType = {
-  food_id: number | null
-  store_id: number | null
+  food: number | null
+  store: number | null
+  quantity: number | null
   price: runtime.Decimal | null
 }
 
 export type FoodstoreCountAggregateOutputType = {
-  food_id: number
-  store_id: number
+  food: number
+  store: number
+  quantity: number
   price: number
   _all: number
 }
 
 
 export type FoodstoreAvgAggregateInputType = {
-  food_id?: true
-  store_id?: true
+  food?: true
+  store?: true
+  quantity?: true
   price?: true
 }
 
 export type FoodstoreSumAggregateInputType = {
-  food_id?: true
-  store_id?: true
+  food?: true
+  store?: true
+  quantity?: true
   price?: true
 }
 
 export type FoodstoreMinAggregateInputType = {
-  food_id?: true
-  store_id?: true
+  food?: true
+  store?: true
+  quantity?: true
   price?: true
 }
 
 export type FoodstoreMaxAggregateInputType = {
-  food_id?: true
-  store_id?: true
+  food?: true
+  store?: true
+  quantity?: true
   price?: true
 }
 
 export type FoodstoreCountAggregateInputType = {
-  food_id?: true
-  store_id?: true
+  food?: true
+  store?: true
+  quantity?: true
   price?: true
   _all?: true
 }
@@ -175,8 +185,9 @@ export type foodstoreGroupByArgs<ExtArgs extends runtime.Types.Extensions.Intern
 }
 
 export type FoodstoreGroupByOutputType = {
-  food_id: number
-  store_id: number
+  food: number
+  store: number
+  quantity: number | null
   price: runtime.Decimal | null
   _count: FoodstoreCountAggregateOutputType | null
   _avg: FoodstoreAvgAggregateOutputType | null
@@ -204,36 +215,40 @@ export type foodstoreWhereInput = {
   AND?: Prisma.foodstoreWhereInput | Prisma.foodstoreWhereInput[]
   OR?: Prisma.foodstoreWhereInput[]
   NOT?: Prisma.foodstoreWhereInput | Prisma.foodstoreWhereInput[]
-  food_id?: Prisma.IntFilter<"foodstore"> | number
-  store_id?: Prisma.IntFilter<"foodstore"> | number
+  food?: Prisma.IntFilter<"foodstore"> | number
+  store?: Prisma.IntFilter<"foodstore"> | number
+  quantity?: Prisma.IntNullableFilter<"foodstore"> | number | null
   price?: Prisma.DecimalNullableFilter<"foodstore"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  food?: Prisma.XOR<Prisma.FoodScalarRelationFilter, Prisma.foodWhereInput>
-  store?: Prisma.XOR<Prisma.StoreScalarRelationFilter, Prisma.storeWhereInput>
+  food_foodstore_foodTofood?: Prisma.XOR<Prisma.FoodScalarRelationFilter, Prisma.foodWhereInput>
+  store_foodstore_storeTostore?: Prisma.XOR<Prisma.StoreScalarRelationFilter, Prisma.storeWhereInput>
 }
 
 export type foodstoreOrderByWithRelationInput = {
-  food_id?: Prisma.SortOrder
-  store_id?: Prisma.SortOrder
+  food?: Prisma.SortOrder
+  store?: Prisma.SortOrder
+  quantity?: Prisma.SortOrderInput | Prisma.SortOrder
   price?: Prisma.SortOrderInput | Prisma.SortOrder
-  food?: Prisma.foodOrderByWithRelationInput
-  store?: Prisma.storeOrderByWithRelationInput
+  food_foodstore_foodTofood?: Prisma.foodOrderByWithRelationInput
+  store_foodstore_storeTostore?: Prisma.storeOrderByWithRelationInput
 }
 
 export type foodstoreWhereUniqueInput = Prisma.AtLeast<{
-  food_id_store_id?: Prisma.foodstoreFood_idStore_idCompoundUniqueInput
+  food_store?: Prisma.foodstoreFoodStoreCompoundUniqueInput
   AND?: Prisma.foodstoreWhereInput | Prisma.foodstoreWhereInput[]
   OR?: Prisma.foodstoreWhereInput[]
   NOT?: Prisma.foodstoreWhereInput | Prisma.foodstoreWhereInput[]
-  food_id?: Prisma.IntFilter<"foodstore"> | number
-  store_id?: Prisma.IntFilter<"foodstore"> | number
+  food?: Prisma.IntFilter<"foodstore"> | number
+  store?: Prisma.IntFilter<"foodstore"> | number
+  quantity?: Prisma.IntNullableFilter<"foodstore"> | number | null
   price?: Prisma.DecimalNullableFilter<"foodstore"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  food?: Prisma.XOR<Prisma.FoodScalarRelationFilter, Prisma.foodWhereInput>
-  store?: Prisma.XOR<Prisma.StoreScalarRelationFilter, Prisma.storeWhereInput>
-}, "food_id_store_id">
+  food_foodstore_foodTofood?: Prisma.XOR<Prisma.FoodScalarRelationFilter, Prisma.foodWhereInput>
+  store_foodstore_storeTostore?: Prisma.XOR<Prisma.StoreScalarRelationFilter, Prisma.storeWhereInput>
+}, "food_store">
 
 export type foodstoreOrderByWithAggregationInput = {
-  food_id?: Prisma.SortOrder
-  store_id?: Prisma.SortOrder
+  food?: Prisma.SortOrder
+  store?: Prisma.SortOrder
+  quantity?: Prisma.SortOrderInput | Prisma.SortOrder
   price?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.foodstoreCountOrderByAggregateInput
   _avg?: Prisma.foodstoreAvgOrderByAggregateInput
@@ -246,48 +261,56 @@ export type foodstoreScalarWhereWithAggregatesInput = {
   AND?: Prisma.foodstoreScalarWhereWithAggregatesInput | Prisma.foodstoreScalarWhereWithAggregatesInput[]
   OR?: Prisma.foodstoreScalarWhereWithAggregatesInput[]
   NOT?: Prisma.foodstoreScalarWhereWithAggregatesInput | Prisma.foodstoreScalarWhereWithAggregatesInput[]
-  food_id?: Prisma.IntWithAggregatesFilter<"foodstore"> | number
-  store_id?: Prisma.IntWithAggregatesFilter<"foodstore"> | number
+  food?: Prisma.IntWithAggregatesFilter<"foodstore"> | number
+  store?: Prisma.IntWithAggregatesFilter<"foodstore"> | number
+  quantity?: Prisma.IntNullableWithAggregatesFilter<"foodstore"> | number | null
   price?: Prisma.DecimalNullableWithAggregatesFilter<"foodstore"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type foodstoreCreateInput = {
+  quantity?: number | null
   price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  food: Prisma.foodCreateNestedOneWithoutFoodstoreInput
-  store: Prisma.storeCreateNestedOneWithoutFoodstoreInput
+  food_foodstore_foodTofood: Prisma.foodCreateNestedOneWithoutFoodstore_foodstore_foodTofoodInput
+  store_foodstore_storeTostore: Prisma.storeCreateNestedOneWithoutFoodstore_foodstore_storeTostoreInput
 }
 
 export type foodstoreUncheckedCreateInput = {
-  food_id: number
-  store_id: number
+  food: number
+  store: number
+  quantity?: number | null
   price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type foodstoreUpdateInput = {
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  food?: Prisma.foodUpdateOneRequiredWithoutFoodstoreNestedInput
-  store?: Prisma.storeUpdateOneRequiredWithoutFoodstoreNestedInput
+  food_foodstore_foodTofood?: Prisma.foodUpdateOneRequiredWithoutFoodstore_foodstore_foodTofoodNestedInput
+  store_foodstore_storeTostore?: Prisma.storeUpdateOneRequiredWithoutFoodstore_foodstore_storeTostoreNestedInput
 }
 
 export type foodstoreUncheckedUpdateInput = {
-  food_id?: Prisma.IntFieldUpdateOperationsInput | number
-  store_id?: Prisma.IntFieldUpdateOperationsInput | number
+  food?: Prisma.IntFieldUpdateOperationsInput | number
+  store?: Prisma.IntFieldUpdateOperationsInput | number
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type foodstoreCreateManyInput = {
-  food_id: number
-  store_id: number
+  food: number
+  store: number
+  quantity?: number | null
   price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type foodstoreUpdateManyMutationInput = {
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type foodstoreUncheckedUpdateManyInput = {
-  food_id?: Prisma.IntFieldUpdateOperationsInput | number
-  store_id?: Prisma.IntFieldUpdateOperationsInput | number
+  food?: Prisma.IntFieldUpdateOperationsInput | number
+  store?: Prisma.IntFieldUpdateOperationsInput | number
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
@@ -301,81 +324,94 @@ export type foodstoreOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
-export type foodstoreFood_idStore_idCompoundUniqueInput = {
-  food_id: number
-  store_id: number
+export type foodstoreFoodStoreCompoundUniqueInput = {
+  food: number
+  store: number
 }
 
 export type foodstoreCountOrderByAggregateInput = {
-  food_id?: Prisma.SortOrder
-  store_id?: Prisma.SortOrder
+  food?: Prisma.SortOrder
+  store?: Prisma.SortOrder
+  quantity?: Prisma.SortOrder
   price?: Prisma.SortOrder
 }
 
 export type foodstoreAvgOrderByAggregateInput = {
-  food_id?: Prisma.SortOrder
-  store_id?: Prisma.SortOrder
+  food?: Prisma.SortOrder
+  store?: Prisma.SortOrder
+  quantity?: Prisma.SortOrder
   price?: Prisma.SortOrder
 }
 
 export type foodstoreMaxOrderByAggregateInput = {
-  food_id?: Prisma.SortOrder
-  store_id?: Prisma.SortOrder
+  food?: Prisma.SortOrder
+  store?: Prisma.SortOrder
+  quantity?: Prisma.SortOrder
   price?: Prisma.SortOrder
 }
 
 export type foodstoreMinOrderByAggregateInput = {
-  food_id?: Prisma.SortOrder
-  store_id?: Prisma.SortOrder
+  food?: Prisma.SortOrder
+  store?: Prisma.SortOrder
+  quantity?: Prisma.SortOrder
   price?: Prisma.SortOrder
 }
 
 export type foodstoreSumOrderByAggregateInput = {
-  food_id?: Prisma.SortOrder
-  store_id?: Prisma.SortOrder
+  food?: Prisma.SortOrder
+  store?: Prisma.SortOrder
+  quantity?: Prisma.SortOrder
   price?: Prisma.SortOrder
 }
 
-export type foodstoreCreateNestedManyWithoutFoodInput = {
-  create?: Prisma.XOR<Prisma.foodstoreCreateWithoutFoodInput, Prisma.foodstoreUncheckedCreateWithoutFoodInput> | Prisma.foodstoreCreateWithoutFoodInput[] | Prisma.foodstoreUncheckedCreateWithoutFoodInput[]
-  connectOrCreate?: Prisma.foodstoreCreateOrConnectWithoutFoodInput | Prisma.foodstoreCreateOrConnectWithoutFoodInput[]
-  createMany?: Prisma.foodstoreCreateManyFoodInputEnvelope
+export type foodstoreCreateNestedManyWithoutFood_foodstore_foodTofoodInput = {
+  create?: Prisma.XOR<Prisma.foodstoreCreateWithoutFood_foodstore_foodTofoodInput, Prisma.foodstoreUncheckedCreateWithoutFood_foodstore_foodTofoodInput> | Prisma.foodstoreCreateWithoutFood_foodstore_foodTofoodInput[] | Prisma.foodstoreUncheckedCreateWithoutFood_foodstore_foodTofoodInput[]
+  connectOrCreate?: Prisma.foodstoreCreateOrConnectWithoutFood_foodstore_foodTofoodInput | Prisma.foodstoreCreateOrConnectWithoutFood_foodstore_foodTofoodInput[]
+  createMany?: Prisma.foodstoreCreateManyFood_foodstore_foodTofoodInputEnvelope
   connect?: Prisma.foodstoreWhereUniqueInput | Prisma.foodstoreWhereUniqueInput[]
 }
 
-export type foodstoreUncheckedCreateNestedManyWithoutFoodInput = {
-  create?: Prisma.XOR<Prisma.foodstoreCreateWithoutFoodInput, Prisma.foodstoreUncheckedCreateWithoutFoodInput> | Prisma.foodstoreCreateWithoutFoodInput[] | Prisma.foodstoreUncheckedCreateWithoutFoodInput[]
-  connectOrCreate?: Prisma.foodstoreCreateOrConnectWithoutFoodInput | Prisma.foodstoreCreateOrConnectWithoutFoodInput[]
-  createMany?: Prisma.foodstoreCreateManyFoodInputEnvelope
+export type foodstoreUncheckedCreateNestedManyWithoutFood_foodstore_foodTofoodInput = {
+  create?: Prisma.XOR<Prisma.foodstoreCreateWithoutFood_foodstore_foodTofoodInput, Prisma.foodstoreUncheckedCreateWithoutFood_foodstore_foodTofoodInput> | Prisma.foodstoreCreateWithoutFood_foodstore_foodTofoodInput[] | Prisma.foodstoreUncheckedCreateWithoutFood_foodstore_foodTofoodInput[]
+  connectOrCreate?: Prisma.foodstoreCreateOrConnectWithoutFood_foodstore_foodTofoodInput | Prisma.foodstoreCreateOrConnectWithoutFood_foodstore_foodTofoodInput[]
+  createMany?: Prisma.foodstoreCreateManyFood_foodstore_foodTofoodInputEnvelope
   connect?: Prisma.foodstoreWhereUniqueInput | Prisma.foodstoreWhereUniqueInput[]
 }
 
-export type foodstoreUpdateManyWithoutFoodNestedInput = {
-  create?: Prisma.XOR<Prisma.foodstoreCreateWithoutFoodInput, Prisma.foodstoreUncheckedCreateWithoutFoodInput> | Prisma.foodstoreCreateWithoutFoodInput[] | Prisma.foodstoreUncheckedCreateWithoutFoodInput[]
-  connectOrCreate?: Prisma.foodstoreCreateOrConnectWithoutFoodInput | Prisma.foodstoreCreateOrConnectWithoutFoodInput[]
-  upsert?: Prisma.foodstoreUpsertWithWhereUniqueWithoutFoodInput | Prisma.foodstoreUpsertWithWhereUniqueWithoutFoodInput[]
-  createMany?: Prisma.foodstoreCreateManyFoodInputEnvelope
+export type foodstoreUpdateManyWithoutFood_foodstore_foodTofoodNestedInput = {
+  create?: Prisma.XOR<Prisma.foodstoreCreateWithoutFood_foodstore_foodTofoodInput, Prisma.foodstoreUncheckedCreateWithoutFood_foodstore_foodTofoodInput> | Prisma.foodstoreCreateWithoutFood_foodstore_foodTofoodInput[] | Prisma.foodstoreUncheckedCreateWithoutFood_foodstore_foodTofoodInput[]
+  connectOrCreate?: Prisma.foodstoreCreateOrConnectWithoutFood_foodstore_foodTofoodInput | Prisma.foodstoreCreateOrConnectWithoutFood_foodstore_foodTofoodInput[]
+  upsert?: Prisma.foodstoreUpsertWithWhereUniqueWithoutFood_foodstore_foodTofoodInput | Prisma.foodstoreUpsertWithWhereUniqueWithoutFood_foodstore_foodTofoodInput[]
+  createMany?: Prisma.foodstoreCreateManyFood_foodstore_foodTofoodInputEnvelope
   set?: Prisma.foodstoreWhereUniqueInput | Prisma.foodstoreWhereUniqueInput[]
   disconnect?: Prisma.foodstoreWhereUniqueInput | Prisma.foodstoreWhereUniqueInput[]
   delete?: Prisma.foodstoreWhereUniqueInput | Prisma.foodstoreWhereUniqueInput[]
   connect?: Prisma.foodstoreWhereUniqueInput | Prisma.foodstoreWhereUniqueInput[]
-  update?: Prisma.foodstoreUpdateWithWhereUniqueWithoutFoodInput | Prisma.foodstoreUpdateWithWhereUniqueWithoutFoodInput[]
-  updateMany?: Prisma.foodstoreUpdateManyWithWhereWithoutFoodInput | Prisma.foodstoreUpdateManyWithWhereWithoutFoodInput[]
+  update?: Prisma.foodstoreUpdateWithWhereUniqueWithoutFood_foodstore_foodTofoodInput | Prisma.foodstoreUpdateWithWhereUniqueWithoutFood_foodstore_foodTofoodInput[]
+  updateMany?: Prisma.foodstoreUpdateManyWithWhereWithoutFood_foodstore_foodTofoodInput | Prisma.foodstoreUpdateManyWithWhereWithoutFood_foodstore_foodTofoodInput[]
   deleteMany?: Prisma.foodstoreScalarWhereInput | Prisma.foodstoreScalarWhereInput[]
 }
 
-export type foodstoreUncheckedUpdateManyWithoutFoodNestedInput = {
-  create?: Prisma.XOR<Prisma.foodstoreCreateWithoutFoodInput, Prisma.foodstoreUncheckedCreateWithoutFoodInput> | Prisma.foodstoreCreateWithoutFoodInput[] | Prisma.foodstoreUncheckedCreateWithoutFoodInput[]
-  connectOrCreate?: Prisma.foodstoreCreateOrConnectWithoutFoodInput | Prisma.foodstoreCreateOrConnectWithoutFoodInput[]
-  upsert?: Prisma.foodstoreUpsertWithWhereUniqueWithoutFoodInput | Prisma.foodstoreUpsertWithWhereUniqueWithoutFoodInput[]
-  createMany?: Prisma.foodstoreCreateManyFoodInputEnvelope
+export type foodstoreUncheckedUpdateManyWithoutFood_foodstore_foodTofoodNestedInput = {
+  create?: Prisma.XOR<Prisma.foodstoreCreateWithoutFood_foodstore_foodTofoodInput, Prisma.foodstoreUncheckedCreateWithoutFood_foodstore_foodTofoodInput> | Prisma.foodstoreCreateWithoutFood_foodstore_foodTofoodInput[] | Prisma.foodstoreUncheckedCreateWithoutFood_foodstore_foodTofoodInput[]
+  connectOrCreate?: Prisma.foodstoreCreateOrConnectWithoutFood_foodstore_foodTofoodInput | Prisma.foodstoreCreateOrConnectWithoutFood_foodstore_foodTofoodInput[]
+  upsert?: Prisma.foodstoreUpsertWithWhereUniqueWithoutFood_foodstore_foodTofoodInput | Prisma.foodstoreUpsertWithWhereUniqueWithoutFood_foodstore_foodTofoodInput[]
+  createMany?: Prisma.foodstoreCreateManyFood_foodstore_foodTofoodInputEnvelope
   set?: Prisma.foodstoreWhereUniqueInput | Prisma.foodstoreWhereUniqueInput[]
   disconnect?: Prisma.foodstoreWhereUniqueInput | Prisma.foodstoreWhereUniqueInput[]
   delete?: Prisma.foodstoreWhereUniqueInput | Prisma.foodstoreWhereUniqueInput[]
   connect?: Prisma.foodstoreWhereUniqueInput | Prisma.foodstoreWhereUniqueInput[]
-  update?: Prisma.foodstoreUpdateWithWhereUniqueWithoutFoodInput | Prisma.foodstoreUpdateWithWhereUniqueWithoutFoodInput[]
-  updateMany?: Prisma.foodstoreUpdateManyWithWhereWithoutFoodInput | Prisma.foodstoreUpdateManyWithWhereWithoutFoodInput[]
+  update?: Prisma.foodstoreUpdateWithWhereUniqueWithoutFood_foodstore_foodTofoodInput | Prisma.foodstoreUpdateWithWhereUniqueWithoutFood_foodstore_foodTofoodInput[]
+  updateMany?: Prisma.foodstoreUpdateManyWithWhereWithoutFood_foodstore_foodTofoodInput | Prisma.foodstoreUpdateManyWithWhereWithoutFood_foodstore_foodTofoodInput[]
   deleteMany?: Prisma.foodstoreScalarWhereInput | Prisma.foodstoreScalarWhereInput[]
+}
+
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
 }
 
 export type NullableDecimalFieldUpdateOperationsInput = {
@@ -386,224 +422,242 @@ export type NullableDecimalFieldUpdateOperationsInput = {
   divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
-export type foodstoreCreateNestedManyWithoutStoreInput = {
-  create?: Prisma.XOR<Prisma.foodstoreCreateWithoutStoreInput, Prisma.foodstoreUncheckedCreateWithoutStoreInput> | Prisma.foodstoreCreateWithoutStoreInput[] | Prisma.foodstoreUncheckedCreateWithoutStoreInput[]
-  connectOrCreate?: Prisma.foodstoreCreateOrConnectWithoutStoreInput | Prisma.foodstoreCreateOrConnectWithoutStoreInput[]
-  createMany?: Prisma.foodstoreCreateManyStoreInputEnvelope
+export type foodstoreCreateNestedManyWithoutStore_foodstore_storeTostoreInput = {
+  create?: Prisma.XOR<Prisma.foodstoreCreateWithoutStore_foodstore_storeTostoreInput, Prisma.foodstoreUncheckedCreateWithoutStore_foodstore_storeTostoreInput> | Prisma.foodstoreCreateWithoutStore_foodstore_storeTostoreInput[] | Prisma.foodstoreUncheckedCreateWithoutStore_foodstore_storeTostoreInput[]
+  connectOrCreate?: Prisma.foodstoreCreateOrConnectWithoutStore_foodstore_storeTostoreInput | Prisma.foodstoreCreateOrConnectWithoutStore_foodstore_storeTostoreInput[]
+  createMany?: Prisma.foodstoreCreateManyStore_foodstore_storeTostoreInputEnvelope
   connect?: Prisma.foodstoreWhereUniqueInput | Prisma.foodstoreWhereUniqueInput[]
 }
 
-export type foodstoreUncheckedCreateNestedManyWithoutStoreInput = {
-  create?: Prisma.XOR<Prisma.foodstoreCreateWithoutStoreInput, Prisma.foodstoreUncheckedCreateWithoutStoreInput> | Prisma.foodstoreCreateWithoutStoreInput[] | Prisma.foodstoreUncheckedCreateWithoutStoreInput[]
-  connectOrCreate?: Prisma.foodstoreCreateOrConnectWithoutStoreInput | Prisma.foodstoreCreateOrConnectWithoutStoreInput[]
-  createMany?: Prisma.foodstoreCreateManyStoreInputEnvelope
+export type foodstoreUncheckedCreateNestedManyWithoutStore_foodstore_storeTostoreInput = {
+  create?: Prisma.XOR<Prisma.foodstoreCreateWithoutStore_foodstore_storeTostoreInput, Prisma.foodstoreUncheckedCreateWithoutStore_foodstore_storeTostoreInput> | Prisma.foodstoreCreateWithoutStore_foodstore_storeTostoreInput[] | Prisma.foodstoreUncheckedCreateWithoutStore_foodstore_storeTostoreInput[]
+  connectOrCreate?: Prisma.foodstoreCreateOrConnectWithoutStore_foodstore_storeTostoreInput | Prisma.foodstoreCreateOrConnectWithoutStore_foodstore_storeTostoreInput[]
+  createMany?: Prisma.foodstoreCreateManyStore_foodstore_storeTostoreInputEnvelope
   connect?: Prisma.foodstoreWhereUniqueInput | Prisma.foodstoreWhereUniqueInput[]
 }
 
-export type foodstoreUpdateManyWithoutStoreNestedInput = {
-  create?: Prisma.XOR<Prisma.foodstoreCreateWithoutStoreInput, Prisma.foodstoreUncheckedCreateWithoutStoreInput> | Prisma.foodstoreCreateWithoutStoreInput[] | Prisma.foodstoreUncheckedCreateWithoutStoreInput[]
-  connectOrCreate?: Prisma.foodstoreCreateOrConnectWithoutStoreInput | Prisma.foodstoreCreateOrConnectWithoutStoreInput[]
-  upsert?: Prisma.foodstoreUpsertWithWhereUniqueWithoutStoreInput | Prisma.foodstoreUpsertWithWhereUniqueWithoutStoreInput[]
-  createMany?: Prisma.foodstoreCreateManyStoreInputEnvelope
+export type foodstoreUpdateManyWithoutStore_foodstore_storeTostoreNestedInput = {
+  create?: Prisma.XOR<Prisma.foodstoreCreateWithoutStore_foodstore_storeTostoreInput, Prisma.foodstoreUncheckedCreateWithoutStore_foodstore_storeTostoreInput> | Prisma.foodstoreCreateWithoutStore_foodstore_storeTostoreInput[] | Prisma.foodstoreUncheckedCreateWithoutStore_foodstore_storeTostoreInput[]
+  connectOrCreate?: Prisma.foodstoreCreateOrConnectWithoutStore_foodstore_storeTostoreInput | Prisma.foodstoreCreateOrConnectWithoutStore_foodstore_storeTostoreInput[]
+  upsert?: Prisma.foodstoreUpsertWithWhereUniqueWithoutStore_foodstore_storeTostoreInput | Prisma.foodstoreUpsertWithWhereUniqueWithoutStore_foodstore_storeTostoreInput[]
+  createMany?: Prisma.foodstoreCreateManyStore_foodstore_storeTostoreInputEnvelope
   set?: Prisma.foodstoreWhereUniqueInput | Prisma.foodstoreWhereUniqueInput[]
   disconnect?: Prisma.foodstoreWhereUniqueInput | Prisma.foodstoreWhereUniqueInput[]
   delete?: Prisma.foodstoreWhereUniqueInput | Prisma.foodstoreWhereUniqueInput[]
   connect?: Prisma.foodstoreWhereUniqueInput | Prisma.foodstoreWhereUniqueInput[]
-  update?: Prisma.foodstoreUpdateWithWhereUniqueWithoutStoreInput | Prisma.foodstoreUpdateWithWhereUniqueWithoutStoreInput[]
-  updateMany?: Prisma.foodstoreUpdateManyWithWhereWithoutStoreInput | Prisma.foodstoreUpdateManyWithWhereWithoutStoreInput[]
+  update?: Prisma.foodstoreUpdateWithWhereUniqueWithoutStore_foodstore_storeTostoreInput | Prisma.foodstoreUpdateWithWhereUniqueWithoutStore_foodstore_storeTostoreInput[]
+  updateMany?: Prisma.foodstoreUpdateManyWithWhereWithoutStore_foodstore_storeTostoreInput | Prisma.foodstoreUpdateManyWithWhereWithoutStore_foodstore_storeTostoreInput[]
   deleteMany?: Prisma.foodstoreScalarWhereInput | Prisma.foodstoreScalarWhereInput[]
 }
 
-export type foodstoreUncheckedUpdateManyWithoutStoreNestedInput = {
-  create?: Prisma.XOR<Prisma.foodstoreCreateWithoutStoreInput, Prisma.foodstoreUncheckedCreateWithoutStoreInput> | Prisma.foodstoreCreateWithoutStoreInput[] | Prisma.foodstoreUncheckedCreateWithoutStoreInput[]
-  connectOrCreate?: Prisma.foodstoreCreateOrConnectWithoutStoreInput | Prisma.foodstoreCreateOrConnectWithoutStoreInput[]
-  upsert?: Prisma.foodstoreUpsertWithWhereUniqueWithoutStoreInput | Prisma.foodstoreUpsertWithWhereUniqueWithoutStoreInput[]
-  createMany?: Prisma.foodstoreCreateManyStoreInputEnvelope
+export type foodstoreUncheckedUpdateManyWithoutStore_foodstore_storeTostoreNestedInput = {
+  create?: Prisma.XOR<Prisma.foodstoreCreateWithoutStore_foodstore_storeTostoreInput, Prisma.foodstoreUncheckedCreateWithoutStore_foodstore_storeTostoreInput> | Prisma.foodstoreCreateWithoutStore_foodstore_storeTostoreInput[] | Prisma.foodstoreUncheckedCreateWithoutStore_foodstore_storeTostoreInput[]
+  connectOrCreate?: Prisma.foodstoreCreateOrConnectWithoutStore_foodstore_storeTostoreInput | Prisma.foodstoreCreateOrConnectWithoutStore_foodstore_storeTostoreInput[]
+  upsert?: Prisma.foodstoreUpsertWithWhereUniqueWithoutStore_foodstore_storeTostoreInput | Prisma.foodstoreUpsertWithWhereUniqueWithoutStore_foodstore_storeTostoreInput[]
+  createMany?: Prisma.foodstoreCreateManyStore_foodstore_storeTostoreInputEnvelope
   set?: Prisma.foodstoreWhereUniqueInput | Prisma.foodstoreWhereUniqueInput[]
   disconnect?: Prisma.foodstoreWhereUniqueInput | Prisma.foodstoreWhereUniqueInput[]
   delete?: Prisma.foodstoreWhereUniqueInput | Prisma.foodstoreWhereUniqueInput[]
   connect?: Prisma.foodstoreWhereUniqueInput | Prisma.foodstoreWhereUniqueInput[]
-  update?: Prisma.foodstoreUpdateWithWhereUniqueWithoutStoreInput | Prisma.foodstoreUpdateWithWhereUniqueWithoutStoreInput[]
-  updateMany?: Prisma.foodstoreUpdateManyWithWhereWithoutStoreInput | Prisma.foodstoreUpdateManyWithWhereWithoutStoreInput[]
+  update?: Prisma.foodstoreUpdateWithWhereUniqueWithoutStore_foodstore_storeTostoreInput | Prisma.foodstoreUpdateWithWhereUniqueWithoutStore_foodstore_storeTostoreInput[]
+  updateMany?: Prisma.foodstoreUpdateManyWithWhereWithoutStore_foodstore_storeTostoreInput | Prisma.foodstoreUpdateManyWithWhereWithoutStore_foodstore_storeTostoreInput[]
   deleteMany?: Prisma.foodstoreScalarWhereInput | Prisma.foodstoreScalarWhereInput[]
 }
 
-export type foodstoreCreateWithoutFoodInput = {
+export type foodstoreCreateWithoutFood_foodstore_foodTofoodInput = {
+  quantity?: number | null
   price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  store: Prisma.storeCreateNestedOneWithoutFoodstoreInput
+  store_foodstore_storeTostore: Prisma.storeCreateNestedOneWithoutFoodstore_foodstore_storeTostoreInput
 }
 
-export type foodstoreUncheckedCreateWithoutFoodInput = {
-  store_id: number
+export type foodstoreUncheckedCreateWithoutFood_foodstore_foodTofoodInput = {
+  store: number
+  quantity?: number | null
   price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
-export type foodstoreCreateOrConnectWithoutFoodInput = {
+export type foodstoreCreateOrConnectWithoutFood_foodstore_foodTofoodInput = {
   where: Prisma.foodstoreWhereUniqueInput
-  create: Prisma.XOR<Prisma.foodstoreCreateWithoutFoodInput, Prisma.foodstoreUncheckedCreateWithoutFoodInput>
+  create: Prisma.XOR<Prisma.foodstoreCreateWithoutFood_foodstore_foodTofoodInput, Prisma.foodstoreUncheckedCreateWithoutFood_foodstore_foodTofoodInput>
 }
 
-export type foodstoreCreateManyFoodInputEnvelope = {
-  data: Prisma.foodstoreCreateManyFoodInput | Prisma.foodstoreCreateManyFoodInput[]
+export type foodstoreCreateManyFood_foodstore_foodTofoodInputEnvelope = {
+  data: Prisma.foodstoreCreateManyFood_foodstore_foodTofoodInput | Prisma.foodstoreCreateManyFood_foodstore_foodTofoodInput[]
   skipDuplicates?: boolean
 }
 
-export type foodstoreUpsertWithWhereUniqueWithoutFoodInput = {
+export type foodstoreUpsertWithWhereUniqueWithoutFood_foodstore_foodTofoodInput = {
   where: Prisma.foodstoreWhereUniqueInput
-  update: Prisma.XOR<Prisma.foodstoreUpdateWithoutFoodInput, Prisma.foodstoreUncheckedUpdateWithoutFoodInput>
-  create: Prisma.XOR<Prisma.foodstoreCreateWithoutFoodInput, Prisma.foodstoreUncheckedCreateWithoutFoodInput>
+  update: Prisma.XOR<Prisma.foodstoreUpdateWithoutFood_foodstore_foodTofoodInput, Prisma.foodstoreUncheckedUpdateWithoutFood_foodstore_foodTofoodInput>
+  create: Prisma.XOR<Prisma.foodstoreCreateWithoutFood_foodstore_foodTofoodInput, Prisma.foodstoreUncheckedCreateWithoutFood_foodstore_foodTofoodInput>
 }
 
-export type foodstoreUpdateWithWhereUniqueWithoutFoodInput = {
+export type foodstoreUpdateWithWhereUniqueWithoutFood_foodstore_foodTofoodInput = {
   where: Prisma.foodstoreWhereUniqueInput
-  data: Prisma.XOR<Prisma.foodstoreUpdateWithoutFoodInput, Prisma.foodstoreUncheckedUpdateWithoutFoodInput>
+  data: Prisma.XOR<Prisma.foodstoreUpdateWithoutFood_foodstore_foodTofoodInput, Prisma.foodstoreUncheckedUpdateWithoutFood_foodstore_foodTofoodInput>
 }
 
-export type foodstoreUpdateManyWithWhereWithoutFoodInput = {
+export type foodstoreUpdateManyWithWhereWithoutFood_foodstore_foodTofoodInput = {
   where: Prisma.foodstoreScalarWhereInput
-  data: Prisma.XOR<Prisma.foodstoreUpdateManyMutationInput, Prisma.foodstoreUncheckedUpdateManyWithoutFoodInput>
+  data: Prisma.XOR<Prisma.foodstoreUpdateManyMutationInput, Prisma.foodstoreUncheckedUpdateManyWithoutFood_foodstore_foodTofoodInput>
 }
 
 export type foodstoreScalarWhereInput = {
   AND?: Prisma.foodstoreScalarWhereInput | Prisma.foodstoreScalarWhereInput[]
   OR?: Prisma.foodstoreScalarWhereInput[]
   NOT?: Prisma.foodstoreScalarWhereInput | Prisma.foodstoreScalarWhereInput[]
-  food_id?: Prisma.IntFilter<"foodstore"> | number
-  store_id?: Prisma.IntFilter<"foodstore"> | number
+  food?: Prisma.IntFilter<"foodstore"> | number
+  store?: Prisma.IntFilter<"foodstore"> | number
+  quantity?: Prisma.IntNullableFilter<"foodstore"> | number | null
   price?: Prisma.DecimalNullableFilter<"foodstore"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
-export type foodstoreCreateWithoutStoreInput = {
+export type foodstoreCreateWithoutStore_foodstore_storeTostoreInput = {
+  quantity?: number | null
   price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  food: Prisma.foodCreateNestedOneWithoutFoodstoreInput
+  food_foodstore_foodTofood: Prisma.foodCreateNestedOneWithoutFoodstore_foodstore_foodTofoodInput
 }
 
-export type foodstoreUncheckedCreateWithoutStoreInput = {
-  food_id: number
+export type foodstoreUncheckedCreateWithoutStore_foodstore_storeTostoreInput = {
+  food: number
+  quantity?: number | null
   price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
-export type foodstoreCreateOrConnectWithoutStoreInput = {
+export type foodstoreCreateOrConnectWithoutStore_foodstore_storeTostoreInput = {
   where: Prisma.foodstoreWhereUniqueInput
-  create: Prisma.XOR<Prisma.foodstoreCreateWithoutStoreInput, Prisma.foodstoreUncheckedCreateWithoutStoreInput>
+  create: Prisma.XOR<Prisma.foodstoreCreateWithoutStore_foodstore_storeTostoreInput, Prisma.foodstoreUncheckedCreateWithoutStore_foodstore_storeTostoreInput>
 }
 
-export type foodstoreCreateManyStoreInputEnvelope = {
-  data: Prisma.foodstoreCreateManyStoreInput | Prisma.foodstoreCreateManyStoreInput[]
+export type foodstoreCreateManyStore_foodstore_storeTostoreInputEnvelope = {
+  data: Prisma.foodstoreCreateManyStore_foodstore_storeTostoreInput | Prisma.foodstoreCreateManyStore_foodstore_storeTostoreInput[]
   skipDuplicates?: boolean
 }
 
-export type foodstoreUpsertWithWhereUniqueWithoutStoreInput = {
+export type foodstoreUpsertWithWhereUniqueWithoutStore_foodstore_storeTostoreInput = {
   where: Prisma.foodstoreWhereUniqueInput
-  update: Prisma.XOR<Prisma.foodstoreUpdateWithoutStoreInput, Prisma.foodstoreUncheckedUpdateWithoutStoreInput>
-  create: Prisma.XOR<Prisma.foodstoreCreateWithoutStoreInput, Prisma.foodstoreUncheckedCreateWithoutStoreInput>
+  update: Prisma.XOR<Prisma.foodstoreUpdateWithoutStore_foodstore_storeTostoreInput, Prisma.foodstoreUncheckedUpdateWithoutStore_foodstore_storeTostoreInput>
+  create: Prisma.XOR<Prisma.foodstoreCreateWithoutStore_foodstore_storeTostoreInput, Prisma.foodstoreUncheckedCreateWithoutStore_foodstore_storeTostoreInput>
 }
 
-export type foodstoreUpdateWithWhereUniqueWithoutStoreInput = {
+export type foodstoreUpdateWithWhereUniqueWithoutStore_foodstore_storeTostoreInput = {
   where: Prisma.foodstoreWhereUniqueInput
-  data: Prisma.XOR<Prisma.foodstoreUpdateWithoutStoreInput, Prisma.foodstoreUncheckedUpdateWithoutStoreInput>
+  data: Prisma.XOR<Prisma.foodstoreUpdateWithoutStore_foodstore_storeTostoreInput, Prisma.foodstoreUncheckedUpdateWithoutStore_foodstore_storeTostoreInput>
 }
 
-export type foodstoreUpdateManyWithWhereWithoutStoreInput = {
+export type foodstoreUpdateManyWithWhereWithoutStore_foodstore_storeTostoreInput = {
   where: Prisma.foodstoreScalarWhereInput
-  data: Prisma.XOR<Prisma.foodstoreUpdateManyMutationInput, Prisma.foodstoreUncheckedUpdateManyWithoutStoreInput>
+  data: Prisma.XOR<Prisma.foodstoreUpdateManyMutationInput, Prisma.foodstoreUncheckedUpdateManyWithoutStore_foodstore_storeTostoreInput>
 }
 
-export type foodstoreCreateManyFoodInput = {
-  store_id: number
+export type foodstoreCreateManyFood_foodstore_foodTofoodInput = {
+  store: number
+  quantity?: number | null
   price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
-export type foodstoreUpdateWithoutFoodInput = {
+export type foodstoreUpdateWithoutFood_foodstore_foodTofoodInput = {
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  store?: Prisma.storeUpdateOneRequiredWithoutFoodstoreNestedInput
+  store_foodstore_storeTostore?: Prisma.storeUpdateOneRequiredWithoutFoodstore_foodstore_storeTostoreNestedInput
 }
 
-export type foodstoreUncheckedUpdateWithoutFoodInput = {
-  store_id?: Prisma.IntFieldUpdateOperationsInput | number
-  price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-}
-
-export type foodstoreUncheckedUpdateManyWithoutFoodInput = {
-  store_id?: Prisma.IntFieldUpdateOperationsInput | number
+export type foodstoreUncheckedUpdateWithoutFood_foodstore_foodTofoodInput = {
+  store?: Prisma.IntFieldUpdateOperationsInput | number
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
-export type foodstoreCreateManyStoreInput = {
-  food_id: number
+export type foodstoreUncheckedUpdateManyWithoutFood_foodstore_foodTofoodInput = {
+  store?: Prisma.IntFieldUpdateOperationsInput | number
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+}
+
+export type foodstoreCreateManyStore_foodstore_storeTostoreInput = {
+  food: number
+  quantity?: number | null
   price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
-export type foodstoreUpdateWithoutStoreInput = {
+export type foodstoreUpdateWithoutStore_foodstore_storeTostoreInput = {
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  food?: Prisma.foodUpdateOneRequiredWithoutFoodstoreNestedInput
+  food_foodstore_foodTofood?: Prisma.foodUpdateOneRequiredWithoutFoodstore_foodstore_foodTofoodNestedInput
 }
 
-export type foodstoreUncheckedUpdateWithoutStoreInput = {
-  food_id?: Prisma.IntFieldUpdateOperationsInput | number
+export type foodstoreUncheckedUpdateWithoutStore_foodstore_storeTostoreInput = {
+  food?: Prisma.IntFieldUpdateOperationsInput | number
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
-export type foodstoreUncheckedUpdateManyWithoutStoreInput = {
-  food_id?: Prisma.IntFieldUpdateOperationsInput | number
+export type foodstoreUncheckedUpdateManyWithoutStore_foodstore_storeTostoreInput = {
+  food?: Prisma.IntFieldUpdateOperationsInput | number
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 
 
 export type foodstoreSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  food_id?: boolean
-  store_id?: boolean
+  food?: boolean
+  store?: boolean
+  quantity?: boolean
   price?: boolean
-  food?: boolean | Prisma.foodDefaultArgs<ExtArgs>
-  store?: boolean | Prisma.storeDefaultArgs<ExtArgs>
+  food_foodstore_foodTofood?: boolean | Prisma.foodDefaultArgs<ExtArgs>
+  store_foodstore_storeTostore?: boolean | Prisma.storeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["foodstore"]>
 
 export type foodstoreSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  food_id?: boolean
-  store_id?: boolean
+  food?: boolean
+  store?: boolean
+  quantity?: boolean
   price?: boolean
-  food?: boolean | Prisma.foodDefaultArgs<ExtArgs>
-  store?: boolean | Prisma.storeDefaultArgs<ExtArgs>
+  food_foodstore_foodTofood?: boolean | Prisma.foodDefaultArgs<ExtArgs>
+  store_foodstore_storeTostore?: boolean | Prisma.storeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["foodstore"]>
 
 export type foodstoreSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  food_id?: boolean
-  store_id?: boolean
+  food?: boolean
+  store?: boolean
+  quantity?: boolean
   price?: boolean
-  food?: boolean | Prisma.foodDefaultArgs<ExtArgs>
-  store?: boolean | Prisma.storeDefaultArgs<ExtArgs>
+  food_foodstore_foodTofood?: boolean | Prisma.foodDefaultArgs<ExtArgs>
+  store_foodstore_storeTostore?: boolean | Prisma.storeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["foodstore"]>
 
 export type foodstoreSelectScalar = {
-  food_id?: boolean
-  store_id?: boolean
+  food?: boolean
+  store?: boolean
+  quantity?: boolean
   price?: boolean
 }
 
-export type foodstoreOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"food_id" | "store_id" | "price", ExtArgs["result"]["foodstore"]>
+export type foodstoreOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"food" | "store" | "quantity" | "price", ExtArgs["result"]["foodstore"]>
 export type foodstoreInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  food?: boolean | Prisma.foodDefaultArgs<ExtArgs>
-  store?: boolean | Prisma.storeDefaultArgs<ExtArgs>
+  food_foodstore_foodTofood?: boolean | Prisma.foodDefaultArgs<ExtArgs>
+  store_foodstore_storeTostore?: boolean | Prisma.storeDefaultArgs<ExtArgs>
 }
 export type foodstoreIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  food?: boolean | Prisma.foodDefaultArgs<ExtArgs>
-  store?: boolean | Prisma.storeDefaultArgs<ExtArgs>
+  food_foodstore_foodTofood?: boolean | Prisma.foodDefaultArgs<ExtArgs>
+  store_foodstore_storeTostore?: boolean | Prisma.storeDefaultArgs<ExtArgs>
 }
 export type foodstoreIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  food?: boolean | Prisma.foodDefaultArgs<ExtArgs>
-  store?: boolean | Prisma.storeDefaultArgs<ExtArgs>
+  food_foodstore_foodTofood?: boolean | Prisma.foodDefaultArgs<ExtArgs>
+  store_foodstore_storeTostore?: boolean | Prisma.storeDefaultArgs<ExtArgs>
 }
 
 export type $foodstorePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "foodstore"
   objects: {
-    food: Prisma.$foodPayload<ExtArgs>
-    store: Prisma.$storePayload<ExtArgs>
+    food_foodstore_foodTofood: Prisma.$foodPayload<ExtArgs>
+    store_foodstore_storeTostore: Prisma.$storePayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    food_id: number
-    store_id: number
+    food: number
+    store: number
+    quantity: number | null
     price: runtime.Decimal | null
   }, ExtArgs["result"]["foodstore"]>
   composites: {}
@@ -688,8 +742,8 @@ export interface foodstoreDelegate<ExtArgs extends runtime.Types.Extensions.Inte
    * // Get first 10 Foodstores
    * const foodstores = await prisma.foodstore.findMany({ take: 10 })
    * 
-   * // Only select the `food_id`
-   * const foodstoreWithFood_idOnly = await prisma.foodstore.findMany({ select: { food_id: true } })
+   * // Only select the `food`
+   * const foodstoreWithFoodOnly = await prisma.foodstore.findMany({ select: { food: true } })
    * 
    */
   findMany<T extends foodstoreFindManyArgs>(args?: Prisma.SelectSubset<T, foodstoreFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$foodstorePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -733,9 +787,9 @@ export interface foodstoreDelegate<ExtArgs extends runtime.Types.Extensions.Inte
    *   ]
    * })
    * 
-   * // Create many Foodstores and only return the `food_id`
-   * const foodstoreWithFood_idOnly = await prisma.foodstore.createManyAndReturn({
-   *   select: { food_id: true },
+   * // Create many Foodstores and only return the `food`
+   * const foodstoreWithFoodOnly = await prisma.foodstore.createManyAndReturn({
+   *   select: { food: true },
    *   data: [
    *     // ... provide data here
    *   ]
@@ -824,9 +878,9 @@ export interface foodstoreDelegate<ExtArgs extends runtime.Types.Extensions.Inte
    *   ]
    * })
    * 
-   * // Update zero or more Foodstores and only return the `food_id`
-   * const foodstoreWithFood_idOnly = await prisma.foodstore.updateManyAndReturn({
-   *   select: { food_id: true },
+   * // Update zero or more Foodstores and only return the `food`
+   * const foodstoreWithFoodOnly = await prisma.foodstore.updateManyAndReturn({
+   *   select: { food: true },
    *   where: {
    *     // ... provide filter here
    *   },
@@ -999,8 +1053,8 @@ readonly fields: foodstoreFieldRefs;
  */
 export interface Prisma__foodstoreClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  food<T extends Prisma.foodDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.foodDefaultArgs<ExtArgs>>): Prisma.Prisma__foodClient<runtime.Types.Result.GetResult<Prisma.$foodPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  store<T extends Prisma.storeDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.storeDefaultArgs<ExtArgs>>): Prisma.Prisma__storeClient<runtime.Types.Result.GetResult<Prisma.$storePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  food_foodstore_foodTofood<T extends Prisma.foodDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.foodDefaultArgs<ExtArgs>>): Prisma.Prisma__foodClient<runtime.Types.Result.GetResult<Prisma.$foodPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  store_foodstore_storeTostore<T extends Prisma.storeDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.storeDefaultArgs<ExtArgs>>): Prisma.Prisma__storeClient<runtime.Types.Result.GetResult<Prisma.$storePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1030,8 +1084,9 @@ export interface Prisma__foodstoreClient<T, Null = never, ExtArgs extends runtim
  * Fields of the foodstore model
  */
 export interface foodstoreFieldRefs {
-  readonly food_id: Prisma.FieldRef<"foodstore", 'Int'>
-  readonly store_id: Prisma.FieldRef<"foodstore", 'Int'>
+  readonly food: Prisma.FieldRef<"foodstore", 'Int'>
+  readonly store: Prisma.FieldRef<"foodstore", 'Int'>
+  readonly quantity: Prisma.FieldRef<"foodstore", 'Int'>
   readonly price: Prisma.FieldRef<"foodstore", 'Decimal'>
 }
     

@@ -215,7 +215,7 @@ export type storeWhereInput = {
   label?: Prisma.StringFilter<"store"> | string
   longitude?: Prisma.DecimalFilter<"store"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   latitude?: Prisma.DecimalFilter<"store"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  foodstore?: Prisma.FoodstoreListRelationFilter
+  foodstore_foodstore_storeTostore?: Prisma.FoodstoreListRelationFilter
 }
 
 export type storeOrderByWithRelationInput = {
@@ -223,7 +223,7 @@ export type storeOrderByWithRelationInput = {
   label?: Prisma.SortOrder
   longitude?: Prisma.SortOrder
   latitude?: Prisma.SortOrder
-  foodstore?: Prisma.foodstoreOrderByRelationAggregateInput
+  foodstore_foodstore_storeTostore?: Prisma.foodstoreOrderByRelationAggregateInput
 }
 
 export type storeWhereUniqueInput = Prisma.AtLeast<{
@@ -234,7 +234,7 @@ export type storeWhereUniqueInput = Prisma.AtLeast<{
   label?: Prisma.StringFilter<"store"> | string
   longitude?: Prisma.DecimalFilter<"store"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   latitude?: Prisma.DecimalFilter<"store"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  foodstore?: Prisma.FoodstoreListRelationFilter
+  foodstore_foodstore_storeTostore?: Prisma.FoodstoreListRelationFilter
 }, "id">
 
 export type storeOrderByWithAggregationInput = {
@@ -263,7 +263,7 @@ export type storeCreateInput = {
   label: string
   longitude: runtime.Decimal | runtime.DecimalJsLike | number | string
   latitude: runtime.Decimal | runtime.DecimalJsLike | number | string
-  foodstore?: Prisma.foodstoreCreateNestedManyWithoutStoreInput
+  foodstore_foodstore_storeTostore?: Prisma.foodstoreCreateNestedManyWithoutStore_foodstore_storeTostoreInput
 }
 
 export type storeUncheckedCreateInput = {
@@ -271,14 +271,14 @@ export type storeUncheckedCreateInput = {
   label: string
   longitude: runtime.Decimal | runtime.DecimalJsLike | number | string
   latitude: runtime.Decimal | runtime.DecimalJsLike | number | string
-  foodstore?: Prisma.foodstoreUncheckedCreateNestedManyWithoutStoreInput
+  foodstore_foodstore_storeTostore?: Prisma.foodstoreUncheckedCreateNestedManyWithoutStore_foodstore_storeTostoreInput
 }
 
 export type storeUpdateInput = {
   label?: Prisma.StringFieldUpdateOperationsInput | string
   longitude?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   latitude?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  foodstore?: Prisma.foodstoreUpdateManyWithoutStoreNestedInput
+  foodstore_foodstore_storeTostore?: Prisma.foodstoreUpdateManyWithoutStore_foodstore_storeTostoreNestedInput
 }
 
 export type storeUncheckedUpdateInput = {
@@ -286,7 +286,7 @@ export type storeUncheckedUpdateInput = {
   label?: Prisma.StringFieldUpdateOperationsInput | string
   longitude?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   latitude?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  foodstore?: Prisma.foodstoreUncheckedUpdateManyWithoutStoreNestedInput
+  foodstore_foodstore_storeTostore?: Prisma.foodstoreUncheckedUpdateManyWithoutStore_foodstore_storeTostoreNestedInput
 }
 
 export type storeCreateManyInput = {
@@ -347,18 +347,18 @@ export type storeSumOrderByAggregateInput = {
   latitude?: Prisma.SortOrder
 }
 
-export type storeCreateNestedOneWithoutFoodstoreInput = {
-  create?: Prisma.XOR<Prisma.storeCreateWithoutFoodstoreInput, Prisma.storeUncheckedCreateWithoutFoodstoreInput>
-  connectOrCreate?: Prisma.storeCreateOrConnectWithoutFoodstoreInput
+export type storeCreateNestedOneWithoutFoodstore_foodstore_storeTostoreInput = {
+  create?: Prisma.XOR<Prisma.storeCreateWithoutFoodstore_foodstore_storeTostoreInput, Prisma.storeUncheckedCreateWithoutFoodstore_foodstore_storeTostoreInput>
+  connectOrCreate?: Prisma.storeCreateOrConnectWithoutFoodstore_foodstore_storeTostoreInput
   connect?: Prisma.storeWhereUniqueInput
 }
 
-export type storeUpdateOneRequiredWithoutFoodstoreNestedInput = {
-  create?: Prisma.XOR<Prisma.storeCreateWithoutFoodstoreInput, Prisma.storeUncheckedCreateWithoutFoodstoreInput>
-  connectOrCreate?: Prisma.storeCreateOrConnectWithoutFoodstoreInput
-  upsert?: Prisma.storeUpsertWithoutFoodstoreInput
+export type storeUpdateOneRequiredWithoutFoodstore_foodstore_storeTostoreNestedInput = {
+  create?: Prisma.XOR<Prisma.storeCreateWithoutFoodstore_foodstore_storeTostoreInput, Prisma.storeUncheckedCreateWithoutFoodstore_foodstore_storeTostoreInput>
+  connectOrCreate?: Prisma.storeCreateOrConnectWithoutFoodstore_foodstore_storeTostoreInput
+  upsert?: Prisma.storeUpsertWithoutFoodstore_foodstore_storeTostoreInput
   connect?: Prisma.storeWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.storeUpdateToOneWithWhereWithoutFoodstoreInput, Prisma.storeUpdateWithoutFoodstoreInput>, Prisma.storeUncheckedUpdateWithoutFoodstoreInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.storeUpdateToOneWithWhereWithoutFoodstore_foodstore_storeTostoreInput, Prisma.storeUpdateWithoutFoodstore_foodstore_storeTostoreInput>, Prisma.storeUncheckedUpdateWithoutFoodstore_foodstore_storeTostoreInput>
 }
 
 export type DecimalFieldUpdateOperationsInput = {
@@ -369,42 +369,42 @@ export type DecimalFieldUpdateOperationsInput = {
   divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
-export type storeCreateWithoutFoodstoreInput = {
+export type storeCreateWithoutFoodstore_foodstore_storeTostoreInput = {
   label: string
   longitude: runtime.Decimal | runtime.DecimalJsLike | number | string
   latitude: runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
-export type storeUncheckedCreateWithoutFoodstoreInput = {
+export type storeUncheckedCreateWithoutFoodstore_foodstore_storeTostoreInput = {
   id?: number
   label: string
   longitude: runtime.Decimal | runtime.DecimalJsLike | number | string
   latitude: runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
-export type storeCreateOrConnectWithoutFoodstoreInput = {
+export type storeCreateOrConnectWithoutFoodstore_foodstore_storeTostoreInput = {
   where: Prisma.storeWhereUniqueInput
-  create: Prisma.XOR<Prisma.storeCreateWithoutFoodstoreInput, Prisma.storeUncheckedCreateWithoutFoodstoreInput>
+  create: Prisma.XOR<Prisma.storeCreateWithoutFoodstore_foodstore_storeTostoreInput, Prisma.storeUncheckedCreateWithoutFoodstore_foodstore_storeTostoreInput>
 }
 
-export type storeUpsertWithoutFoodstoreInput = {
-  update: Prisma.XOR<Prisma.storeUpdateWithoutFoodstoreInput, Prisma.storeUncheckedUpdateWithoutFoodstoreInput>
-  create: Prisma.XOR<Prisma.storeCreateWithoutFoodstoreInput, Prisma.storeUncheckedCreateWithoutFoodstoreInput>
+export type storeUpsertWithoutFoodstore_foodstore_storeTostoreInput = {
+  update: Prisma.XOR<Prisma.storeUpdateWithoutFoodstore_foodstore_storeTostoreInput, Prisma.storeUncheckedUpdateWithoutFoodstore_foodstore_storeTostoreInput>
+  create: Prisma.XOR<Prisma.storeCreateWithoutFoodstore_foodstore_storeTostoreInput, Prisma.storeUncheckedCreateWithoutFoodstore_foodstore_storeTostoreInput>
   where?: Prisma.storeWhereInput
 }
 
-export type storeUpdateToOneWithWhereWithoutFoodstoreInput = {
+export type storeUpdateToOneWithWhereWithoutFoodstore_foodstore_storeTostoreInput = {
   where?: Prisma.storeWhereInput
-  data: Prisma.XOR<Prisma.storeUpdateWithoutFoodstoreInput, Prisma.storeUncheckedUpdateWithoutFoodstoreInput>
+  data: Prisma.XOR<Prisma.storeUpdateWithoutFoodstore_foodstore_storeTostoreInput, Prisma.storeUncheckedUpdateWithoutFoodstore_foodstore_storeTostoreInput>
 }
 
-export type storeUpdateWithoutFoodstoreInput = {
+export type storeUpdateWithoutFoodstore_foodstore_storeTostoreInput = {
   label?: Prisma.StringFieldUpdateOperationsInput | string
   longitude?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   latitude?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
-export type storeUncheckedUpdateWithoutFoodstoreInput = {
+export type storeUncheckedUpdateWithoutFoodstore_foodstore_storeTostoreInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   label?: Prisma.StringFieldUpdateOperationsInput | string
   longitude?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -417,11 +417,11 @@ export type storeUncheckedUpdateWithoutFoodstoreInput = {
  */
 
 export type StoreCountOutputType = {
-  foodstore: number
+  foodstore_foodstore_storeTostore: number
 }
 
 export type StoreCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  foodstore?: boolean | StoreCountOutputTypeCountFoodstoreArgs
+  foodstore_foodstore_storeTostore?: boolean | StoreCountOutputTypeCountFoodstore_foodstore_storeTostoreArgs
 }
 
 /**
@@ -437,7 +437,7 @@ export type StoreCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extens
 /**
  * StoreCountOutputType without action
  */
-export type StoreCountOutputTypeCountFoodstoreArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type StoreCountOutputTypeCountFoodstore_foodstore_storeTostoreArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.foodstoreWhereInput
 }
 
@@ -447,7 +447,7 @@ export type storeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   label?: boolean
   longitude?: boolean
   latitude?: boolean
-  foodstore?: boolean | Prisma.store$foodstoreArgs<ExtArgs>
+  foodstore_foodstore_storeTostore?: boolean | Prisma.store$foodstore_foodstore_storeTostoreArgs<ExtArgs>
   _count?: boolean | Prisma.StoreCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["store"]>
 
@@ -474,7 +474,7 @@ export type storeSelectScalar = {
 
 export type storeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "label" | "longitude" | "latitude", ExtArgs["result"]["store"]>
 export type storeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  foodstore?: boolean | Prisma.store$foodstoreArgs<ExtArgs>
+  foodstore_foodstore_storeTostore?: boolean | Prisma.store$foodstore_foodstore_storeTostoreArgs<ExtArgs>
   _count?: boolean | Prisma.StoreCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type storeIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -483,7 +483,7 @@ export type storeIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
 export type $storePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "store"
   objects: {
-    foodstore: Prisma.$foodstorePayload<ExtArgs>[]
+    foodstore_foodstore_storeTostore: Prisma.$foodstorePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -884,7 +884,7 @@ readonly fields: storeFieldRefs;
  */
 export interface Prisma__storeClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  foodstore<T extends Prisma.store$foodstoreArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.store$foodstoreArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$foodstorePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  foodstore_foodstore_storeTostore<T extends Prisma.store$foodstore_foodstore_storeTostoreArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.store$foodstore_foodstore_storeTostoreArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$foodstorePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1306,9 +1306,9 @@ export type storeDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
 }
 
 /**
- * store.foodstore
+ * store.foodstore_foodstore_storeTostore
  */
-export type store$foodstoreArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type store$foodstore_foodstore_storeTostoreArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the foodstore
    */

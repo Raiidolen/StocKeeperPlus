@@ -1,10 +1,10 @@
-import { check } from "../../utils/hashUtils.js";
-import { sign } from "../../utils/jwt.js"; 
+import { check } from "../utils/hashUtils.js";
+import { sign } from "../utils/jwt.js"; 
 import prisma from "../database/databaseORM.js";
 
 export const readUserByEmail = async (email) => {
   return await prisma.user.findUnique({
-    where: { mail: email }, 
+    where: { mail: email }
   });
 };
 

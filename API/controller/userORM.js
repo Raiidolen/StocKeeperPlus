@@ -1,4 +1,5 @@
 import prisma from '../database/databaseORM.js';
+import { hashing } from '../utils/hashUtils.js';
 
 
 export const getUser = async (req, res)=> {
@@ -36,11 +37,12 @@ export const getAllUser = async (_req, res)=> {
 export const addUser = async (req, res) => {
     try {
         const {mail, username, password, isadmin} = req.val;
+        const hashedPassword = await hashing(password);
         const {idMail} = await prisma.user.create({
             data: {
                 mail,
                 username,
-                password,
+                password: hashedPassword,
                 isadmin
             },
             select: {
@@ -56,13 +58,14 @@ export const addUser = async (req, res) => {
 
 export const updateUser = async (req, res) => {
     try {
-        const {mail, username, password, isAdmin} = req.val;
+        const {mail, username, password, isadmin} = req.val;
+        const hashedPassword = await hashing(password);
         await prisma.user.update({
             data: {
                 mail,
                 username,
-                password,
-                isAdmin
+                password: hashedPassword,
+                isadmin
             },
             where: {
                 mail
