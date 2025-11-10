@@ -2,10 +2,13 @@ import prisma from '../database/databaseORM.js';
 
 export const getFoodUser = async (req, res)=> {
     try {
-        const foodUser = await prisma.foodUser.findUnique({
+        const {food_id, user_mail} = req.val;
+        const foodUser = await prisma.fooduser.findUnique({
             where: {
-                food_id: req.val.food_id,
-                user_mail: req.val.user_mail
+                food_user_mail: {
+                    food: food_id,
+                    user_mail: user_mail
+                }
             }
         });
         if(foodUser){
@@ -21,7 +24,7 @@ export const getFoodUser = async (req, res)=> {
 
 export const getAllFoodUser = async (_req, res)=> {
     try {
-        const foodsUser = await prisma.foodUser.findMany();
+        const foodsUser = await prisma.fooduser.findMany();
         if(foodsUser){
             res.send(foodsUser);
         } else {
@@ -36,9 +39,9 @@ export const getAllFoodUser = async (_req, res)=> {
 export const addFoodUser = async (req, res) => {
     try {
         const {food_id, user_mail, quantity, storagetype, expirationdate} = req.val;
-        const foodUser = await prisma.foodUser.create({
+        const foodUser = await prisma.fooduser.create({
             data: {
-                food_id,
+                food: food_id,
                 user_mail,
                 quantity,
                 storagetype,
@@ -55,17 +58,19 @@ export const addFoodUser = async (req, res) => {
 export const updateFoodUser= async (req, res) => {
     try {
         const {food_id, user_mail, quantity, storagetype, expirationdate} = req.val;
-        await prisma.foodUser.update({
+        await prisma.fooduser.update({
             data: {
-                food_id,
+                food: food_id,
                 user_mail,
                 quantity,
                 storagetype,
                 expirationdate,
             },
             where: {
-                food_id,
-                user_mail
+                food_user_mail: {
+                    food: food_id,
+                    user_mail: user_mail
+                }
             }
         });
         res.sendStatus(204);
@@ -78,10 +83,12 @@ export const updateFoodUser= async (req, res) => {
 export const deleteFoodUser = async (req, res) => {
     try {
         const {food_id, user_mail} = req.val;
-        await prisma.foodUser.delete({
+        await prisma.fooduser.delete({
             where: {
-                food_id,
-                user_mail
+                food_user_mail: {
+                    food: food_id,
+                    user_mail: user_mail
+                }
             }
         });
         res.sendStatus(204);
