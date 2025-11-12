@@ -53,7 +53,8 @@ export const ModelName = {
   foodstore: 'foodstore',
   ingredientamount: 'ingredientamount',
   recipe: 'recipe',
-  store: 'store'
+  store: 'store',
+  fooduser: 'fooduser'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -85,20 +86,17 @@ export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof User
 export const FoodScalarFieldEnum = {
   id: 'id',
   label: 'label',
-  expirationdate: 'expirationdate',
-  quantity: 'quantity',
-  storagetype: 'storagetype',
   diet: 'diet',
-  nutriscore: 'nutriscore',
-  user_mail: 'user_mail'
+  nutriscore: 'nutriscore'
 } as const
 
 export type FoodScalarFieldEnum = (typeof FoodScalarFieldEnum)[keyof typeof FoodScalarFieldEnum]
 
 
 export const FoodstoreScalarFieldEnum = {
-  food_id: 'food_id',
-  store_id: 'store_id',
+  food: 'food',
+  store: 'store',
+  quantity: 'quantity',
   price: 'price'
 } as const
 
@@ -106,8 +104,8 @@ export type FoodstoreScalarFieldEnum = (typeof FoodstoreScalarFieldEnum)[keyof t
 
 
 export const IngredientamountScalarFieldEnum = {
-  recipe_id: 'recipe_id',
-  food_id: 'food_id',
+  recipe: 'recipe',
+  food: 'food',
   quantity: 'quantity'
 } as const
 
@@ -119,6 +117,7 @@ export const RecipeScalarFieldEnum = {
   label: 'label',
   description: 'description',
   caloricintake: 'caloricintake',
+  nbeaters: 'nbeaters',
   timetomake: 'timetomake'
 } as const
 
@@ -133,6 +132,17 @@ export const StoreScalarFieldEnum = {
 } as const
 
 export type StoreScalarFieldEnum = (typeof StoreScalarFieldEnum)[keyof typeof StoreScalarFieldEnum]
+
+
+export const FooduserScalarFieldEnum = {
+  food: 'food',
+  user_mail: 'user_mail',
+  quantity: 'quantity',
+  storagetype: 'storagetype',
+  expirationdate: 'expirationdate'
+} as const
+
+export type FooduserScalarFieldEnum = (typeof FooduserScalarFieldEnum)[keyof typeof FooduserScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -46,3 +46,8 @@ export type recipe = Prisma.recipeModel
  * 
  */
 export type store = Prisma.storeModel
+/**
+ * Model fooduser
+ * This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+ */
+export type fooduser = Prisma.fooduserModel
