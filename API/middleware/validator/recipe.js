@@ -6,14 +6,15 @@ const recipeIDSchema = vine.object({
 
 const addRecipeSchema = vine.object({
   label: vine.string().trim(),
-  description: vine.string().trim(),
-  caloricIntake: vine.number().positive(),
-  timeToMake: vine.number().positive().optional(),
+  description: vine.string().trim().optional(),
+  caloricintake: vine.number().positive().optional(),
+  nbeaters: vine.number().positive().optional(),
+  timetomake: vine.number().positive().optional(),
   ingredients: vine.array(
     vine.object({
       label: vine.string().trim(),
       diet: vine.string().optional(),
-      nutriScore: vine.string().trim().maxLength(1).optional(),
+      nutriscore: vine.string().trim().maxLength(1).optional(),
       quantity: vine.number().min(1),
     })
   )

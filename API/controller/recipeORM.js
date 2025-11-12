@@ -21,19 +21,20 @@ export const getRecipe = async (req, res) => {
 
 export const addRecipe = async (req, res) => {
   try {
-    const { label, description, caloricIntake, timeToMake, ingredients } = req.val;
-    // ingredients = [{ label, diet, nutriScore, quantity }]
+    const { label, description, caloricintake, nbeaters, timetomake, ingredients } = req.val;
 
-    // 1️⃣ Création de la recette (on ne sélectionne que l'id)
+    // 1️⃣ Création de la recette
     const recipe = await prisma.recipe.create({
-      data: { label, description, caloricIntake, timeToMake },
+      data: { label, description, caloricintake, nbeaters, timetomake },
       select: { id: true },
     });
 
+    // 2️⃣ Création des ingredientsAmount
     await Promise.all(
       ingredients.map(async (ing) => {
         let food = await prisma.food.findFirst({
           where: { label: ing.label },
+          select: { id: true },
         });
 
         if (!food) {
@@ -41,7 +42,7 @@ export const addRecipe = async (req, res) => {
             data: {
               label: ing.label,
               diet: ing.diet,
-              nutriScore: ing.nutriScore,
+              nutriscore: ing.nutriscore,
             },
             select: { id: true },
           });
@@ -49,17 +50,21 @@ export const addRecipe = async (req, res) => {
 
         await prisma.ingredientamount.create({
           data: {
-            recipeId: recipe.id,
-            foodId: food.id,
             quantity: ing.quantity,
+            recipe_ingredientamount_recipeTorecipe: {
+              connect: { id: recipe.id },
+            },
+            food_ingredientamount_foodTofood: {
+              connect: { id: food.id },
+            },
           },
         });
       })
     );
+
     res.status(201).json({ id: recipe.id });
-    }
-    catch(err){
-        console.error(err);
-        res.sendStatus(500);
-    }
-}
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Erreur lors de la création de la recette" });
+  }
+};
