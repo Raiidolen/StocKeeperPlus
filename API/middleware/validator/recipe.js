@@ -16,7 +16,7 @@ const addRecipeSchema = vine.object({
       nutriScore: vine.string().trim().maxLength(1).optional(),
       quantity: vine.number().min(1),
     })
-  ).min(1),
+  )
 });
 
 export const
