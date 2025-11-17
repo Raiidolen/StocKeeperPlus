@@ -19,7 +19,7 @@ export const getFoodStore = async (req, res)=> {
     }
 };
 
-export const getAllFoodStore = async (_req, res)=> {
+export const getAllFoodStores = async (_req, res)=> {
     try {
         const foodStores = await prisma.foodStore.findMany();
         if(foodStores){

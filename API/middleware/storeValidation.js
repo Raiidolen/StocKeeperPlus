@@ -1,4 +1,4 @@
-import * as storeValidator from '../validators/storeValidator.js';
+import * as storeValidator from './validator/store.js';
 
 export const storeValidatorMiddlewares = {
     storeToGet: async (req, res, next) => {
