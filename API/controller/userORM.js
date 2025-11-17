@@ -1,13 +1,19 @@
 import prisma from '../database/databaseORM.js';
 import { hashing } from '../utils/hashUtils.js';
 
+export const userPublicFields = {
+    mail: true,
+    username: true,
+    isadmin: true
+};
 
 export const getUser = async (req, res)=> {
     try {
         const user = await prisma.user.findUnique({
             where: {
                 mail: req.val.mail
-            }
+            },
+            select: userPublicFields
         });
         if(user){
             res.send(user);
@@ -22,7 +28,7 @@ export const getUser = async (req, res)=> {
 
 export const getAllUser = async (_req, res)=> {
     try {
-        const users = await prisma.user.findMany();
+        const users = await prisma.user.findMany({ select: userPublicFields });
         if(users){
             res.send(users);
         } else {
