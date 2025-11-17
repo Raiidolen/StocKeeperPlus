@@ -9,5 +9,32 @@ export const recipeValidatorMiddleware = {
         catch(e){
             res.status(400).send(e.messages);
         }
+    },
+    addRecipe: async(req, res, next) => {
+        try {
+            req.val = await recipeValidator.addRecipe.validate(req.body);
+            next();
+        }
+        catch(e){
+            res.status(400).send(e.messages);
+        }
+    },
+    updateRecipe: async(req, res, next) => {
+        try {
+            req.val = await recipeValidator.updateRecipe.validate(req.body);
+            next();
+        }
+        catch(e){
+            res.status(400).send(e.messages);
+        }
+    },
+    deleteRecipe: async(req, res, next) => {
+        try {
+            req.val = await recipeValidator.deleteRecipe.validate(req.params);
+            next();
+        }
+        catch(e){
+            res.status(400).send(e.messages);
+        }
     }
 }
