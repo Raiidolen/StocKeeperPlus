@@ -22,11 +22,10 @@ const storeToUpdateSchema = vine.object({
 const storeToGetAllSchema = vine.object({});
 
 const storeToGetInRangeSchema = vine.object({
-    minLatitude: vine.number().min(-90).max(90),
-    maxLatitude: vine.number().min(-90).max(90),
-    minLongitude: vine.number().min(-180).max(180),
-    maxLongitude: vine.number().min(-180).max(180)
-});// TODO because it's been regenerated automatically, we need to add validation to ensure min < max
+    latitude: vine.number(),
+    longitude: vine.number(),
+    range: vine.number()
+});
 
 export const 
     storeToAdd = vine.compile(storeToAddSchema),
