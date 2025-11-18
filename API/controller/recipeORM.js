@@ -26,6 +26,21 @@ export const getRecipe = async (req, res) => {
   }
 };
 
+export const getAllRecipe = async (_req, res) => {
+  try {
+    const recipes = await prisma.recipe.findMany();
+    if(recipes){
+      res.send(recipes);
+    } else {
+      res.sendStatus(404);
+    }
+  }
+  catch(err) {
+    console.error(err);
+    res.sendStatus(500);
+  }
+}
+
 
 export const addRecipe = async (req, res) => {
   try {
