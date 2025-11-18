@@ -97,3 +97,35 @@ export const deleteFoodUser = async (req, res) => {
         res.sendStatus(500);
     }
 };
+
+export const getFoodUserByMail = async (req, res)=> {
+    try {
+        const { user_mail } = req.params;
+
+        const foodsUser = await prisma.fooduser.findMany({
+        where: {
+            user_mail
+        },
+        include: {
+            food_fooduser_foodTofood: true
+        }
+        });
+
+        if (foodsUser.length === 0) {
+            return res.sendStatus(404);
+        }
+
+        const formatted = foodsUser.map(f => ({
+            id: f.food,
+            label: f.food_fooduser_foodTofood.label,
+            quantity: f.quantity,
+            expirationDate: f.expirationdate
+        }));
+
+        res.send(formatted);
+
+    } catch (err) {
+        console.error(err);
+        res.sendStatus(500);
+    }
+};

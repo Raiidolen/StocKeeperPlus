@@ -5,7 +5,8 @@ import {
     updateFoodUser,
     getFoodUser,
     getAllFoodUser,
-    deleteFoodUser
+    deleteFoodUser,
+    getFoodUserByMail
 }  from  '../controller/foodUserORM.js'
 import {foodUserValidatorMiddleware as PVM} from '../middleware/foodUserValidation.js';
 
@@ -16,5 +17,7 @@ router.patch('/', PVM.foodUserToUpdate, updateFoodUser);
 router.get('/', PVM.searchedFoodUser, getFoodUser);
 router.get('/all', getAllFoodUser);
 router.delete('/', PVM.foodUserToDelete, deleteFoodUser);
+
+router.get('/calendar/:user_mail/foods', getFoodUserByMail);
 
 export default router;
