@@ -8,6 +8,6 @@ const router = Router();
 router.get('/:id', PVM.searchedRecipe, getRecipe);
 router.post('/', PVM.addRecipe, addRecipe);
 router.patch('/', PVM.updateRecipe, updateRecipe);
-router.delete('/:id', PVM.deleteRecipe, deleteRecipe);
+router.delete('/:id', PVM.searchedRecipe, deleteRecipe);
 
 export default router;
