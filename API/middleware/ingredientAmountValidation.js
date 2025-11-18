@@ -9,5 +9,14 @@ export const ingredientAmountValidatorMiddleware = {
         catch(e){
             res.status(400).send(e.messages);
         }
-    }
+    },
+    addOrUpdateIngredientAmount: async(req, res, next) => {
+        try{
+            req.val = await ingredientAmountValidator.addOrUpdateIngredientAmount.validate(req.body);
+            next();
+        }
+        catch(e){
+            res.status(400).send(e.messages);
+        }
+    },
 }
