@@ -38,16 +38,18 @@ export const getStoresWithInRange = async (req, res) => {
     try {
         const {latitude, longitude, range} = req.val;
         const stores = await prisma.$queryRaw`
-            SELECT *, 
-            (${EARTH_RADIUS_KM} * acos(
-                cos(radians(${latitude})) *
-                cos(radians(latitude)) * 
-                cos(radians(longitude) - radians(${longitude})) +
-                sin(radians(${latitude})) *
-                sin(radians(latitude))
-            )) AS distance
-            FROM store
-            HAVING distance < ${range}
+            SELECT * FROM (
+                SELECT *,
+                (${EARTH_RADIUS_KM} * acos(
+                    cos(radians(${latitude})) *
+                    cos(radians(latitude)) *
+                    cos(radians(longitude) - radians(${longitude})) +
+                    sin(radians(${latitude})) *
+                    sin(radians(latitude))
+                )) AS distance
+                FROM store
+            ) AS stores_with_distance
+            WHERE distance < ${range};
         `;
         res.send(stores);
     } catch (e) {
@@ -56,15 +58,15 @@ export const getStoresWithInRange = async (req, res) => {
     }
 };
 
+
 export const addStore = async (req, res) => {
     try {
-        const {name, latitude, longitude, address} = req.val;
+        const {label, latitude, longitude} = req.body;
         const {id} =  await prisma.store.create({
             data: {
-                name,
+                label,
                 latitude,
-                longitude,
-                address
+                longitude
             },
             select: { id: true }
         });
@@ -77,19 +79,18 @@ export const addStore = async (req, res) => {
 
 export const updateStore = async (req, res) => {
     try {
-        const {name, latitude, longitude, address} = req.val;
+        const {label, latitude, longitude} = req.val;
         await prisma.store.update({
             data: {
-                name,
+                label,
                 latitude,
-                longitude,
-                address
+                longitude
             },
             where: {
                 id: req.val.id
             }
         });
-        res.sendStatus(200);
+        res.sendStatus(204);
     } catch (e) {
         console.error(e);
         res.sendStatus(500);
@@ -98,13 +99,13 @@ export const updateStore = async (req, res) => {
 
 export const deleteStore = async (req, res) => {
     try {
-        const {id} = req.val;
+        const {id} = req.body;
         await prisma.store.delete({
             where: {
                 id
             }
         });
-        res.sendStatus(200);
+        res.sendStatus(204);
     } catch (e) {
         console.error(e);
         res.sendStatus(500);

@@ -5,18 +5,16 @@ const storeIDSchema = vine.object({
 });
 
 const storeToAddSchema = vine.object({
-    name: vine.string().trim(),
+    label: vine.string().trim(),
     latitude: vine.number(),
     longitude: vine.number(),
-    address: vine.string().trim()
 });
 
 const storeToUpdateSchema = vine.object({
     id: vine.number(),
-    name: vine.string().trim(),
-    latitude: vine.number(),
-    longitude: vine.number(),
-    address: vine.string().trim()
+    label: vine.string().trim().optional(),
+    latitude: vine.number().optional(),
+    longitude: vine.number().optional(),
 });
 
 const storeToGetAllSchema = vine.object({});

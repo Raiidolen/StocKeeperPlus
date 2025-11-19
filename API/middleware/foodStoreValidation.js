@@ -3,7 +3,7 @@ import * as foodStoreValidator from './validator/foodStore.js';
 export const foodStoreValidatorMiddleware = {
     foodStoreToGet: async (req, res, next) => {
         try {
-            await foodStoreValidator.foodStoreToGet.validate(req.params);
+            await foodStoreValidator.foodStoreToGet.validate(req.body);
             next();
         } catch (e) {
             res.status(400).send({ error: e.message });
@@ -27,7 +27,7 @@ export const foodStoreValidatorMiddleware = {
     },
     foodStoreToDelete: async (req, res, next) => {
         try {
-            await foodStoreValidator.foodStoreToDelete.validate(req.params);
+            await foodStoreValidator.foodStoreToDelete.validate(req.body);
             next();
         } catch (e) {
             res.status(400).send({ error: e.message });
