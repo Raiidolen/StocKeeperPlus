@@ -39,13 +39,15 @@ export const getAllFoodUser = async (_req, res)=> {
 export const addFoodUser = async (req, res) => {
     try {
         const {food_id, user_mail, quantity, storagetype, expirationdate} = req.val;
+        const exp = new Date(expirationdate); //définit la date comme étant à midi 
+        exp.setHours(12, 0, 0, 0);// pour éviter des  conflict de fuseau horraie
         const foodUser = await prisma.fooduser.create({
             data: {
                 food: food_id,
                 user_mail,
                 quantity,
                 storagetype,
-                expirationdate,
+                expirationdate: exp
             }
         });
         res.status(201).send({foodUser});
