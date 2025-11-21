@@ -5,7 +5,7 @@ import {recipeValidatorMiddleware as PVM} from '../middleware/recipeValidation.j
 
 const router = Router();
 
-router.get('/', PVM.searchedRecipe, getRecipe);
+router.post('/get', PVM.searchedRecipe, getRecipe);
 router.get('/all', getAllRecipe);
 router.post('/', PVM.addRecipe, addRecipe);
 router.patch('/', PVM.updateRecipe, updateRecipe);

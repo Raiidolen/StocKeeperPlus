@@ -13,7 +13,7 @@ const router = Router();
 
 router.post('/', PVM.foodToAdd, addFood);
 router.patch('/', PVM.foodToUpdate, updateFood);
-router.get('/', PVM.searchedFood, getFood);
+router.post('/get', PVM.searchedFood, getFood);
 router.get('/all', getAllFood);
 router.delete('/', PVM.foodToDelete, deleteFood);
 

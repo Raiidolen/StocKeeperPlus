@@ -13,8 +13,8 @@ const router = Router();
 
 router.post('/', PVM.userToAdd, addUser);
 router.patch('/', PVM.userToUpdate, updateUser);
-router.get('/', PVM.searchedUser, getUser);
-router.get('/all/', getAllUser);
+router.post('/post', PVM.searchedUser, getUser);
+router.get('/all', getAllUser);
 router.delete('/', PVM.userToDelete, deleteUser);
 
 export default router;
