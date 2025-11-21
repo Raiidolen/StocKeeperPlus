@@ -13,7 +13,7 @@ const router = Router();
 
 router.get('/range', SVM.storeToGetInRange, getStoresWithInRange);
 router.get('/all', SVM.storeToGetAll, getAllStores);
-router.get('/:id', SVM.storeToGet, getStore);
+router.get('/get/:id', SVM.storeToGet, getStore);
 router.post('/', SVM.storeToAdd, addStore);
 router.patch('/', SVM.storeToUpdate, updateStore);
 router.delete('/', SVM.storeToDelete, deleteStore);
