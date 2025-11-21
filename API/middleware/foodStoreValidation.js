@@ -3,7 +3,7 @@ import * as foodStoreValidator from './validator/foodStore.js';
 export const foodStoreValidatorMiddleware = {
     foodStoreToGet: async (req, res, next) => {
         try {
-            await foodStoreValidator.foodStoreToGet.validate(req.body);
+            await foodStoreValidator.foodStoreToGet.validate(req.params);
             next();
         } catch (e) {
             res.status(400).send({ error: e.message });
