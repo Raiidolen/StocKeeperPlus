@@ -3,7 +3,7 @@ import * as foodValidator from './validator/food.js';
 export const foodValidatorMiddleware = {
     searchedFood: async (req, res, next) => {
         try {
-            req.val  = await foodValidator.searchedFood.validate(req.body);
+            req.val  = await foodValidator.searchedFood.validate(req.params);
             next();
         } catch (e) {
             res.status(400).send(e.messages);

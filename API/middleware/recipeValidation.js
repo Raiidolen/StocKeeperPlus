@@ -3,7 +3,7 @@
 export const recipeValidatorMiddleware = {
     searchedRecipe: async(req, res, next) => {
         try {
-            req.val = await recipeValidator.searchedRecipe.validate(req.body);
+            req.val = await recipeValidator.searchedRecipe.validate(req.params);
             next();
         }
         catch(e){

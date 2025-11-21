@@ -3,7 +3,7 @@ import * as storeValidator from './validator/store.js';
 export const storeValidatorMiddlewares = {
     storeToGet: async (req, res, next) => {
         try {
-            req.val  = await storeValidator.storeToGet.validate(req.body);
+            req.val  = await storeValidator.storeToGet.validate(req.params);
             next();
         } catch (e) {
             res.status(400).send(e.messages);

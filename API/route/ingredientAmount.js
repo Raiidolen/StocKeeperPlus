@@ -5,7 +5,7 @@ import { ingredientAmountValidatorMiddleware as IAVM } from '../middleware/ingre
 
 const router = Router();
 
-router.get('/', IAVM.searchedIngredientAmount, getIngredientAmount);
+router.get('/:recipe_id/:food_id', IAVM.searchedIngredientAmount, getIngredientAmount);
 router.get('/all', getAllIngredientAmount);
 router.post('/', IAVM.addOrUpdateIngredientAmount, addIngredientAmount);
 router.patch('/', IAVM.addOrUpdateIngredientAmount, updateIngredientAmount);

@@ -3,7 +3,7 @@ import * as userValidator from './validator/user.js';
 export const userValidatorMiddleware = {
     searchedUser: async (req, res, next) => {
         try {
-            req.val  = await userValidator.searchedUser.validate(req.body);
+            req.val  = await userValidator.searchedUser.validate(req.params);
             next();
         } catch (e) {
             res.status(400).send(e.messages);
