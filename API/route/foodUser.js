@@ -14,7 +14,7 @@ const router = Router();
 
 router.post('/', PVM.foodUserToAdd, addFoodUser);
 router.patch('/', PVM.foodUserToUpdate, updateFoodUser);
-router.get('/:food_id/:user_mail', PVM.searchedFoodUser, getFoodUser);
+router.get('/get/:food_id/:user_mail', PVM.searchedFoodUser, getFoodUser);
 router.get('/all', getAllFoodUser);
 router.delete('/', PVM.foodUserToDelete, deleteFoodUser);
 

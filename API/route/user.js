@@ -13,7 +13,7 @@ const router = Router();
 
 router.post('/', PVM.userToAdd, addUser);
 router.patch('/', PVM.userToUpdate, updateUser);
-router.get('/:mail', PVM.searchedUser, getUser);
+router.get('/get/:mail', PVM.searchedUser, getUser);
 router.get('/all', getAllUser);
 router.delete('/', PVM.userToDelete, deleteUser);
 
