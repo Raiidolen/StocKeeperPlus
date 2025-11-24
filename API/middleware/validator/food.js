@@ -7,14 +7,14 @@ const foodIDSchema = vine.object({
 const foodToAddSchema = vine.object({
     label: vine.string().trim(),
     diet: vine.string().trim().optional(),
-    nutriscore: vine.string().trim().maxLength(1).optional()
+    nutriscore: vine.string().regex(new RegExp('^[A-Ea-e]+$')).trim().maxLength(1).optional()
 });
 
 const foodToUpdateSchema = vine.object({
     id: vine.number(),
     label: vine.string().trim().optional(),
     diet: vine.string().trim().optional(),
-    nutriscore: vine.string().trim().maxLength(1).optional()
+    nutriscore: vine.string().regex(new RegExp('^[A-Ea-e]+$')).trim().maxLength(1).optional()
 });
 
 
