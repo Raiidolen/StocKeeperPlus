@@ -7,6 +7,7 @@ import {default as storeRouter} from './store.js'
 import {default as foodUserRouter} from './foodUser.js'
 import {default as foodStoreRouter} from './foodStore.js'
 import {default as ingredientAmountRouter} from './ingredientAmount.js'
+import {default as columnsRouter} from './columns.js'
 import 'dotenv/config';
 const router = Router();
 
@@ -18,4 +19,7 @@ router.use('/store', storeRouter);
 router.use('/foodUser', foodUserRouter);
 router.use('/foodStore', foodStoreRouter);
 router.use('/ingredientAmount', ingredientAmountRouter);
+router.use('/', columnsRouter);
+
+
 export default router;
