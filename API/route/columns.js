@@ -20,11 +20,13 @@ router.get("/:table/columns", async (req, res) => {
   }
 
   try {
+    const tableName = table === "User" ? "User" : table.toLowerCase();
+
     const rows = await prisma.$queryRawUnsafe(`
       SELECT column_name
       FROM information_schema.columns
       WHERE table_catalog = current_database()
-        AND table_name = '${table.toLowerCase()}';
+        AND table_name = '${tableName}';
     `);
 
     const columns = rows.map(r => r.column_name);

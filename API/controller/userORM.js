@@ -64,19 +64,22 @@ export const addUser = async (req, res) => {
 
 export const updateUser = async (req, res) => {
     try {
-        const {mail, username, password, isadmin} = req.val;
-        const hashedPassword = await hashing(password);
+        const { mail, username, password, isadmin } = req.val;
+
+        const dataToUpdate = {
+            username,
+            isadmin
+        };
+
+        if (password) {
+            dataToUpdate.password = await hashing(password);
+        }
+
         await prisma.user.update({
-            data: {
-                mail,
-                username,
-                password: hashedPassword,
-                isadmin
-            },
-            where: {
-                mail
-            }
+            where: { mail },
+            data: dataToUpdate
         });
+
         res.sendStatus(204);
     } catch (e) {
         console.error(e);

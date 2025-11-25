@@ -1,12 +1,12 @@
 import vine from '@vinejs/vine';
 
 const foodUserIDSchema = vine.object({
-    food_id: vine.number(),
+    food: vine.number(),
     user_mail: vine.string().trim()
 });
 
 const foodUserToAddSchema = vine.object({
-    food_id: vine.number(),
+    food: vine.number(),
     user_mail: vine.string().trim(),
     quantity: vine.number().min(1),
     storagetype: vine.string().trim().optional(),
@@ -14,7 +14,7 @@ const foodUserToAddSchema = vine.object({
 });
 
 const foodUserToUpdateSchema = vine.object({
-    food_id: vine.number(),
+    food: vine.number(),
     user_mail: vine.string().trim(),
     quantity: vine.number().min(1).optional(),
     storagetype: vine.string().trim().optional(),
