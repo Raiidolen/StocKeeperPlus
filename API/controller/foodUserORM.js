@@ -29,7 +29,15 @@ export const getFoodUser = async (req, res)=> {
 
 export const getAllFoodUser = async (_req, res)=> {
     try {
-        const foodsUser = await prisma.fooduser.findMany();
+        const foodsUser = await prisma.fooduser.findMany({
+            orderBy: [{
+                user_mail: 'asc',
+            },
+            {
+                food: 'asc'
+            }
+            ]
+        });
         if(foodsUser.length){
             res.send(
                 foodsUser.map(f => ({
