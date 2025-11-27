@@ -20,7 +20,11 @@ export const getFood = async (req, res)=> {
 
 export const getAllFood = async (_req, res)=> {
     try {
-        const foods = await prisma.food.findMany();
+        const foods = await prisma.food.findMany({
+            orderBy: {
+                id: 'asc',
+            }
+        });
         if(foods){
             res.send(foods);
         } else {

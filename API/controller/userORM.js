@@ -28,7 +28,12 @@ export const getUser = async (req, res)=> {
 
 export const getAllUser = async (_req, res)=> {
     try {
-        const users = await prisma.user.findMany({ select: userPublicFields });
+        const users = await prisma.user.findMany({
+            orderBy: {
+                mail: 'asc',
+            },
+            select: userPublicFields
+        });
         if(users){
             res.send(users);
         } else {
