@@ -2,12 +2,12 @@ import prisma from '../database/databaseORM.js';
 
 export const getFoodStore = async (req, res)=> {
     try {
-        const {food_id, store_id} = req.body;
+        const {food, store} = req.val;
         const foodStore =  await prisma.foodstore.findUnique({
             where: {
                 food_store: {
-                    food: food_id,
-                    store: store_id
+                    food: food,
+                    store: store
                 }
             }
         });
@@ -24,7 +24,15 @@ export const getFoodStore = async (req, res)=> {
 
 export const getAllFoodStores = async (_req, res)=> {
     try {
-        const foodStores = await prisma.foodstore.findMany();
+        const foodStores = await prisma.foodstore.findMany({
+            orderBy: [{
+                store: 'asc',
+            },
+            {
+                food: 'asc'
+            }
+            ]
+        });
         if(foodStores){
             res.send(foodStores);
         } else {
@@ -38,11 +46,12 @@ export const getAllFoodStores = async (_req, res)=> {
 
 export const addFoodStore = async (req, res) => {
     try {
-        const {food_id, store_id, price} = req.body;
+        const {food, store, quantity, price} = req.val;
         const foodStore = await prisma.foodstore.create({
             data: {
-                food: food_id,
-                store: store_id,
+                food,
+                store,
+                quantity,
                 price
             }
         });
@@ -55,15 +64,18 @@ export const addFoodStore = async (req, res) => {
 
 export const updateFoodStore= async (req, res) => {
     try {
-        const {food_id, store_id, price} = req.body;
+        const {food, store, quantity, price} = req.val;
         await prisma.foodstore.update({
             data: {
+                food,
+                store,
+                quantity,
                 price
             },
             where: {
                 food_store: {
-                    food: food_id,
-                    store: store_id
+                    food: food,
+                    store: store
                 }
             }
         });
@@ -76,12 +88,12 @@ export const updateFoodStore= async (req, res) => {
 
 export const deleteFoodStore = async (req, res) => {
     try {
-        const {food_id, store_id} = req.body;
+        const {food, store} = req.val;
         await prisma.foodstore.delete({
             where: {
                 food_store: {
-                    food: food_id,
-                    store: store_id
+                    food,
+                    store
                 }
             }
         });
