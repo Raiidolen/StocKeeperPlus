@@ -26,7 +26,8 @@ router.get("/:table/columns", async (req, res) => {
       SELECT column_name
       FROM information_schema.columns
       WHERE table_catalog = current_database()
-        AND table_name = '${tableName}';
+        AND table_name = '${tableName}'
+      ORDER BY ordinal_position;
     `);
 
     const columns = rows.map(r => r.column_name);
