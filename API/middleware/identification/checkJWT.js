@@ -1,7 +1,10 @@
 import { verify } from "../../utils/jwt.js"
 
 export const checkJWT = async (req, res, next) => {
+    
     const token = req.cookies?.jwt;
+
+    
 
     if (!token) {
         return res.status(401).json({ message: "Non authentifié (cookie manquant)" });
