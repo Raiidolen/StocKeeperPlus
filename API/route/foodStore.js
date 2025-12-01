@@ -14,7 +14,7 @@ const router = Router();
 router.post('/', FSM.foodStoreToAdd, addFoodStore);
 router.patch('/', FSM.foodStoreToUpdate, updateFoodStore);
 router.delete('/', FSM.foodStoreToDelete, deleteFoodStore);
-router.get('/', FSM.foodStoreToGet, getFoodStore);
+router.get('/get/:food/:store', FSM.foodStoreToGet, getFoodStore);
 router.get('/all', getAllFoodStores);
 
 export default router;

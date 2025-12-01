@@ -19,7 +19,7 @@ export const storeValidatorMiddlewares = {
     },
     storeToGetInRange: async (req, res, next) => {
         try {
-            req.val  = await storeValidator.storeToGetInRange.validate(req.params);
+            req.val  = await storeValidator.storeToGetInRange.validate(req.body);
             next();
         } catch (e) {
             res.status(400).send(e.messages);
@@ -43,7 +43,7 @@ export const storeValidatorMiddlewares = {
     },
     storeToDelete: async(req, res, next) => {
         try {
-            req.val  = await storeValidator.storeToDelete.validate(req.params);
+            req.val  = await storeValidator.storeToDelete.validate(req.body);
             next();
         } catch (e) {
             res.status(400).send(e.messages);

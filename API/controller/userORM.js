@@ -28,7 +28,12 @@ export const getUser = async (req, res)=> {
 
 export const getAllUser = async (_req, res)=> {
     try {
-        const users = await prisma.user.findMany({ select: userPublicFields });
+        const users = await prisma.user.findMany({
+            orderBy: {
+                mail: 'asc',
+            },
+            select: userPublicFields
+        });
         if(users){
             res.send(users);
         } else {
@@ -64,19 +69,22 @@ export const addUser = async (req, res) => {
 
 export const updateUser = async (req, res) => {
     try {
-        const {mail, username, password, isadmin} = req.val;
-        const hashedPassword = await hashing(password);
+        const { mail, username, password, isadmin } = req.val;
+
+        const dataToUpdate = {
+            username,
+            isadmin
+        };
+
+        if (password) {
+            dataToUpdate.password = await hashing(password);
+        }
+
         await prisma.user.update({
-            data: {
-                mail,
-                username,
-                password: hashedPassword,
-                isadmin
-            },
-            where: {
-                mail
-            }
+            where: { mail },
+            data: dataToUpdate
         });
+
         res.sendStatus(204);
     } catch (e) {
         console.error(e);

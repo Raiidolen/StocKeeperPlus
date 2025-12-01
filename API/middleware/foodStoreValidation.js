@@ -3,7 +3,7 @@ import * as foodStoreValidator from './validator/foodStore.js';
 export const foodStoreValidatorMiddleware = {
     foodStoreToGet: async (req, res, next) => {
         try {
-            await foodStoreValidator.foodStoreToGet.validate(req.params);
+            req.val  = await foodStoreValidator.foodStoreToGet.validate(req.params);
             next();
         } catch (e) {
             res.status(400).send({ error: e.message });
@@ -11,7 +11,7 @@ export const foodStoreValidatorMiddleware = {
     },
     foodStoreToAdd: async (req, res, next) => {
         try {
-            await foodStoreValidator.foodStoreToAdd.validate(req.body);
+            req.val  = await foodStoreValidator.foodStoreToAdd.validate(req.body);
             next();
         } catch (e) {
             res.status(400).send({ error: e.message });
@@ -19,7 +19,7 @@ export const foodStoreValidatorMiddleware = {
     },
     foodStoreToUpdate: async (req, res, next) => {
         try {
-            await foodStoreValidator.foodStoreToUpdate.validate(req.body);
+            req.val  = await foodStoreValidator.foodStoreToUpdate.validate(req.body);
             next();
         } catch (e) {
             res.status(400).send({ error: e.message });
@@ -27,7 +27,7 @@ export const foodStoreValidatorMiddleware = {
     },
     foodStoreToDelete: async (req, res, next) => {
         try {
-            await foodStoreValidator.foodStoreToDelete.validate(req.params);
+            req.val  = await foodStoreValidator.foodStoreToDelete.validate(req.body);
             next();
         } catch (e) {
             res.status(400).send({ error: e.message });
