@@ -9,6 +9,6 @@ router.get('/get/:id', PVM.searchedRecipe, getRecipe);
 router.get('/all', getAllRecipe);
 router.post('/', PVM.addRecipe, addRecipe);
 router.patch('/', PVM.updateRecipe, updateRecipe);
-router.delete('/', PVM.searchedRecipe, deleteRecipe);
+router.delete('/', PVM.deleteRecipe, deleteRecipe);
 
 export default router;
