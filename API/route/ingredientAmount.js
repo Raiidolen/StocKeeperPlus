@@ -9,6 +9,6 @@ router.get('/get/:recipe_id/:food_id', IAVM.searchedIngredientAmount, getIngredi
 router.get('/all', getAllIngredientAmount);
 router.post('/', IAVM.addOrUpdateIngredientAmount, addIngredientAmount);
 router.patch('/', IAVM.addOrUpdateIngredientAmount, updateIngredientAmount);
-router.delete('/', IAVM.searchedIngredientAmount, deleteIngredientAmount);
+router.delete('/', IAVM.deleteIngredientAmount, deleteIngredientAmount);
 
 export default router;

@@ -1,3 +1,4 @@
+import { deleteIngredientAmount } from '../controller/ingredientAmountORM.js';
 import * as ingredientAmountValidator from './validator/ingredientAmount.js';
 
 export const ingredientAmountValidatorMiddleware = {
@@ -19,4 +20,13 @@ export const ingredientAmountValidatorMiddleware = {
             res.status(400).send(e.messages);
         }
     },
+    deleteIngredientAmount: async(req, res, next) => {
+        try {
+            req.val = await ingredientAmountValidator.deleteIngredientAmount.validate(req.body);
+            next();
+        }
+        catch(e){
+            res.status(400).send(e.messages);
+        }
+    }
 }

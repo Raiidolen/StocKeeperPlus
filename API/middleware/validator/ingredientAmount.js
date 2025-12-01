@@ -1,6 +1,6 @@
 import vine from "@vinejs/vine";
 
-const getIngredientAmountSchema = vine.object({
+const IngredientAmountIDSchema = vine.object({
     recipe_id: vine.number().positive(),
     food_id: vine.number().positive()
 });
@@ -12,5 +12,6 @@ const addOrUpdateIngredientAmountSchema = vine.object({
 })
 
 export const
-    searchedIngredientAmount = vine.compile(getIngredientAmountSchema),
-    addOrUpdateIngredientAmount = vine.compile(addOrUpdateIngredientAmountSchema);
+    searchedIngredientAmount = vine.compile(IngredientAmountIDSchema),
+    addOrUpdateIngredientAmount = vine.compile(addOrUpdateIngredientAmountSchema),
+    deleteIngredientAmount = vine.compile(IngredientAmountIDSchema);
