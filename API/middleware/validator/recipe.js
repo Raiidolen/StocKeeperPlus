@@ -51,4 +51,5 @@ const updateRecipeSchema = vine.object({
 export const
   searchedRecipe = vine.compile(recipeIDSchema),
   addRecipe = vine.compile(addRecipeSchema),
-  updateRecipe = vine.compile(updateRecipeSchema);
+  updateRecipe = vine.compile(updateRecipeSchema),
+  deleteRecipe = vine.compile(recipeIDSchema);

@@ -1,4 +1,5 @@
-    import * as recipeValidator from './validator/recipe.js';
+    import { deleteRecipe } from '../controller/recipeORM.js';
+import * as recipeValidator from './validator/recipe.js';
 
 export const recipeValidatorMiddleware = {
     searchedRecipe: async(req, res, next) => {
@@ -28,4 +29,13 @@ export const recipeValidatorMiddleware = {
             res.status(400).send(e.messages);
         }
     },
+    deleteRecipe: async(req, res, next) => {
+        try {
+            req.val = await recipeValidator.deleteRecipe.validate(req.body);
+            next();
+        }
+        catch(e){
+            res.status(400).send(e.messages);
+        }
+    }
 }
