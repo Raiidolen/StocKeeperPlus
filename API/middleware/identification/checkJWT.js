@@ -1,16 +1,17 @@
 import { verify } from "../../utils/jwt.js"
 
 export const checkJWT = async (req, res, next) => {
-    const authorize = req.get('authorization');
-    if(authorize?.includes('Bearer')){
-        const jwtEncoded = authorize.split(' ')[1];
-        try {
-            req.session = verify(jwtEncoded);
-            next();
-        } catch (e){
-            res.status(401).send(e.message);
-        }
-    } else {
-        res.status(401).send('No jwt');
+    
+    const token = req.cookies?.jwt;
+    
+    if (!token) {
+        return res.status(401).json({ message: "Non authentifié (cookie manquant)" });
+    }
+
+    try {
+        req.user = verify(token);
+        next();
+    } catch (e) {
+        res.status(401).json({ message: "JWT invalide ou expiré" });
     }
 };
