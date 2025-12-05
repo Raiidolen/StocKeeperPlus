@@ -1,4 +1,6 @@
+import dotenv from 'dotenv';
 import pg from "pg";
+dotenv.config();
 
 const pgPool = new pg.Pool({
     host: process.env.HOSTDB,
