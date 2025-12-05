@@ -134,7 +134,7 @@ export const getFoodUserByMail = async (req, res)=> {
         });
 
         if (foodsUser.length === 0) {
-            return res.sendStatus(404);
+            return res.json([]);
         }
 
         const formatted = foodsUser.map(f => ({
