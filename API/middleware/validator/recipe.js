@@ -13,39 +13,29 @@ const addRecipeSchema = vine.object({
   ingredients: vine.array(
     vine.object({
       label: vine.string().trim(),
-      diet: vine.string().optional(),
-      nutriscore: vine.string().trim().maxLength(1).optional(),
       quantity: vine.number().min(1),
     })
   ).minLength(1),
 });
 
-const updateRecipeSchema = vine.object({
+export const updateRecipeSchema = vine.object({
   id: vine.number().positive(),
   label: vine.string().trim().optional(),
   description: vine.string().trim().optional(),
   caloricintake: vine.number().positive().optional(),
   nbeaters: vine.number().positive().optional(),
   timetomake: vine.number().positive().optional(),
-
-  ingredientsToAddOrUpdate: vine
-    .array(
+  ingredientsToAddOrUpdate: vine.array(
       vine.object({
         label: vine.string().trim(),
-        diet: vine.string().optional(),
-        nutriscore: vine.string().trim().maxLength(1).optional(),
         quantity: vine.number().min(1),
       })
-    )
-    .optional(),
-
-  ingredientsToRemove: vine
-    .array(
+    ).optional(),
+  ingredientsToRemove: vine.array(
       vine.object({
         foodId: vine.number().positive(),
       })
-    )
-    .optional(),
+    ).optional(),
 });
 
 export const
