@@ -22,6 +22,8 @@ model food {
   label                                        String             @db.VarChar(255)
   diet                                         String?            @db.VarChar(100)
   nutriscore                                   String?            @db.Char(1)
+  measuringunit                                String?            @db.VarChar(255)
+  barcode                                      String             @db.VarChar(50)
   foodstore_foodstore_foodTofood               foodstore[]        @relation("foodstore_foodTofood")
   fooduser_fooduser_foodTofood                 fooduser[]         @relation("fooduser_foodTofood")
   ingredientamount_ingredientamount_foodTofood ingredientamount[] @relation("ingredientamount_foodTofood")

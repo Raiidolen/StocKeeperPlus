@@ -9,6 +9,14 @@ export const foodValidatorMiddleware = {
             res.status(400).send(e.messages);
         }
     },
+    searchedFoodByBarcode: async(req, res, next) => {
+        try {
+            req.val  = await foodValidator.searchedFoodByBarcode.validate(req.params);
+            next();
+        } catch (e) {
+            res.status(400).send(e.messages);
+        }
+    },
     foodToAdd: async(req, res, next) => {
         try {
             req.val  = await foodValidator.foodToAdd.validate(req.body);
