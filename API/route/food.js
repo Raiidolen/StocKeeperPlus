@@ -4,6 +4,7 @@ import {
     addFood,
     updateFood,
     getFood,
+    getFoodByBarcode,
     getAllFood,
     deleteFood
 }  from  '../controller/foodORM.js'
@@ -14,6 +15,7 @@ const router = Router();
 router.post('/', PVM.foodToAdd, addFood);
 router.patch('/', PVM.foodToUpdate, updateFood);
 router.get('/get/:id', PVM.searchedFood, getFood);
+router.get('/barcode/:barcode', PVM.searchedFoodByBarcode, getFoodByBarcode);
 router.get('/all', getAllFood);
 router.delete('/', PVM.foodToDelete, deleteFood);
 

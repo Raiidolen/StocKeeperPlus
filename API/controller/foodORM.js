@@ -18,6 +18,24 @@ export const getFood = async (req, res)=> {
     }
 };
 
+export const getFoodByBarcode = async (req, res)=> {
+    try {
+        const food = await prisma.food.findUnique({
+            where: {
+                barcode: req.val.barcode
+            }
+        });
+        if(food){
+            res.send(food);
+        } else {
+            res.sendStatus(404);
+        }
+    } catch (err) {
+        console.error(err);
+        res.sendStatus(500);
+    }
+};
+
 export const getAllFood = async (_req, res)=> {
     try {
         const foods = await prisma.food.findMany({
@@ -38,12 +56,14 @@ export const getAllFood = async (_req, res)=> {
 
 export const addFood = async (req, res) => {
     try {
-        const {label, diet, nutriscore} = req.val;
+        const {label, diet, nutriscore, measuringunit, barcode} = req.val;
         const {id} = await prisma.food.create({
             data: {
                 label,
                 diet,
-                nutriscore
+                nutriscore,
+                measuringunit,
+                barcode
             },
             select: {
                 id: true
@@ -58,12 +78,14 @@ export const addFood = async (req, res) => {
 
 export const updateFood = async (req, res) => {
     try {
-        const {id, label, diet, nutriscore} = req.val;
+        const {id, label, diet, nutriscore, measuringunit, barcode} = req.val;
         await prisma.food.update({
             data: {
                 label,
                 diet,
-                nutriscore
+                nutriscore,
+                measuringunit,
+                barcode
             },
             where: {
                 id
