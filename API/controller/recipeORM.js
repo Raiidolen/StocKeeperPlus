@@ -41,44 +41,56 @@ export const getAllRecipe = async (_req, res) => {
   }
 }
 
-
 export const addRecipe = async (req, res) => {
   try {
     const { label, description, caloricintake, nbeaters, timetomake, ingredients } = req.val;
 
+    // 1️⃣ Vérifier que tous les food existent AVANT de créer la recette
+    const missingFoods = [];
+    const foodIds = new Map(); // Pour stocker label -> id
+
+    for (const ing of ingredients) {
+      const food = await prisma.food.findFirst({
+        where: { label: ing.label },
+        select: { id: true },
+      });
+
+      if (!food) {
+        missingFoods.push(ing.label);
+      } else {
+        foodIds.set(ing.label, food.id);
+      }
+    }
+
+    // Si des food n'existent pas, renvoyer une erreur
+    if (missingFoods.length > 0) {
+      return res.status(400).json({ 
+        error: "Certains ingrédients n'existent pas dans la base de données",
+        missingFoods: missingFoods
+      });
+    }
+
+    // 2️⃣ Tous les food existent, on peut créer la recette en transaction
     const createdRecipe = await prisma.$transaction(async (tx) => {
       const recipe = await tx.recipe.create({
         data: { label, description, caloricintake, nbeaters, timetomake },
         select: { id: true },
       });
 
+      // Créer tous les ingredientamount
       for (const ing of ingredients) {
-        let food = await tx.food.findFirst({
-          where: { label: ing.label },
-          select: { id: true },
-        });
-
-        if (!food) {
-          food = await tx.food.create({
-            data: {
-              label: ing.label,
-              diet: ing.diet,
-              nutriscore: ing.nutriscore,
-            },
-            select: { id: true },
-          });
-        }
-
         await tx.ingredientamount.create({
           data: {
             recipe: recipe.id,
-            food: food.id,
+            food: foodIds.get(ing.label), // Utiliser l'ID récupéré
             quantity: ing.quantity,
           },
         });
       }
+
       return recipe;
     });
+
     res.status(201).json({ id: createdRecipe.id });
   } catch (err) {
     console.error(err);
@@ -97,7 +109,7 @@ export const updateRecipe = async (req, res) => {
       timetomake,
       ingredientsToAddOrUpdate,
       ingredientsToRemove
-    } = req.val;
+    } = req.val; // ← Changé de req.body à req.val (validé)
 
     await prisma.$transaction(async (tx) => {
       // 1️⃣ Mettre à jour les infos principales de la recette (si présentes)
@@ -115,11 +127,11 @@ export const updateRecipe = async (req, res) => {
         });
       }
 
-      // 2️⃣ Supprimer les ingrédients demandés
+      // 2️⃣ Supprimer les ingrédients demandés (par foodId)
       if (ingredientsToRemove && ingredientsToRemove.length > 0) {
         await Promise.all(
           ingredientsToRemove.map(async (ing) => {
-            // Utiliser directement foodId sans recherche inutile
+            // Utiliser directement foodId (pas d'ambiguïté possible)
             await tx.ingredientamount.delete({
               where: {
                 recipe_food: {
@@ -127,6 +139,8 @@ export const updateRecipe = async (req, res) => {
                   food: ing.foodId
                 }
               }
+            }).catch(() => {
+              // Ignorer si l'ingrédient n'existe pas dans la recette
             });
           })
         );
