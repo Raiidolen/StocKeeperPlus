@@ -9,6 +9,8 @@ import {
     getFoodUserByMail
 }  from  '../controller/foodUserORM.js'
 import {foodUserValidatorMiddleware as PVM} from '../middleware/foodUserValidation.js';
+import { checkJWT } from '../middleware/identification/checkJWT.js';
+import { checkAdmin } from '../middleware/identification/checkAdmin.js';
 
 const router = Router();
 
