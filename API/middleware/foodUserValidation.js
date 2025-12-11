@@ -12,7 +12,6 @@ export const foodUserValidatorMiddleware = {
     },
     foodUserToAdd: async(req, res, next) => {
         try {
-            console.log(req.body)
             req.val  = await foodUserValidator.foodUserToAdd.validate(req.body);
             req.val.food_id = req.val.food;
             next();
