@@ -27,6 +27,10 @@ export const login = async (req, res) => {
     if (!person)
       return res.status(401).json({ message: "Email ou mot de passe invalide" });
 
+    if (person.role !== "admin") {
+      return res.status(403).json({ message: "Accès réservé aux administrateurs" });
+    }
+
     const payload = { email: person.email, role: person.role };
     const jwt = sign(payload, { expiresIn: "8h" });
 
