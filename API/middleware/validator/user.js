@@ -7,7 +7,7 @@ const userIDSchema = vine.object({
 const userToAddSchema = vine.object({
     mail: vine.string().trim().email(),
     username: vine.string().trim(),
-    password: vine.string().trim(),
+    password: vine.string().trim().minLength(5) ,
     isadmin: vine.boolean()
 });
 

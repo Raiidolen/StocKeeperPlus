@@ -1,3 +1,4 @@
+import { errorHandeling } from '../utils/errorHandeling.js';
 import * as foodStoreValidator from './validator/foodStore.js';
 
 export const foodStoreValidatorMiddleware = {
@@ -6,7 +7,7 @@ export const foodStoreValidatorMiddleware = {
             req.val  = await foodStoreValidator.foodStoreToGet.validate(req.params);
             next();
         } catch (e) {
-            res.status(400).send({ error: e.message });
+            return errorHandeling(res, e);
         }
     },
     foodStoreToAdd: async (req, res, next) => {
@@ -14,7 +15,7 @@ export const foodStoreValidatorMiddleware = {
             req.val  = await foodStoreValidator.foodStoreToAdd.validate(req.body);
             next();
         } catch (e) {
-            res.status(400).send({ error: e.message });
+            return errorHandeling(res, e);
         }
     },
     foodStoreToUpdate: async (req, res, next) => {
@@ -22,7 +23,7 @@ export const foodStoreValidatorMiddleware = {
             req.val  = await foodStoreValidator.foodStoreToUpdate.validate(req.body);
             next();
         } catch (e) {
-            res.status(400).send({ error: e.message });
+            return errorHandeling(res, e);
         }
     },
     foodStoreToDelete: async (req, res, next) => {
@@ -30,7 +31,7 @@ export const foodStoreValidatorMiddleware = {
             req.val  = await foodStoreValidator.foodStoreToDelete.validate(req.body);
             next();
         } catch (e) {
-            res.status(400).send({ error: e.message });
+            return errorHandeling(res, e);
         }
     }
 };
