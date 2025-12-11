@@ -5,8 +5,8 @@ export const getIngredientAmount = async (req, res) => {
         const ingredientamount = await prisma.ingredientamount.findUnique({
             where: {
                 recipe_food: {
-                    recipe: parseInt(req.val.recipe_id),
-                    food: parseInt(req.val.food_id)
+                    recipe: parseInt(req.val.recipe),
+                    food: parseInt(req.val.food)
                 }
             }
         });
@@ -38,11 +38,11 @@ export const getAllIngredientAmount = async (_req, res) => {
 
 export const addIngredientAmount = async (req, res) => {
     try {
-        const {recipe_id, food_id, quantity} = req.val;
+        const {recipe, food, quantity} = req.val;
         const ingredientamount = await prisma.ingredientamount.create({
             data: {
-                recipe: recipe_id,
-                food: food_id,
+                recipe: recipe,
+                food: food,
                 quantity: quantity
             }
         });
@@ -56,17 +56,17 @@ export const addIngredientAmount = async (req, res) => {
 
 export const updateIngredientAmount = async (req, res) => {
     try {
-        const {recipe_id, food_id, quantity} = req.val;
+        const {recipe, food, quantity} = req.val;
         await prisma.ingredientamount.update({
             data: {
-                recipe: recipe_id,
-                food: food_id,
+                recipe: recipe,
+                food: food,
                 quantity
             },
             where: {
                 recipe_food: {
-                    recipe: recipe_id,
-                    food: food_id
+                    recipe: recipe,
+                    food: food
                 }
             }
         });
@@ -80,12 +80,12 @@ export const updateIngredientAmount = async (req, res) => {
 
 export const deleteIngredientAmount = async (req, res) => {
     try {
-        const {recipe_id, food_id} = req.val;
+        const {recipe, food} = req.val;
         await prisma.ingredientamount.delete({
             where: {
                 recipe_food: {
-                    recipe: recipe_id,
-                    food: food_id
+                    recipe: recipe,
+                    food: food
                 }
             }
         });
