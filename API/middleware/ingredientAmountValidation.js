@@ -1,4 +1,5 @@
 import { deleteIngredientAmount } from '../controller/ingredientAmountORM.js';
+import { errorHandeling } from '../utils/errorHandeling.js';
 import * as ingredientAmountValidator from './validator/ingredientAmount.js';
 
 export const ingredientAmountValidatorMiddleware = {
@@ -8,7 +9,7 @@ export const ingredientAmountValidatorMiddleware = {
             next();
         }
         catch(e){
-            res.status(400).send(e.messages);
+            return errorHandeling(res, e);
         }
     },
     addOrUpdateIngredientAmount: async(req, res, next) => {
@@ -17,7 +18,7 @@ export const ingredientAmountValidatorMiddleware = {
             next();
         }
         catch(e){
-            res.status(400).send(e.messages);
+            return errorHandeling(res, e);
         }
     },
     deleteIngredientAmount: async(req, res, next) => {
@@ -26,7 +27,7 @@ export const ingredientAmountValidatorMiddleware = {
             next();
         }
         catch(e){
-            res.status(400).send(e.messages);
+            return errorHandeling(res, e);
         }
     }
 }
