@@ -62,7 +62,7 @@ export const addFood = async (req, res) => {
     try {
         const {label, diet, nutriscore, measuringunit, barcode} = req.val;
 
-        let imagepath = path.join('images', 'uploads/default.jpg');
+        let imagepath = '/images/default.jpg';
 
         if (barcode) {
             try {
@@ -83,7 +83,7 @@ export const addFood = async (req, res) => {
                         if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir, { recursive: true });
                         const filePath = path.join(uploadDir, fileName);
                         fs.writeFileSync(filePath, buffer);
-                        imagepath = filePath;
+                        imagepath = `/images/${fileName}`;
                     }
                 }
             } catch (e) {
