@@ -1,4 +1,8 @@
 import prisma from '../database/databaseORM.js';
+import fs from 'fs';
+import path from 'path';
+import { v4 as uuidv4 } from 'uuid';
+import fetch from 'node-fetch';
 
 export const getFood = async (req, res)=> {
     try {
@@ -57,35 +61,68 @@ export const getAllFood = async (_req, res)=> {
 export const addFood = async (req, res) => {
     try {
         const {label, diet, nutriscore, measuringunit, barcode} = req.val;
+
+        let imagepath = path.join('images', 'uploads/default.jpg');
+
+        if (barcode) {
+            try {
+                const offResponse = await fetch(`https://world.openfoodfacts.org/api/v0/product/${barcode}.json`);
+                const offData = await offResponse.json();
+                const product = offData.product;
+
+                if (product) {
+                    const imageUrl = product.image_front_small_url || product.image_url;
+                    if (imageUrl) {
+                        const imageResponse = await fetch(imageUrl);
+                        const arrayBuffer = await imageResponse.arrayBuffer();
+                        const buffer = Buffer.from(arrayBuffer);
+
+                        const extension = path.extname(imageUrl).split('?')[0] || '.jpg';
+                        const fileName = `${uuidv4()}${extension}`;
+                        const uploadDir = path.join('uploads', 'images');
+                        if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir, { recursive: true });
+                        const filePath = path.join(uploadDir, fileName);
+                        fs.writeFileSync(filePath, buffer);
+                        imagepath = filePath;
+                    }
+                }
+            } catch (e) {
+                console.error(e.message);
+                res.sendStatus(500);
+            }
+        }
+
         const {id} = await prisma.food.create({
             data: {
                 label,
                 diet,
                 nutriscore,
                 measuringunit,
-                barcode
+                barcode,
+                imagepath
             },
             select: {
                 id: true
             }
         });
         res.status(201).send({id});
-    } catch (err) {
-        console.error(err);
+    } catch (e) {
+        console.error(e);
         res.sendStatus(500);
     }
 };
 
 export const updateFood = async (req, res) => {
     try {
-        const {id, label, diet, nutriscore, measuringunit, barcode} = req.val;
+        const {id, label, diet, nutriscore, measuringunit, barcode, imagepath} = req.val;
         await prisma.food.update({
             data: {
                 label,
                 diet,
                 nutriscore,
                 measuringunit,
-                barcode
+                barcode,
+                imagepath
             },
             where: {
                 id
