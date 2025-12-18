@@ -137,12 +137,35 @@ export const updateFood = async (req, res) => {
 
 export const deleteFood = async (req, res) => {
     try {
-        const {id} = req.val;
-        await prisma.food.delete({
-            where: {
-                id
-            }
+        const { id } = req.val;
+
+        const food = await prisma.food.findUnique({
+            where: { id },
+            select: { imagepath: true }
         });
+
+        if (!food) {
+            return res.sendStatus(404);
+        }
+
+        if (
+            food.imagepath &&
+            food.imagepath !== '/images/default.jpg'
+        ) {
+            const imageFilePath = path.join(
+                'uploads',
+                food.imagepath
+            );
+
+            if (fs.existsSync(imageFilePath)) {
+                fs.unlinkSync(imageFilePath);
+            }
+        }
+
+        await prisma.food.delete({
+            where: { id }
+        });
+
         res.sendStatus(204);
     } catch (e) {
         console.error(e);
