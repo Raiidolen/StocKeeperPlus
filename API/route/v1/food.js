@@ -21,16 +21,35 @@
  *                              id:
  *                                  type: integer
  *          400:
- *              description: the error(s) described
+ *              description: validation errors
  *              content:
- *                  text/plain:
+ *                  application/json:
  *                      schema:
- *                          type: string
+ *                          type: object
+ *                          properties:
+ *                              message:
+ *                                  type: string
+ *                                  example: "Opération échouée :"
+ *                              details:
+ *                                  type: array
+ *                                  items:
+ *                                      type: object
+ *                                      properties:
+ *                                          message:
+ *                                              type: string
+ *                                              example: "The barcode field must be defined"
+ *                                          rule:
+ *                                              type: string
+ *                                              example: "required"
+ *                                          field:
+ *                                              type: string
+ *                                              example: "barcode"
  *          401:
  *              $ref: '#/components/responses/UnauthorizedError'
  *          500:
  *              description: Error server
  */
+
 /**
  * @swagger
  * /food:
@@ -47,16 +66,35 @@
  *          204:
  *              description: food updated
  *          400:
- *              description: the error(s) described
+ *              description: validation errors
  *              content:
- *                  text/plain:
+ *                  application/json:
  *                      schema:
- *                          type: string
+ *                          type: object
+ *                          properties:
+ *                              message:
+ *                                  type: string
+ *                                  example: "Opération échouée :"
+ *                              details:
+ *                                  type: array
+ *                                  items:
+ *                                      type: object
+ *                                      properties:
+ *                                          message:
+ *                                              type: string
+ *                                              example: "The id field must be defined"
+ *                                          rule:
+ *                                              type: string
+ *                                              example: "required"
+ *                                          field:
+ *                                              type: string
+ *                                              example: "id"
  *          401:
  *              $ref: '#/components/responses/UnauthorizedError'
  *          500:
  *              description: Error server
  */
+
 /**
  * @swagger
  * /food/get/{id}:
@@ -78,12 +116,35 @@
  *                      schema:
  *                          $ref: '#/components/schemas/Food'
  *          400:
- *              description: the error(s) described
+ *              description: validation errors
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                              message:
+ *                                  type: string
+ *                                  example: "Opération échouée :"
+ *                              details:
+ *                                  type: array
+ *                                  items:
+ *                                      type: object
+ *                                      properties:
+ *                                          message:
+ *                                              type: string
+ *                                              example: "The id field must be defined"
+ *                                          rule:
+ *                                              type: string
+ *                                              example: "number"
+ *                                          field:
+ *                                              type: string
+ *                                              example: "id"
  *          404:
  *              description: food not found
  *          500:
  *              description: Error server
  */
+
 /**
  * @swagger
  * /food/barcode/{barcode}:
@@ -105,12 +166,35 @@
  *                      schema:
  *                          $ref: '#/components/schemas/Food'
  *          400:
- *              description: the error(s) described
+ *              description: validation errors
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                              message:
+ *                                  type: string
+ *                                  example: "Opération échouée :"
+ *                              details:
+ *                                  type: array
+ *                                  items:
+ *                                      type: object
+ *                                      properties:
+ *                                          message:
+ *                                              type: string
+ *                                              example: "The barcode field format is invalid"
+ *                                          rule:
+ *                                              type: string
+ *                                              example: "regex"
+ *                                          field:
+ *                                              type: string
+ *                                              example: "barcode"
  *          404:
  *              description: food not found
  *          500:
  *              description: Error server
  */
+
 /**
  * @swagger
  * /food/all:
@@ -146,16 +230,35 @@
  *          204:
  *              description: food deleted
  *          400:
- *              description: the error(s) described
+ *              description: validation errors
  *              content:
- *                  text/plain:
+ *                  application/json:
  *                      schema:
- *                          type: string
+ *                          type: object
+ *                          properties:
+ *                              message:
+ *                                  type: string
+ *                                  example: "Opération échouée :"
+ *                              details:
+ *                                  type: array
+ *                                  items:
+ *                                      type: object
+ *                                      properties:
+ *                                          message:
+ *                                              type: string
+ *                                              example: "The id field must be defined"
+ *                                          rule:
+ *                                              type: string
+ *                                              example: "required"
+ *                                          field:
+ *                                              type: string
+ *                                              example: "id"
  *          404:
  *              description: food not found
  *          500:
  *              description: Error server
  */
+
 
 import Router from 'express';
 
