@@ -1,5 +1,5 @@
 import { Router } from "express";
-import prisma from "../database/databaseORM.js";
+import prisma from "../../database/databaseORM.js";
 
 const router = Router();
 const allowedModels = [

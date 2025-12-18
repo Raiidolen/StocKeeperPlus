@@ -166,8 +166,8 @@ import {
     getFoodByBarcode,
     getAllFood,
     deleteFood
-}  from  '../controller/foodORM.js'
-import {foodValidatorMiddleware as PVM} from '../middleware/foodValidation.js';
+}  from  '../../controller/foodORM.js'
+import {foodValidatorMiddleware as PVM} from '../../middleware/foodValidation.js';
 
 const router = Router();
 

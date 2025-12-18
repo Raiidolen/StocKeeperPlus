@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import Router from "./route/index.js";
+import RouterV1 from "./route/v1/index.js";
 import path from 'path';
 import "dotenv/config";
 import cookieParser from "cookie-parser";
@@ -16,7 +16,7 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser());
 app.use('/images', express.static(path.join(process.cwd(), 'uploads/images')));
-app.use(Router);
+app.use('/v1', RouterV1);
 
 
 
