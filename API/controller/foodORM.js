@@ -1,3 +1,98 @@
+/**
+ * @swagger
+ * components:
+ *  schemas:
+ *      Food:
+ *          type: object
+ *          properties:
+ *              id:
+ *                  type: integer
+ *                  example: 1
+ *              label:
+ *                  type: string
+ *                  example: "Pâtes complètes"
+ *              diet:
+ *                  type: string
+ *                  nullable: true
+ *                  example: "vegetarien"
+ *              nutriscore:
+ *                  type: string
+ *                  nullable: true
+ *                  maxLength: 1
+ *                  example: "A"
+ *              measuringunit:
+ *                  type: string
+ *                  example: "gram"
+ *              barcode:
+ *                  type: string
+ *                  example: "1234567890123"
+ *              imagepath:
+ *                  type: string
+ *                  nullable: true
+ *                  example: "/images/default.jpg"
+ */
+/**
+ * @swagger
+ * components:
+ *  responses:
+ *      getFood:
+ *          description: the food
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/Food'
+ */
+/**
+ * @swagger
+ * components:
+ *  responses:
+ *      getFoodByBarcode:
+ *          description: the food found by barcode
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/Food'
+ */
+/**
+ * @swagger
+ * components:
+ *  responses:
+ *      getAllFood:
+ *          description: list of foods
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      type: array
+ *                      items:
+ *                          $ref: '#/components/schemas/Food'
+ */
+/**
+ * @swagger
+ * components:
+ *  responses:
+ *      addFood:
+ *          description: food created
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/FoodIDSchema'
+ */
+/**
+ * @swagger
+ * components:
+ *  responses:
+ *      updateFood:
+ *          description: food updated
+ */
+/**
+ * @swagger
+ * components:
+ *  responses:
+ *      deleteFood:
+ *          description: food deleted
+ */
+
+
 import prisma from '../database/databaseORM.js';
 import fs from 'fs';
 import path from 'path';
