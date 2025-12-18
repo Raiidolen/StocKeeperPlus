@@ -15,6 +15,7 @@ export function errorHandeling(res, error, genericMessage) {
                 break;
             case 'P2025':
                 message = "L'élément demandé n'a pas été trouvé.";
+                statusCode = 404;
                 break;
             default:
                 message = `Erreur base de données (${error.code})`;
