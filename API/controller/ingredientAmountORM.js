@@ -24,7 +24,15 @@ export const getIngredientAmount = async (req, res) => {
 
 export const getAllIngredientAmount = async (_req, res) => {
     try {
-        const ingredients = await prisma.ingredientamount.findMany();
+        const ingredients = await prisma.ingredientamount.findMany({
+            orderBy: [{
+                recipe: 'asc',
+            },
+            {
+                food: 'asc'
+            }
+            ]
+        });
         if(ingredients){
             res.send(ingredients);
         } else {
