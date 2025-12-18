@@ -3,6 +3,7 @@ import cors from "cors";
 import Router from "./route/index.js";
 import "dotenv/config";
 import cookieParser from "cookie-parser";
+import initCronJobs from "./utils/cronScheduler.js";
 
 const app = express();
 const port = 3001;
@@ -16,7 +17,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(Router);
 
-
+initCronJobs();
 
 
 app.listen(port, () => {
