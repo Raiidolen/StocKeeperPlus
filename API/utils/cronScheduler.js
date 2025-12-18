@@ -8,7 +8,7 @@ const getTopicFromEmail = (email) => {
 };
 
 const initCronJobs = () => {
-    cron.schedule('0 15 * * *', async () => {
+    cron.schedule('* * * * *', async () => {
         try {
             const tomorrow = new Date();
             tomorrow.setDate(tomorrow.getDate() + 1);
