@@ -1,3 +1,75 @@
+/**
+ * @swagger
+ * components:
+ *  schemas:
+ *      User:
+ *          type: object
+ *          properties:
+ *              mail:
+ *                  type: string
+ *                  format: email
+ *                  example: username@gmail.com
+ *              username:
+ *                  type: string
+ *                  example: username
+ *              password:
+ *                  type: string
+ *                  minLength: 5
+ *                  example: password
+ *              isadmin:
+ *                  type: boolean
+ *                  example: false
+ */
+/**
+ * @swagger
+ * components:
+ *  responses:
+ *      getUser:
+ *          description: the user
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/User'
+ */
+/**
+ * @swagger
+ * components:
+ *  responses:
+ *      getAllUser:
+ *          description: list of users
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      type: array
+ *                      items:
+ *                          $ref: '#/components/schemas/User'
+ */
+/**
+ * @swagger
+ * components:
+ *  responses:
+ *      addUser:
+ *          description: user created
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/userIDSchema'
+ */
+/**
+ * @swagger
+ * components:
+ *  responses:
+ *      updateUser:
+ *          description: user updated
+ */
+/**
+ * @swagger
+ * components:
+ *  responses:
+ *      deleteUser:
+ *          description: user deleted
+ */
+
 import prisma from '../database/databaseORM.js';
 import { hashing } from '../utils/hashUtils.js';
 
@@ -60,7 +132,7 @@ export const addUser = async (req, res) => {
                 mail: true
             }
         });
-        res.status(201).send({idMail});
+        res.status(201).send({mail});
     } catch (err) {
         console.error(err);
         res.sendStatus(500);

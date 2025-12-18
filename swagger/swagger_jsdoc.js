@@ -14,7 +14,7 @@ const options = {
         "./API/controller/*.js",
         "./API/middleware/validator/*.js",
         "./API/middleware/identification/*.js",
-        "./API/route/*.js",
+        "./API/route/v1/*.js",
     ],
 };
 

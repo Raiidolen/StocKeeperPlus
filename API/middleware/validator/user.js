@@ -1,7 +1,63 @@
+ /**
+ * @swagger
+ * components:
+ *  schemas:
+ *      userIDSchema:
+ *          type: object
+ *          properties:
+ *              mail:
+ *                  type: string
+ *          required:
+ *              - mail
+ */
+/**
+ * @swagger
+ * components:
+ *  schemas:
+ *      userToAddSchema:
+ *          type: object
+ *          properties:
+ *              mail:
+ *                  type: string
+ *                  format: email
+ *              username:
+ *                  type: string
+ *              password:
+ *                  type: string
+ *                  minLength: 5
+ *              isadmin:
+ *                  type: boolean
+ *          required:
+ *              - mail
+ *              - username
+ *              - password
+ *              - isadmin
+ */
+/**
+ * @swagger
+ * components:
+ *  schemas:
+ *      userToUpdateSchema:
+ *          type: object
+ *          properties:
+ *              mail:
+ *                  type: string
+ *                  format: email
+ *              username:
+ *                  type: string
+ *              password:
+ *                  type: string
+ *                  minLength: 5
+ *              isadmin:
+ *                  type: boolean
+ *          required:
+ *              - mail
+ */
+
 import vine from '@vinejs/vine';
 
 const userIDSchema = vine.object({
-    mail: vine.string().trim()
+    mail: vine.string().trim().email()
 });
 
 const userToAddSchema = vine.object({
