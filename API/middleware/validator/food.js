@@ -22,7 +22,7 @@ const foodToUpdateSchema = vine.object({
     diet: vine.string().trim().optional(),
     nutriscore: vine.string().regex(new RegExp('^[A-Ea-e]+$')).trim().maxLength(1).optional(),
     measuringunit: vine.string().trim().optional(),
-    barcode: vine.string().regex(/^(?:\d{8}|\d{13})$/).trim(),
+    barcode: vine.string().regex(/^(?:\d{8}|\d{13})$/).trim().optional(),
     imagepath: vine.string().trim().optional(),
 });
 
