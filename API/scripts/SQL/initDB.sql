@@ -42,8 +42,9 @@ CREATE TABLE Food (
     label VARCHAR(255) NOT NULL,
     diet VARCHAR(100),
     nutriScore CHAR(1),
-    measuringUnit VARCHAR(255),
-    barcode VARCHAR(50) NOT NULL
+    measuringUnit VARCHAR(255) NOT NULL,
+    barcode VARCHAR(50) NOT NULL UNIQUE,
+    imagepath VARCHAR(200)
 );
 
 -- TABLE: Recipe
