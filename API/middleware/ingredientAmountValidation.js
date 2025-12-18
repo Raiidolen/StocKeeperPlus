@@ -1,4 +1,3 @@
-import { deleteIngredientAmount } from '../controller/ingredientAmountORM.js';
 import { errorHandeling } from '../utils/errorHandeling.js';
 import * as ingredientAmountValidator from './validator/ingredientAmount.js';
 
