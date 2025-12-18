@@ -18,9 +18,7 @@ export const getRecipe = async (req, res) => {
 
     if (recipe) {
       return res.send(recipe);
-    } else {
-      return res.sendStatus(404);
-    }
+    } 
   } catch (err) {
     return errorHandeling(res, err);
   }
@@ -191,7 +189,7 @@ export const updateRecipe = async (req, res) => {
       }
     });
 
-    res.status(200).json({ message: "Recette mise à jour avec succès" });
+    res.sendStatus(204);
   } catch (err) {
     return errorHandeling(res, err);
   }
@@ -204,7 +202,7 @@ export const deleteRecipe = async (req, res) => {
       where: { id },
     });
 
-    res.status(200).json({ message: "Recette supprimée avec succès" });
+    res.sendStatus(204);
   } catch (err) {
     return errorHandeling(res, err);
   }

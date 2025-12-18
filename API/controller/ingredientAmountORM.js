@@ -53,7 +53,7 @@ export const addIngredientAmount = async (req, res) => {
                 quantity: quantity
             }
         });
-        res.status(201).send({ingredientamount});
+        res.send(ingredientamount);
     }
     catch (err) {
         return errorHandeling(res, err);

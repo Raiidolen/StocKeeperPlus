@@ -22,7 +22,7 @@ export function errorHandeling(res, error, genericMessage) {
         
     }
 
-    return res.status(400).json({ 
+    return res.status(500).json({ 
         message: message,
         details: details 
     });

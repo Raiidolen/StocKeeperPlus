@@ -38,7 +38,7 @@ export const getAllFoodUser = async (_req, res)=> {
             }
             ]
         });
-        if(foodsUser.length){
+        if(foodsUser){
             res.send(
                 foodsUser.map(f => ({
                     ...f,
@@ -94,10 +94,7 @@ export const updateFoodUser= async (req, res) => {
                 }
             }
         });
-        res.send({
-            ...updated,
-            expirationdate: formatDate(updated.expirationdate)
-        });
+        res.sendStatus(204);
     } catch (err) {
         return errorHandeling(res, err);
     }
