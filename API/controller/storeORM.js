@@ -1,4 +1,5 @@
 import prisma from '../database/databaseORM.js';
+import { errorHandeling } from '../utils/errorHandeling.js';
 
 const EARTH_RADIUS_KM = 6371;
 
@@ -14,9 +15,8 @@ export const getStore = async (req, res)=> {
         }else {
             return res.sendStatus(404);
         }
-    } catch (e) {
-        console.error(e);
-        res.sendStatus(500);
+    } catch (err) {
+        return errorHandeling(res, err);
     }
 };
 
@@ -28,9 +28,8 @@ export const getAllStores = async (_req, res)=> {
         }else {
             res.sendStatus(404);
         }
-    } catch (e) {
-        console.error(e);
-        res.sendStatus(500);
+    } catch (err) {
+        return errorHandeling(res, err);
     }
 };
 
@@ -52,16 +51,15 @@ export const getStoresWithInRange = async (req, res) => {
             WHERE distance < ${range};
         `;
         res.send(stores);
-    } catch (e) {
-        console.error(e);
-        res.sendStatus(500);
+    } catch (err) {
+        return errorHandeling(res, err);
     }
 };
 
 
 export const addStore = async (req, res) => {
     try {
-        const {label, latitude, longitude} = req.body;
+        const {label, latitude, longitude} = req.val;
         const {id} =  await prisma.store.create({
             data: {
                 label,
@@ -71,9 +69,8 @@ export const addStore = async (req, res) => {
             select: { id: true }
         });
         res.status(201).send({ id });
-    } catch (e) {
-        console.error(e);
-        res.sendStatus(500);
+    } catch (err) {
+        return errorHandeling(res, err);
     }
 };
 
@@ -91,23 +88,21 @@ export const updateStore = async (req, res) => {
             }
         });
         res.sendStatus(204);
-    } catch (e) {
-        console.error(e);
-        res.sendStatus(500);
+    } catch (err) {
+        return errorHandeling(res, err);
     }
 };
 
 export const deleteStore = async (req, res) => {
     try {
-        const {id} = req.body;
+        const {id} = req.val;
         await prisma.store.delete({
             where: {
                 id
             }
         });
         res.sendStatus(204);
-    } catch (e) {
-        console.error(e);
-        res.sendStatus(500);
+    } catch (err) {
+        return errorHandeling(res, err);
     }
 };

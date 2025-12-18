@@ -71,6 +71,7 @@
  */
 
 import prisma from '../database/databaseORM.js';
+import { errorHandeling } from '../utils/errorHandeling.js';
 import { hashing } from '../utils/hashUtils.js';
 
 export const userPublicFields = {
@@ -93,8 +94,7 @@ export const getUser = async (req, res)=> {
             res.sendStatus(404);
         }
     } catch (err) {
-        console.error(err);
-        res.sendStatus(500);
+        return errorHandeling(res, err);
     }
 };
 
@@ -112,8 +112,7 @@ export const getAllUser = async (_req, res)=> {
             res.sendStatus(404);
         }
     } catch (err) {
-        console.error(err);
-        res.sendStatus(500);
+        return errorHandeling(res, err);
     }
 }
 
@@ -134,8 +133,7 @@ export const addUser = async (req, res) => {
         });
         res.status(201).send({mail});
     } catch (err) {
-        console.error(err);
-        res.sendStatus(500);
+        return errorHandeling(res, err);
     }
 };
 
@@ -158,9 +156,8 @@ export const updateUser = async (req, res) => {
         });
 
         res.sendStatus(204);
-    } catch (e) {
-        console.error(e);
-        res.sendStatus(500);
+    } catch (err) {
+        return errorHandeling(res, err);
     }
 };
 
@@ -173,8 +170,7 @@ export const deleteUser = async (req, res) => {
             }
         });
         res.sendStatus(204);
-    } catch (e) {
-        console.error(e);
-        res.sendStatus(500);
+    } catch (err) {
+        return errorHandeling(res, err);
     }
 };

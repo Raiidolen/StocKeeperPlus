@@ -1,4 +1,5 @@
 import prisma from '../database/databaseORM.js';
+import { errorHandeling } from '../utils/errorHandeling.js';
 
 const formatDate = (date) => date ? date.toISOString().split("T")[0] : null;
 
@@ -22,8 +23,7 @@ export const getFoodUser = async (req, res)=> {
             res.sendStatus(404);
         }
     } catch (err) {
-        console.error(err);
-        res.sendStatus(500);
+        return errorHandeling(res, err);
     }
 };
 
@@ -49,8 +49,7 @@ export const getAllFoodUser = async (_req, res)=> {
             res.sendStatus(404);
         }
     } catch (err) {
-        console.error(err);
-        res.sendStatus(500);
+        return errorHandeling(res, err);
     }
 }
 
@@ -73,8 +72,7 @@ export const addFoodUser = async (req, res) => {
             expirationdate: formatDate(foodUser.expirationdate)
         });
     } catch (err) {
-        console.error(err);
-        res.sendStatus(500);
+        return errorHandeling(res, err);
     }
 };
 
@@ -100,9 +98,8 @@ export const updateFoodUser= async (req, res) => {
             ...updated,
             expirationdate: formatDate(updated.expirationdate)
         });
-    } catch (e) {
-        console.error(e);
-        res.sendStatus(500);
+    } catch (err) {
+        return errorHandeling(res, err);
     }
 };
 
@@ -118,9 +115,8 @@ export const deleteFoodUser = async (req, res) => {
             }
         });
         res.sendStatus(204);
-    } catch (e) {
-        console.error(e);
-        res.sendStatus(500);
+    } catch (err) {
+        return errorHandeling(res, err);
     }
 };
 
@@ -147,7 +143,6 @@ export const getFoodUserByMail = async (req, res)=> {
         res.send(formatted);
 
     } catch (err) {
-        console.error(err);
-        res.sendStatus(500);
+        return errorHandeling(res, err);
     }
 };

@@ -97,6 +97,7 @@ import fs from 'fs';
 import path from 'path';
 import { v4 as uuidv4 } from 'uuid';
 import fetch from 'node-fetch';
+import { errorHandeling } from '../utils/errorHandeling.js';
 
 export const getFood = async (req, res)=> {
     try {
@@ -111,8 +112,7 @@ export const getFood = async (req, res)=> {
             res.sendStatus(404);
         }
     } catch (err) {
-        console.error(err);
-        res.sendStatus(500);
+        errorHandeling(err, res);
     }
 };
 
@@ -129,8 +129,7 @@ export const getFoodByBarcode = async (req, res)=> {
             res.sendStatus(404);
         }
     } catch (err) {
-        console.error(err);
-        res.sendStatus(500);
+        return errorHandeling(res, err);
     }
 };
 
@@ -147,8 +146,7 @@ export const getAllFood = async (_req, res)=> {
             res.sendStatus(404);
         }
     } catch (err) {
-        console.error(err);
-        res.sendStatus(500);
+        return errorHandeling(res, err);
     }
 }
 
@@ -200,9 +198,8 @@ export const addFood = async (req, res) => {
             }
         });
         res.status(201).send({id});
-    } catch (e) {
-        console.error(e);
-        res.sendStatus(500);
+    } catch (err) {
+        return errorHandeling(res, err);
     }
 };
 
@@ -223,9 +220,8 @@ export const updateFood = async (req, res) => {
             }
         });
         res.sendStatus(204);
-    } catch (e) {
-        console.error(e);
-        res.sendStatus(500);
+    } catch (err) {
+        return errorHandeling(res, err);
     }
 };
 
@@ -261,8 +257,7 @@ export const deleteFood = async (req, res) => {
         });
 
         res.sendStatus(204);
-    } catch (e) {
-        console.error(e);
-        res.sendStatus(500);
+    } catch (err) {
+        return errorHandeling(res, err);
     }
 };
