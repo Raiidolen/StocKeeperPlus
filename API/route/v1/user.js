@@ -6,8 +6,8 @@ import {
     getUser,
     getAllUser,
     deleteUser
-}  from  '../controller/userORM.js'
-import {userValidatorMiddleware as PVM} from '../middleware/userValidation.js';
+}  from  '../../controller/userORM.js'
+import {userValidatorMiddleware as PVM} from '../../middleware/userValidation.js';
 
 const router = Router();
 

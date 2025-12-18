@@ -12,7 +12,7 @@ import {default as notificationRouter} from './notification.js'
 import 'dotenv/config';
 const router = Router();
 
-router.use("/auth", authRouter);
+router.use('/auth', authRouter);
 router.use('/user', userRouter);
 router.use('/food', foodRouter);
 router.use('/recipe', recipeRouter);
