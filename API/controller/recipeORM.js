@@ -28,7 +28,11 @@ export const getRecipe = async (req, res) => {
 
 export const getAllRecipe = async (_req, res) => {
   try {
-    const recipes = await prisma.recipe.findMany();
+    const recipes = await prisma.recipe.findMany({
+      orderBy: {
+        id: 'asc',
+      }
+    });
     if(recipes){
       res.send(recipes);
     } else {
