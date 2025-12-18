@@ -1,13 +1,13 @@
 import vine from "@vinejs/vine";
 
 const IngredientAmountIDSchema = vine.object({
-    recipe_id: vine.number().positive(),
-    food_id: vine.number().positive()
+    recipe: vine.number().positive(),
+    food: vine.number().positive()
 });
 
 const addOrUpdateIngredientAmountSchema = vine.object({
-    recipe_id: vine.number().positive(),
-    food_id: vine.number().positive(),
+    recipe: vine.number().positive(),
+    food: vine.number().positive(),
     quantity: vine.number().positive()
 })
 

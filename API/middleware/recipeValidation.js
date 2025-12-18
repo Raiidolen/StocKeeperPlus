@@ -1,4 +1,4 @@
-    import { deleteRecipe } from '../controller/recipeORM.js';
+import { errorHandeling } from '../utils/errorHandeling.js';
 import * as recipeValidator from './validator/recipe.js';
 
 export const recipeValidatorMiddleware = {
@@ -8,7 +8,7 @@ export const recipeValidatorMiddleware = {
             next();
         }
         catch(e){
-            res.status(400).send(e.messages);
+            return errorHandeling(res, e);
         }
     },
     addRecipe: async(req, res, next) => {
@@ -17,7 +17,7 @@ export const recipeValidatorMiddleware = {
             next();
         }
         catch(e){
-            res.status(400).send(e.messages);
+            return errorHandeling(res, e);
         }
     },
     updateRecipe: async(req, res, next) => {
@@ -26,7 +26,7 @@ export const recipeValidatorMiddleware = {
             next();
         }
         catch(e){
-            res.status(400).send(e.messages);
+            return errorHandeling(res, e);
         }
     },
     deleteRecipe: async(req, res, next) => {
@@ -35,7 +35,7 @@ export const recipeValidatorMiddleware = {
             next();
         }
         catch(e){
-            res.status(400).send(e.messages);
+            return errorHandeling(res, e);
         }
     }
 }

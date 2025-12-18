@@ -1,3 +1,4 @@
+import { errorHandeling } from '../utils/errorHandeling.js';
 import * as userValidator from './validator/user.js';
 
 export const userValidatorMiddleware = {
@@ -6,7 +7,7 @@ export const userValidatorMiddleware = {
             req.val  = await userValidator.searchedUser.validate(req.params);
             next();
         } catch (e) {
-            res.status(400).send(e.messages);
+            return errorHandeling(res, e);
         }
     },
     userToAdd: async(req, res, next) => {
@@ -14,7 +15,7 @@ export const userValidatorMiddleware = {
             req.val  = await userValidator.userToAdd.validate(req.body);
             next();
         } catch (e) {
-            res.status(400).send(e.messages);
+            return errorHandeling(res, e);
         }
     },
     userToUpdate: async(req, res, next) => {
@@ -22,7 +23,7 @@ export const userValidatorMiddleware = {
             req.val  = await userValidator.userToUpdate.validate(req.body);
             next();
         } catch (e) {
-            res.status(400).send(e.messages);
+            return errorHandeling(res, e);
         }
     },
     userToDelete: async(req, res, next) => {
@@ -30,7 +31,7 @@ export const userValidatorMiddleware = {
             req.val  = await userValidator.userToDelete.validate(req.body);
             next();
         } catch (e) {
-            res.status(400).send(e.messages);
+            return errorHandeling(res, e);
         }
     }
 };

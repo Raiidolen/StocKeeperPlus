@@ -1,3 +1,19 @@
+/**
+ * @swagger
+ * components:
+ *  responses:
+ *      UnauthorizedError:
+ *          description: Access token is missing or invalid
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      type: object
+ *                      properties:
+ *                          error:
+ *                              type: string
+ *                              example: Unauthorized
+ */
+
 import { verify } from "../../utils/jwt.js"
 
 export const checkJWT = async (req, res, next) => {
