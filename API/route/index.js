@@ -11,7 +11,7 @@ import {default as metaDataRouter} from './metaData.js'
 import 'dotenv/config';
 const router = Router();
 
-router.use("/auth", authRouter);
+router.use('/auth', authRouter);
 router.use('/user', userRouter);
 router.use('/food', foodRouter);
 router.use('/recipe', recipeRouter);
