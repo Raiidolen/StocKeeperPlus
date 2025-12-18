@@ -1,7 +1,7 @@
 import Router from 'express';
 
-import { getIngredientAmount, getAllIngredientAmount, addIngredientAmount, deleteIngredientAmount, updateIngredientAmount } from '../controller/ingredientAmountORM.js';
-import { ingredientAmountValidatorMiddleware as IAVM } from '../middleware/ingredientAmountValidation.js';
+import { getIngredientAmount, getAllIngredientAmount, addIngredientAmount, deleteIngredientAmount, updateIngredientAmount } from '../../controller/ingredientAmountORM.js';
+import { ingredientAmountValidatorMiddleware as IAVM } from '../../middleware/ingredientAmountValidation.js';
 
 const router = Router();
 
