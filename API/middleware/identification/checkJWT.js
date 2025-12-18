@@ -11,7 +11,7 @@
  *                      properties:
  *                          error:
  *                              type: string
- *                              example: Unauthorized
+ *                              example: Non authentifié (cookie manquant)
  */
 
 import { verify } from "../../utils/jwt.js"

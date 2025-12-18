@@ -16,10 +16,7 @@
  *              content:
  *                  application/json:
  *                      schema:
- *                          type: object
- *                          properties:
- *                              id:
- *                                  type: integer
+ *                          $ref: '#/components/schemas/FoodIDSchema'
  *          400:
  *              description: validation errors
  *              content:
