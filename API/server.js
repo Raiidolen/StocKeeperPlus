@@ -4,6 +4,7 @@ import RouterV1 from "./route/v1/index.js";
 import path from 'path';
 import "dotenv/config";
 import cookieParser from "cookie-parser";
+import initCronJobs from "./utils/cronScheduler.js";
 
 const app = express();
 const port = 3001;
@@ -18,7 +19,7 @@ app.use(cookieParser());
 app.use('/images', express.static(path.join(process.cwd(), 'uploads/images')));
 app.use('/v1', RouterV1);
 
-
+initCronJobs();
 
 
 app.listen(port, () => {
