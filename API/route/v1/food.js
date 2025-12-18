@@ -1,22 +1,22 @@
 /**
  * @swagger
- * /user:
+ * /food:
  *  post:
  *      tags:
- *          - User
+ *          - Food
  *      requestBody:
  *          required: true
  *          content:
  *              application/json:
  *                  schema:
- *                      $ref: '#/components/schemas/userToAddSchema'
+ *                      $ref: '#/components/schemas/FoodToAddSchema'
  *      responses:
  *          201:
- *              description: user created
+ *              description: food created
  *              content:
  *                  application/json:
  *                      schema:
- *                          $ref: '#/components/schemas/userIDSchema'
+ *                          $ref: '#/components/schemas/FoodIDSchema'
  *          400:
  *              description: validation errors
  *              content:
@@ -34,33 +34,34 @@
  *                                      properties:
  *                                          message:
  *                                              type: string
- *                                              example: "The username field must be defined"
+ *                                              example: "The barcode field must be defined"
  *                                          rule:
  *                                              type: string
  *                                              example: "required"
  *                                          field:
  *                                              type: string
- *                                              example: "username"
+ *                                              example: "barcode"
  *          401:
  *              $ref: '#/components/responses/UnauthorizedError'
  *          500:
  *              description: Error server
  */
+
 /**
  * @swagger
- * /user:
+ * /food:
  *  patch:
  *      tags:
- *          - User
+ *          - Food
  *      requestBody:
  *          required: true
  *          content:
  *              application/json:
  *                  schema:
- *                      $ref: '#/components/schemas/userToUpdateSchema'
+ *                      $ref: '#/components/schemas/FoodToUpdateSchema'
  *      responses:
  *          204:
- *              description: user updated
+ *              description: food updated
  *          400:
  *              description: validation errors
  *              content:
@@ -78,49 +79,39 @@
  *                                      properties:
  *                                          message:
  *                                              type: string
- *                                              example: "The mail field must be defined"
+ *                                              example: "The id field must be defined"
  *                                          rule:
  *                                              type: string
  *                                              example: "required"
  *                                          field:
  *                                              type: string
- *                                              example: "mail"
+ *                                              example: "id"
  *          401:
  *              $ref: '#/components/responses/UnauthorizedError'
  *          500:
  *              description: Error server
  */
+
 /**
  * @swagger
- * /user/get/{mail}:
+ * /food/get/{id}:
  *  get:
  *      tags:
- *          - User
+ *          - Food
  *      parameters:
  *         - in: path
- *           name: mail
+ *           name: id
  *           schema:
- *             $ref: '#/components/schemas/userIDSchema'
+ *             $ref: '#/components/schemas/FoodIDSchema'
  *           required: true
- *           description: String ID of the user to get
+ *           description: Numeric ID of the food to get
  *      responses:
  *          200:
- *              description: user found
+ *              description: food found
  *              content:
  *                  application/json:
  *                      schema:
- *                          type: object
- *                          properties:
- *                              mail:
- *                                  type: string
- *                                  format: email
- *                                  example: username@gmail.com
- *                              username:
- *                                  type: string
- *                                  example: username
- *                              isadmin:
- *                                  type: boolean
- *                                  example: false
+ *                          $ref: '#/components/schemas/Food'
  *          400:
  *              description: validation errors
  *              content:
@@ -138,62 +129,103 @@
  *                                      properties:
  *                                          message:
  *                                              type: string
- *                                              example: "The mail field must be defined"
+ *                                              example: "The id field must be defined"
  *                                          rule:
  *                                              type: string
- *                                              example: "email"
+ *                                              example: "number"
  *                                          field:
  *                                              type: string
- *                                              example: "mail"
+ *                                              example: "id"
  *          404:
- *              description: user not found
+ *              description: food not found
  *          500:
  *              description: Error server
  */
+
 /**
  * @swagger
- * /user/all:
+ * /food/barcode/{barcode}:
  *  get:
  *      tags:
- *          - User
+ *          - Food
+ *      parameters:
+ *         - in: path
+ *           name: barcode
+ *           schema:
+ *             $ref: '#/components/schemas/FoodBarcodeSchema'
+ *           required: true
+ *           description: Barcode of the food
  *      responses:
  *          200:
- *              description: list of users
+ *              description: food found
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          $ref: '#/components/schemas/Food'
+ *          400:
+ *              description: validation errors
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                              message:
+ *                                  type: string
+ *                                  example: "Opération échouée :"
+ *                              details:
+ *                                  type: array
+ *                                  items:
+ *                                      type: object
+ *                                      properties:
+ *                                          message:
+ *                                              type: string
+ *                                              example: "The barcode field format is invalid"
+ *                                          rule:
+ *                                              type: string
+ *                                              example: "regex"
+ *                                          field:
+ *                                              type: string
+ *                                              example: "barcode"
+ *          404:
+ *              description: food not found
+ *          500:
+ *              description: Error server
+ */
+
+/**
+ * @swagger
+ * /food/all:
+ *  get:
+ *      tags:
+ *          - Food
+ *      responses:
+ *          200:
+ *              description: list of foods
  *              content:
  *                  application/json:
  *                      schema:
  *                          type: array
  *                          items:
- *                              type: object
- *                              properties:
- *                                  mail:
- *                                      type: string
- *                                      format: email
- *                                      example: username@gmail.com
- *                                  username:
- *                                      type: string
- *                                      example: username
- *                                  isadmin:
- *                                      type: boolean
- *                                      example: false
+ *                              $ref: '#/components/schemas/Food'
  *          500:
  *              description: Error server
  */
+
 /**
  * @swagger
- * /user:
+ * /food:
  *  delete:
  *      tags:
- *          - User
+ *          - Food
  *      requestBody:
  *          required: true
  *          content:
  *              application/json:
  *                  schema:
- *                      $ref: '#/components/schemas/userIDSchema'
+ *                      $ref: '#/components/schemas/FoodIDSchema'
  *      responses:
  *          204:
- *              description: user deleted
+ *              description: food deleted
  *          400:
  *              description: validation errors
  *              content:
@@ -211,36 +243,39 @@
  *                                      properties:
  *                                          message:
  *                                              type: string
- *                                              example: "The mail field must be defined"
+ *                                              example: "The id field must be defined"
  *                                          rule:
  *                                              type: string
  *                                              example: "required"
  *                                          field:
  *                                              type: string
- *                                              example: "mail"
+ *                                              example: "id"
  *          404:
- *              description: user not found
+ *              description: food not found
  *          500:
  *              description: Error server
  */
 
+
 import Router from 'express';
 
 import {
-    addUser,
-    updateUser,
-    getUser,
-    getAllUser,
-    deleteUser
-}  from  '../controller/userORM.js'
-import {userValidatorMiddleware as PVM} from '../middleware/userValidation.js';
+    addFood,
+    updateFood,
+    getFood,
+    getFoodByBarcode,
+    getAllFood,
+    deleteFood
+}  from  '../../controller/foodORM.js'
+import {foodValidatorMiddleware as PVM} from '../../middleware/foodValidation.js';
 
 const router = Router();
 
-router.post('/', PVM.userToAdd, addUser);
-router.patch('/', PVM.userToUpdate, updateUser);
-router.get('/get/:mail', PVM.searchedUser, getUser);
-router.get('/all', getAllUser);
-router.delete('/', PVM.userToDelete, deleteUser);
+router.post('/', PVM.foodToAdd, addFood);
+router.patch('/', PVM.foodToUpdate, updateFood);
+router.get('/get/:id', PVM.searchedFood, getFood);
+router.get('/barcode/:barcode', PVM.searchedFoodByBarcode, getFoodByBarcode);
+router.get('/all', getAllFood);
+router.delete('/', PVM.foodToDelete, deleteFood);
 
 export default router;

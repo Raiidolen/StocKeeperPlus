@@ -6,8 +6,8 @@ import {
     deleteFoodStore,
     getFoodStore,
     getAllFoodStores
-} from '../controller/foodStoreORM.js';
-import {foodStoreValidatorMiddleware as FSM} from '../middleware/foodStoreValidation.js';
+} from '../../controller/foodStoreORM.js';
+import {foodStoreValidatorMiddleware as FSM} from '../../middleware/foodStoreValidation.js';
 
 const router = Router();
 

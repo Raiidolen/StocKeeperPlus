@@ -165,7 +165,7 @@ export const addFood = async (req, res) => {
                 const product = offData.product;
 
                 if (product) {
-                    const imageUrl = product.image_front_small_url || product.image_url;
+                    const imageUrl = product.image_url || product.image_front_small_url;
                     if (imageUrl) {
                         const imageResponse = await fetch(imageUrl);
                         const arrayBuffer = await imageResponse.arrayBuffer();
