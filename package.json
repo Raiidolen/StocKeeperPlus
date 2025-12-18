@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon API/server.js",
-    "initDB": "node API/scripts/JS/initDB.js"
+    "initDB": "node API/scripts/JS/initDB.js",
+    "genDoc": "node ./swagger/swagger_jsdoc.js"
   },
   "keywords": [],
   "author": "",
@@ -23,11 +24,14 @@
     "firebase-admin": "^13.6.0",
     "jsonwebtoken": "^9.0.2",
     "node-cron": "^4.2.1",
+    "node-fetch": "^3.3.2",
     "pg": "^8.16.3",
     "prisma": "^6.18.0",
+    "uuid": "^13.0.0",
     "vine": "^0.1.1"
   },
   "devDependencies": {
-    "nodemon": "^3.1.10"
+    "nodemon": "^3.1.10",
+    "swagger-jsdoc": "^6.2.8"
   }
 }
