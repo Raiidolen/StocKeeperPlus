@@ -1,38 +1,5 @@
 /**
  * @swagger
- * components:
- *  schemas:
- *      Food:
- *          type: object
- *          properties:
- *              id:
- *                  type: integer
- *                  example: 1
- *              label:
- *                  type: string
- *                  example: "Pâtes complètes"
- *              diet:
- *                  type: string
- *                  nullable: true
- *                  example: "vegetarien"
- *              nutriscore:
- *                  type: string
- *                  nullable: true
- *                  maxLength: 1
- *                  example: "A"
- *              measuringunit:
- *                  type: string
- *                  example: "gram"
- *              barcode:
- *                  type: string
- *                  example: "1234567890123"
- *              imagepath:
- *                  type: string
- *                  nullable: true
- *                  example: "/images/default.jpg"
- */
-/**
- * @swagger
  * /food:
  *  post:
  *      tags:
