@@ -341,16 +341,29 @@ import {
     updateUser,
     getUser,
     getAllUser,
-    deleteUser
+    deleteUser,
+    addUserNoAdmin,
+    getMyUser,
+    updateMyUser
 }  from  '../../controller/userORM.js'
 import {userValidatorMiddleware as PVM} from '../../middleware/userValidation.js';
+import { checkAdmin } from '../../middleware/identification/checkAdmin.js';
 
 const router = Router();
 
-router.post('/', PVM.userToAdd, addUser);
-router.patch('/', PVM.userToUpdate, updateUser);
-router.get('/get/:mail', PVM.searchedUser, getUser);
-router.get('/all', getAllUser);
-router.delete('/', PVM.userToDelete, deleteUser);
+// --- ROUTES PUBLIQUES ---
+router.post('/register', PVM.userToAddNoAdmin, addUserNoAdmin); 
+
+// --- ROUTES UTILISATEUR CONNECTÉ (Lui-même) ---
+router.get('/me', getMyUser); // Voir son propre profil
+router.patch('/me', PVM.userToUpdateMe, updateMyUser); // Modifier son profil
+//router.delete('/me', verifyToken, deleteMyUser); // Supprimer son propre compte
+
+// --- ROUTES ADMIN ---
+router.get('/all', checkAdmin, getAllUser); // Voir tout le monde
+router.get('/get/:mail', PVM.searchedUser, getUser); // get par le mail on s'en sert ????
+router.post('/admin/create', checkAdmin, PVM.userToAdd, addUser); // Créer n'importe quel rôle
+router.delete('/:id', checkAdmin, deleteUser); // Supprimer n'importe qui 
+router.patch('/', PVM.userToUpdate, updateUser); // modifier n'importe qui (on pourrait ajouter une protect mais c'est overkill pour nous)
 
 export default router;

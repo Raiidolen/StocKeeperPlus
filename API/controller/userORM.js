@@ -94,6 +94,32 @@ export const getUser = async (req, res)=> {
     }
 };
 
+export const getMyUser = async (req, res) => {
+    try {
+        const userMail = req.user.email; 
+        
+        const user = await prisma.user.findUnique({
+            where: {
+                mail: userMail
+            },
+            select: {
+                mail: true,
+                username: true,
+                isadmin: true
+            }
+        });
+        console.log("helo");
+
+        if (!user) {
+            return res.status(404).send({ message: "Utilisateur non trouvé" });
+        }
+
+        res.status(200).send(user);
+    } catch (err) {
+        return errorHandeling(res, err);
+    }
+};
+
 export const getAllUser = async (_req, res)=> {
     try {
         const users = await prisma.user.findMany({
@@ -141,7 +167,7 @@ export const addUserNoAdmin = async (req, res) => {
                 mail,
                 username,
                 password: hashedPassword,
-                isadmin: false // Sécurité : on force la valeur ici
+                isadmin: false 
             },
             select: {
                 mail: true
@@ -174,6 +200,32 @@ export const updateUser = async (req, res) => {
 
         res.sendStatus(204);
     } catch (err) {
+        return errorHandeling(res, err);
+    }
+};
+
+export const updateMyUser = async (req, res) => {
+    try {
+        const mailFromToken = req.user.email;
+
+        const { username, password } = req.val;
+
+        const dataToUpdate = {
+            username
+        };
+
+        if (password) {
+            dataToUpdate.password = await hashing(password);
+        }
+
+        await prisma.user.update({
+            where: { mail: mailFromToken }, 
+            data: dataToUpdate
+        });
+
+        res.sendStatus(204);
+    } catch (err) {
+        console.log(err);
         return errorHandeling(res, err);
     }
 };
