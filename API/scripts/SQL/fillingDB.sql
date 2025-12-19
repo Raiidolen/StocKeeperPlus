@@ -25,3 +25,6 @@ INSERT INTO FoodStore (food, store, quantity, price) VALUES
 INSERT INTO FoodUser (food, user_mail, quantity, storageType, expirationDate) VALUES
 ((SELECT id FROM Food WHERE barcode='3017620422003'), 'admin@test.com', 2, 'Placard', '2026-06-01'),
 ((SELECT id FROM Food WHERE barcode='5000159484695'), 'admin@test.com', 6, 'Frigo', '2025-12-31');
+
+INSERT INTO "User" (mail, username, password, isadmin)
+VALUES ('user@test.com', 'user', '$argon2id$v=19$m=65536,t=3,p=4$xTR2aDwDCXhE1VQoDApfcw$fDyjB1vt2ge96Ad+2P7y5hGmwmPShu7yNlKNTmFL5JY', false);
