@@ -247,7 +247,6 @@ export const deleteUser = async (req, res) => {
         });
         res.sendStatus(204);
     } catch (err) {
-        console.log(err);
         return errorHandeling(res, err);
     }
 };
