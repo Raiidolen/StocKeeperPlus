@@ -1,6 +1,11 @@
 /**
  * @swagger
  * components:
+ *  securitySchemes:
+ *      cookieAuth:
+ *          type: apiKey
+ *          in: cookie
+ *          name: jwt
  *  responses:
  *      UnauthorizedError:
  *          description: Access token is missing or invalid
@@ -11,7 +16,7 @@
  *                      properties:
  *                          error:
  *                              type: string
- *                              example: Unauthorized
+ *                              example: Non authentifié (cookie manquant)
  */
 
 import { verify } from "../../utils/jwt.js"

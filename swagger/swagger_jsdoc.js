@@ -5,19 +5,18 @@ const options = {
     definition: {
         openapi: "3.0.0",
         info: {
-            title: "API", // Title (required)
-            version: "1.0.0", // Version (required)
+            title: "API",
+            version: "1.0.0",
         },
     },
-    // Path to the API docs
+    
     apis: [
         "./API/controller/*.js",
         "./API/middleware/validator/*.js",
         "./API/middleware/identification/*.js",
-        "./API/route/*.js",
+        "./API/route/v1/*.js",
     ],
 };
 
-// Initialize swagger-jsdoc -> returns validated swagger spec in json format
 const swaggerSpec = swaggerJSDoc(options);
 fs.writeFileSync("./swagger/spec.json", JSON.stringify(swaggerSpec));

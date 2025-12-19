@@ -1,0 +1,447 @@
+/**
+ * @swagger
+ * /food:
+ *  post:
+ *      security:
+ *          - cookieAuth: []
+ *      tags:
+ *          - Food
+ *      requestBody:
+ *          required: true
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/FoodToAddSchema'
+ *      responses:
+ *          201:
+ *              description: food created
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          $ref: '#/components/schemas/FoodIDSchema'
+ *          400:
+ *              description: validation errors
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                              message:
+ *                                  type: string
+ *                                  example: "Une erreur est survenue"
+ *                              details:
+ *                                  type: array
+ *                                  items:
+ *                                      type: object
+ *                                      properties:
+ *                                          message:
+ *                                              type: string
+ *                                              example: "The barcode field must be defined"
+ *                                          rule:
+ *                                              type: string
+ *                                              example: "required"
+ *                                          field:
+ *                                              type: string
+ *                                              example: "barcode"
+ *          401:
+ *              $ref: '#/components/responses/UnauthorizedError'
+ *          403:
+ *              $ref: '#/components/responses/ForbiddenError'
+ *          500:
+ *              description: Error server
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                              message:
+ *                                  type: string
+ *                                  example: "Une erreur est survenue"
+ *                              details:
+ *                                  type: array
+ *                                  items:
+ *                                      type: object
+ */
+/**
+ * @swagger
+ * /food:
+ *  patch:
+ *      security:
+ *          - cookieAuth: []
+ *      tags:
+ *          - Food
+ *      requestBody:
+ *          required: true
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/FoodToUpdateSchema'
+ *      responses:
+ *          204:
+ *              description: food updated
+ *          400:
+ *              description: validation errors
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                              message:
+ *                                  type: string
+ *                                  example: "Une erreur est survenue"
+ *                              details:
+ *                                  type: array
+ *                                  items:
+ *                                      type: object
+ *                                      properties:
+ *                                          message:
+ *                                              type: string
+ *                                              example: "The id field must be defined"
+ *                                          rule:
+ *                                              type: string
+ *                                              example: "required"
+ *                                          field:
+ *                                              type: string
+ *                                              example: "id"
+ *          401:
+ *              $ref: '#/components/responses/UnauthorizedError'
+ *          403:
+ *              $ref: '#/components/responses/ForbiddenError'
+ *          404:
+ *              description: validation errors
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                              message:
+ *                                  type: string
+ *                                  example: "L'élément demandé n'a pas été trouvé."
+ *                              details:
+ *                                  type: array
+ *                                  items:
+ *                                      type: object
+ *          500:
+ *              description: Error server
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                              message:
+ *                                  type: string
+ *                                  example: "Une erreur est survenue"
+ *                              details:
+ *                                  type: array
+ *                                  items:
+ *                                      type: object
+ */
+/**
+ * @swagger
+ * /food/get/{id}:
+ *  get:
+ *      security:
+ *          - cookieAuth: []
+ *      tags:
+ *          - Food
+ *      parameters:
+ *         - in: path
+ *           name: id
+ *           schema:
+ *             type: integer
+ *           required: true
+ *           description: Numeric ID of the food to get
+ *      responses:
+ *          200:
+ *              description: food found
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          $ref: '#/components/schemas/Food'
+ *          400:
+ *              description: validation errors
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                              message:
+ *                                  type: string
+ *                                  example: "Une erreur est survenue"
+ *                              details:
+ *                                  type: array
+ *                                  items:
+ *                                      type: object
+ *                                      properties:
+ *                                          message:
+ *                                              type: string
+ *                                              example: "The id field must be a number"
+ *                                          rule:
+ *                                              type: string
+ *                                              example: "number"
+ *                                          field:
+ *                                              type: string
+ *                                              example: "id"
+ *          401:
+ *              $ref: '#/components/responses/UnauthorizedError'
+ *          404:
+ *              description: validation errors
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                              message:
+ *                                  type: string
+ *                                  example: "L'élément demandé n'a pas été trouvé."
+ *                              details:
+ *                                  type: array
+ *                                  items:
+ *                                      type: object
+ *          500:
+ *              description: Error server
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                              message:
+ *                                  type: string
+ *                                  example: "Une erreur est survenue"
+ *                              details:
+ *                                  type: array
+ *                                  items:
+ *                                      type: object
+ */
+
+/**
+ * @swagger
+ * /food/barcode/{barcode}:
+ *  get:
+ *      security:
+ *          - cookieAuth: []
+ *      tags:
+ *          - Food
+ *      parameters:
+ *         - in: path
+ *           name: barcode
+ *           schema:
+ *             $ref: '#/components/schemas/FoodBarcodeSchema'
+ *           required: true
+ *           description: Barcode of the food
+ *      responses:
+ *          200:
+ *              description: food found
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          $ref: '#/components/schemas/Food'
+ *          400:
+ *              description: validation errors
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                              message:
+ *                                  type: string
+ *                                  example: "Une erreur est survenue"
+ *                              details:
+ *                                  type: array
+ *                                  items:
+ *                                      type: object
+ *                                      properties:
+ *                                          message:
+ *                                              type: string
+ *                                              example: "The barcode field format is invalid"
+ *                                          rule:
+ *                                              type: string
+ *                                              example: "regex"
+ *                                          field:
+ *                                              type: string
+ *                                              example: "barcode"
+ *          401:
+ *              $ref: '#/components/responses/UnauthorizedError'
+ *          404:
+ *              description: validation errors
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                              message:
+ *                                  type: string
+ *                                  example: "L'élément demandé n'a pas été trouvé."
+ *                              details:
+ *                                  type: array
+ *                                  items:
+ *                                      type: object
+ *          500:
+ *              description: Error server
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                              message:
+ *                                  type: string
+ *                                  example: "Une erreur est survenue"
+ *                              details:
+ *                                  type: array
+ *                                  items:
+ *                                      type: object
+ */
+
+/**
+ * @swagger
+ * /food/all:
+ *  get:
+ *      security:
+ *          - cookieAuth: []
+ *      tags:
+ *          - Food
+ *      responses:
+ *          200:
+ *              description: list of foods
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: array
+ *                          items:
+ *                              $ref: '#/components/schemas/Food'
+ *          
+ *          401:
+ *              $ref: '#/components/responses/UnauthorizedError'
+ *          400:
+ *              description: validation errors
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                              message:
+ *                                  type: string
+ *                                  example: "Une erreur est survenue"
+ *                              details:
+ *                                  type: array
+ *                                  items:
+ *                                      type: object
+ *                                      properties:
+ *                                          message:
+ *                                              type: string
+ *          500:
+ *              description: Error server
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                              message:
+ *                                  type: string
+ *                                  example: "Une erreur est survenue"
+ *                              details:
+ *                                  type: array
+ *                                  items:
+ *                                      type: object
+ */
+
+/**
+ * @swagger
+ * /food:
+ *  delete:
+ *      security:
+ *          - cookieAuth: []
+ *      tags:
+ *          - Food
+ *      requestBody:
+ *          required: true
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/FoodIDSchema'
+ *      responses:
+ *          204:
+ *              description: food deleted
+ *          400:
+ *              description: validation errors
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                              message:
+ *                                  type: string
+ *                                  example: "Une erreur est survenue"
+ *                              details:
+ *                                  type: array
+ *                                  items:
+ *                                      type: object
+ *                                      properties:
+ *                                          message:
+ *                                              type: string
+ *                                              example: "The id field must be defined"
+ *                                          rule:
+ *                                              type: string
+ *                                              example: "required"
+ *                                          field:
+ *                                              type: string
+ *                                              example: "id"
+ *          401:
+ *              $ref: '#/components/responses/UnauthorizedError'
+ *          403:
+ *              $ref: '#/components/responses/ForbiddenError'
+ *          404:
+ *              description: validation errors
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                              message:
+ *                                  type: string
+ *                                  example: "L'élément demandé n'a pas été trouvé."
+ *                              details:
+ *                                  type: array
+ *                                  items:
+ *                                      type: object
+ *          500:
+ *              description: Error server
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                              message:
+ *                                  type: string
+ *                                  example: "Une erreur est survenue"
+ *                              details:
+ *                                  type: array
+ *                                  items:
+ *                                      type: object
+ */
+
+
+import Router from 'express';
+
+import {
+    addFood,
+    updateFood,
+    getFood,
+    getFoodByBarcode,
+    getAllFood,
+    deleteFood
+}  from  '../../controller/foodORM.js'
+import {foodValidatorMiddleware as PVM} from '../../middleware/foodValidation.js';
+import { checkAdmin } from '../../middleware/identification/checkAdmin.js';
+
+
+const router = Router();
+
+router.post('/', checkAdmin, PVM.foodToAdd, addFood);
+router.patch('/', checkAdmin, PVM.foodToUpdate, updateFood);
+router.get('/get/:id', PVM.searchedFood, getFood);
+router.get('/barcode/:barcode', PVM.searchedFoodByBarcode, getFoodByBarcode);
+router.get('/all', getAllFood);
+router.delete('/', checkAdmin, PVM.foodToDelete, deleteFood);
+
+export default router;

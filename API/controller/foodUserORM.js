@@ -1,4 +1,5 @@
 import prisma from '../database/databaseORM.js';
+import { errorHandeling } from '../utils/errorHandeling.js';
 
 const formatDate = (date) => date ? date.toISOString().split("T")[0] : null;
 
@@ -19,11 +20,10 @@ export const getFoodUser = async (req, res)=> {
                 expirationdate: formatDate(foodUser.expirationdate)
             });
         } else {
-            res.sendStatus(404);
+            return errorHandeling(res, { code: 'P2025' });
         }
     } catch (err) {
-        console.error(err);
-        res.sendStatus(500);
+        return errorHandeling(res, err);
     }
 };
 
@@ -38,21 +38,43 @@ export const getAllFoodUser = async (_req, res)=> {
             }
             ]
         });
-        if(foodsUser.length){
-            res.send(
-                foodsUser.map(f => ({
-                    ...f,
-                    expirationdate: formatDate(f.expirationdate)
-                }))
-            );
-        } else {
-            res.sendStatus(404);
-        }
+
+        res.send(
+            foodsUser.map(f => ({
+                ...f,
+                expirationdate: formatDate(f.expirationdate)
+            }))
+        );
+
     } catch (err) {
-        console.error(err);
-        res.sendStatus(500);
+        return errorHandeling(res, err);
     }
 }
+
+export const getAllMyFoodUser = async (req, res) => {
+    try {
+        const userMailFromToken = req.user.email;
+
+        const foodsUser = await prisma.fooduser.findMany({
+            where: {
+                user_mail: userMailFromToken
+            },
+            orderBy: {
+                food: 'asc'
+            }
+        });
+
+        res.send(
+            foodsUser.map(f => ({
+                ...f,
+                expirationdate: formatDate(f.expirationdate)
+            }))
+        );
+
+    } catch (err) {
+        return errorHandeling(res, err);
+    }
+};
 
 export const addFoodUser = async (req, res) => {
     try {
@@ -66,15 +88,49 @@ export const addFoodUser = async (req, res) => {
                 quantity,
                 storagetype,
                 expirationdate: exp
+            },
+            select: {
+                food: true,
+                user_mail: true
             }
         });
-        res.status(201).send({
-            ...foodUser,
-            expirationdate: formatDate(foodUser.expirationdate)
-        });
+        res.status(201).send({foodUser});
     } catch (err) {
-        console.error(err);
-        res.sendStatus(500);
+        return errorHandeling(res, err);
+    }
+};
+
+export const addMyFoodUser = async (req, res) => {
+    try {
+        
+        const userMailFromToken = req.user.email;
+
+        
+        const { food, quantity, storagetype, expirationdate } = req.val;
+
+        
+        const exp = expirationdate ? new Date(expirationdate) : null;
+        if (exp) exp.setHours(12, 0, 0, 0);
+
+        
+        const foodUser = await prisma.fooduser.create({
+            data: {
+                food: food,
+                user_mail: userMailFromToken,
+                quantity,
+                storagetype,
+                expirationdate: exp
+            },
+            select: {
+                food: true,
+                user_mail: true,
+                quantity: true
+            }
+        });
+
+        res.status(201).send({ foodUser });
+    } catch (err) {
+        return errorHandeling(res, err);
     }
 };
 
@@ -96,13 +152,38 @@ export const updateFoodUser= async (req, res) => {
                 }
             }
         });
-        res.send({
-            ...updated,
-            expirationdate: formatDate(updated.expirationdate)
+        res.sendStatus(204);
+    } catch (err) {
+        return errorHandeling(res, err);
+    }
+};
+
+export const updateMyFoodUser = async (req, res) => {
+    try {
+        const userMailFromToken = req.user.email;
+
+        const { food, quantity, storagetype, expirationdate } = req.val;
+
+        const exp = expirationdate ? new Date(expirationdate) : null;
+        if (exp) exp.setHours(12, 0, 0, 0);
+
+        const updated = await prisma.fooduser.update({
+            data: {
+                quantity,
+                storagetype,
+                expirationdate: exp,
+            },
+            where: {
+                food_user_mail: {
+                    food: food,
+                    user_mail: userMailFromToken 
+                }
+            }
         });
-    } catch (e) {
-        console.error(e);
-        res.sendStatus(500);
+
+        res.sendStatus(204);
+    } catch (err) {
+        return errorHandeling(res, err);
     }
 };
 
@@ -118,9 +199,29 @@ export const deleteFoodUser = async (req, res) => {
             }
         });
         res.sendStatus(204);
-    } catch (e) {
-        console.error(e);
-        res.sendStatus(500);
+    } catch (err) {
+        return errorHandeling(res, err);
+    }
+};
+
+export const deleteMyFoodUser = async (req, res) => {
+    try {
+        const userMailFromToken = req.user.email;
+
+        const { food } = req.val;
+
+        await prisma.fooduser.delete({
+            where: {
+                food_user_mail: {
+                    food: food,
+                    user_mail: userMailFromToken 
+                }
+            }
+        });
+
+        res.sendStatus(204);
+    } catch (err) {
+        return errorHandeling(res, err);
     }
 };
 
@@ -147,7 +248,36 @@ export const getFoodUserByMail = async (req, res)=> {
         res.send(formatted);
 
     } catch (err) {
-        console.error(err);
-        res.sendStatus(500);
+        return errorHandeling(res, err);
     }
 };
+
+export const getMyFoodUserByMail = async (req, res) => {
+    try {
+        const user_mail = req.user.email;
+
+        const foodsUser = await prisma.fooduser.findMany({
+            where: { user_mail },
+            include: { 
+                food_fooduser_foodTofood: true 
+            }
+        });
+
+        if (foodsUser.length === 0) {
+            return res.json([]);
+        }
+
+        const formatted = foodsUser.map(f => ({
+            id: f.food,
+            label: f.food_fooduser_foodTofood.label,
+            quantity: f.quantity,
+            expirationDate: formatDate(f.expirationdate) 
+        }));
+
+        res.send(formatted);
+
+    } catch (err) {
+        return errorHandeling(res, err);
+    }
+};
+

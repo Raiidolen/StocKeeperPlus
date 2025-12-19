@@ -1,15 +1,21 @@
 import {readFileSync} from "node:fs";
 import {pool} from "../../database/database.js";
 
-const requests = readFileSync(
-    './API/scripts/SQL/initDB.sql',
+const initDB = readFileSync(
+    './API/scripts/SQL/01_initDB.sql',
     {encoding: "utf-8"}
 );
 
+const fillingDB = readFileSync(
+    './API/scripts/SQL/02_fillingDB.sql',
+    {encoding: "utf-8"}
+);
 
 try {
-    await pool.query(requests, []);
-    console.log("done");
+    await pool.query(initDB, []);
+    console.log("Init done");
+    await pool.query(fillingDB, []);
+    console.log("Filling done");
 } catch (e) {
     console.error(e);
 }

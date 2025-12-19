@@ -1,4 +1,152 @@
+/**
+ * @swagger
+ * components:
+ *  schemas:
+ *      User:
+ *          type: object
+ *          properties:
+ *              mail:
+ *                  type: string
+ *                  format: email
+ *                  example: username@gmail.com
+ *              username:
+ *                  type: string
+ *                  example: username
+ *              password:
+ *                  type: string
+ *                  minLength: 5
+ *                  example: password
+ *              isadmin:
+ *                  type: boolean
+ *                  example: false
+ */
+/**
+ * @swagger
+ * components:
+ *  responses:
+ *      getUser:
+ *          description: the user
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      type: object
+ *                      properties:
+ *                          mail:
+ *                              type: string
+ *                              format: email
+ *                              example: username@gmail.com
+ *                          username:
+ *                              type: string
+ *                              example: username
+ *                          isadmin:
+ *                              type: boolean
+ *                              example: false
+ */
+/**
+ * @swagger
+ * components:
+ *  responses:
+ *      getMyUser:
+ *          description: the information of the user connected
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      type: object
+ *                      properties:
+ *                          mail:
+ *                              type: string
+ *                              format: email
+ *                              example: username@gmail.com
+ *                          username:
+ *                              type: string
+ *                              example: username
+ *                          isadmin:
+ *                              type: boolean
+ *                              example: false
+ */
+/**
+ * @swagger
+ * components:
+ *  responses:
+ *      getAllUser:
+ *          description: list of users
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      type: array
+ *                      items:
+ *                          type: object
+ *                          properties:
+ *                              mail:
+ *                                  type: string
+ *                                  format: email
+ *                                  example: username@gmail.com
+ *                              username:
+ *                                  type: string
+ *                                  example: username
+ *                              isadmin:
+ *                                  type: boolean
+ *                                  example: false
+ */
+/**
+ * @swagger
+ * components:
+ *  responses:
+ *      addUser:
+ *          description: user created
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      type: object
+ *                      properties:
+ *                          idMail:
+ *                              type: string
+ */
+/**
+ * @swagger
+ * components:
+ *  responses:
+ *      addUserNoAdmin:
+ *          description: user created (not an admin)
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      type: object
+ *                      properties:
+ *                          idMail:
+ *                              type: string
+ */
+/**
+ * @swagger
+ * components:
+ *  responses:
+ *      updateUser:
+ *          description: user updated
+ */
+/**
+ * @swagger
+ * components:
+ *  responses:
+ *      updateMyUser:
+ *          description: user connected updated
+ */
+/**
+ * @swagger
+ * components:
+ *  responses:
+ *      deleteUser:
+ *          description: user deleted
+ */
+/**
+ * @swagger
+ * components:
+ *  responses:
+ *      deleteMyUser:
+ *          description: user connected deleted
+ */
+
 import prisma from '../database/databaseORM.js';
+import { errorHandeling } from '../utils/errorHandeling.js';
 import { hashing } from '../utils/hashUtils.js';
 
 export const userPublicFields = {
@@ -18,11 +166,31 @@ export const getUser = async (req, res)=> {
         if(user){
             res.send(user);
         } else {
-            res.sendStatus(404);
+            return errorHandeling(res, { code: 'P2025' });
         }
     } catch (err) {
-        console.error(err);
-        res.sendStatus(500);
+        return errorHandeling(res, err);
+    }
+};
+
+export const getMyUser = async (req, res) => {
+    try {
+        const userMail = req.user.email; 
+        
+        const user = await prisma.user.findUnique({
+            where: {
+                mail: userMail
+            },
+            select: userPublicFields
+        });
+
+        if (!user) {
+            return res.status(404).send({ message: "Utilisateur non trouvé" });
+        }
+
+        res.status(200).send(user);
+    } catch (err) {
+        return errorHandeling(res, err);
     }
 };
 
@@ -34,14 +202,10 @@ export const getAllUser = async (_req, res)=> {
             },
             select: userPublicFields
         });
-        if(users){
-            res.send(users);
-        } else {
-            res.sendStatus(404);
-        }
+
+        res.send(users);
     } catch (err) {
-        console.error(err);
-        res.sendStatus(500);
+        return errorHandeling(res, err);
     }
 }
 
@@ -49,7 +213,7 @@ export const addUser = async (req, res) => {
     try {
         const {mail, username, password, isadmin} = req.val;
         const hashedPassword = await hashing(password);
-        const {idMail} = await prisma.user.create({
+        const idMail = await prisma.user.create({
             data: {
                 mail,
                 username,
@@ -60,10 +224,33 @@ export const addUser = async (req, res) => {
                 mail: true
             }
         });
-        res.status(201).send({idMail});
+        res.status(201).send(idMail);
     } catch (err) {
-        console.error(err);
-        res.sendStatus(500);
+        return errorHandeling(res, err);
+    }
+};
+
+export const addUserNoAdmin = async (req, res) => {
+    try {
+        
+        const { mail, username, password } = req.val;
+        const hashedPassword = await hashing(password);
+
+        const idMail = await prisma.user.create({
+            data: {
+                mail,
+                username,
+                password: hashedPassword,
+                isadmin: false 
+            },
+            select: {
+                mail: true
+            }
+        });
+
+        res.status(201).send(idMail);
+    } catch (err) {
+        return errorHandeling(res, err);
     }
 };
 
@@ -86,9 +273,34 @@ export const updateUser = async (req, res) => {
         });
 
         res.sendStatus(204);
-    } catch (e) {
-        console.error(e);
-        res.sendStatus(500);
+    } catch (err) {
+        return errorHandeling(res, err);
+    }
+};
+
+export const updateMyUser = async (req, res) => {
+    try {
+        const mailFromToken = req.user.email;
+
+        const { username, password } = req.val;
+
+        const dataToUpdate = {
+            username
+        };
+
+        if (password) {
+            dataToUpdate.password = await hashing(password);
+        }
+
+        await prisma.user.update({
+            where: { mail: mailFromToken }, 
+            data: dataToUpdate
+        });
+
+        res.sendStatus(204);
+    } catch (err) {
+        console.log(err);
+        return errorHandeling(res, err);
     }
 };
 
@@ -101,8 +313,23 @@ export const deleteUser = async (req, res) => {
             }
         });
         res.sendStatus(204);
-    } catch (e) {
-        console.error(e);
-        res.sendStatus(500);
+    } catch (err) {
+        return errorHandeling(res, err);
+    }
+};
+
+export const deleteMyUser = async (req, res) => {
+    try {
+        const mailFromToken = req.user.email;
+
+        await prisma.user.delete({
+            where: {
+                mail: mailFromToken
+            }
+        });
+
+        res.sendStatus(204);
+    } catch (err) {
+        return errorHandeling(res, err);
     }
 };

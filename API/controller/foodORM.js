@@ -75,7 +75,10 @@
  *          content:
  *              application/json:
  *                  schema:
- *                      $ref: '#/components/schemas/FoodIDSchema'
+ *                      type: object
+ *                      properties:
+ *                          id:
+ *                              type: integer                          
  */
 /**
  * @swagger
@@ -92,12 +95,12 @@
  *          description: food deleted
  */
 
-
 import prisma from '../database/databaseORM.js';
 import fs from 'fs';
 import path from 'path';
 import { v4 as uuidv4 } from 'uuid';
 import fetch from 'node-fetch';
+import { errorHandeling } from '../utils/errorHandeling.js';
 
 export const getFood = async (req, res)=> {
     try {
@@ -109,11 +112,10 @@ export const getFood = async (req, res)=> {
         if(food){
             res.send(food);
         } else {
-            res.sendStatus(404);
+            return errorHandeling(res, { code: 'P2025' });
         }
     } catch (err) {
-        console.error(err);
-        res.sendStatus(500);
+        errorHandeling(err, res);
     }
 };
 
@@ -127,11 +129,10 @@ export const getFoodByBarcode = async (req, res)=> {
         if(food){
             res.send(food);
         } else {
-            res.sendStatus(404);
+           return errorHandeling(res, { code: 'P2025' });
         }
     } catch (err) {
-        console.error(err);
-        res.sendStatus(500);
+        return errorHandeling(res, err);
     }
 };
 
@@ -142,14 +143,9 @@ export const getAllFood = async (_req, res)=> {
                 id: 'asc',
             }
         });
-        if(foods){
-            res.send(foods);
-        } else {
-            res.sendStatus(404);
-        }
+        res.send(foods);
     } catch (err) {
-        console.error(err);
-        res.sendStatus(500);
+        return errorHandeling(res, err);
     }
 }
 
@@ -166,7 +162,7 @@ export const addFood = async (req, res) => {
                 const product = offData.product;
 
                 if (product) {
-                    const imageUrl = product.image_front_small_url || product.image_url;
+                    const imageUrl = product.image_url || product.image_front_small_url;
                     if (imageUrl) {
                         const imageResponse = await fetch(imageUrl);
                         const arrayBuffer = await imageResponse.arrayBuffer();
@@ -181,13 +177,12 @@ export const addFood = async (req, res) => {
                         imagepath = `/images/${fileName}`;
                     }
                 }
-            } catch (e) {
-                console.error(e.message);
-                res.sendStatus(500);
+            } catch (err) {
+                return errorHandeling(res, err);
             }
         }
 
-        const {id} = await prisma.food.create({
+        const id = await prisma.food.create({
             data: {
                 label,
                 diet,
@@ -200,10 +195,9 @@ export const addFood = async (req, res) => {
                 id: true
             }
         });
-        res.status(201).send({id});
-    } catch (e) {
-        console.error(e);
-        res.sendStatus(500);
+        res.status(201).send(id);
+    } catch (err) {
+        return errorHandeling(res, err);
     }
 };
 
@@ -224,9 +218,8 @@ export const updateFood = async (req, res) => {
             }
         });
         res.sendStatus(204);
-    } catch (e) {
-        console.error(e);
-        res.sendStatus(500);
+    } catch (err) {
+        return errorHandeling(res, err);
     }
 };
 
@@ -240,7 +233,7 @@ export const deleteFood = async (req, res) => {
         });
 
         if (!food) {
-            return res.sendStatus(404);
+            return errorHandeling(res, { code: 'P2025' });
         }
 
         if (
@@ -262,8 +255,7 @@ export const deleteFood = async (req, res) => {
         });
 
         res.sendStatus(204);
-    } catch (e) {
-        console.error(e);
-        res.sendStatus(500);
+    } catch (err) {
+        return errorHandeling(res, err);
     }
 };

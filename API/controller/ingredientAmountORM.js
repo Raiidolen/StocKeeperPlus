@@ -1,4 +1,5 @@
 import prisma from '../database/databaseORM.js';
+import { errorHandeling } from '../utils/errorHandeling.js';
 
 export const getIngredientAmount = async (req, res) => {
     try {
@@ -13,12 +14,11 @@ export const getIngredientAmount = async (req, res) => {
         if(ingredientamount){
             res.send(ingredientamount);
         } else {
-            res.sendStatus(404);
+            return errorHandeling(res, { code: 'P2025' });
         }
     }
-    catch(err){
-        console.error(err);
-        res.sendStatus(500);
+    catch (err) {
+        return errorHandeling(res, err);
     }
 };
 
@@ -33,14 +33,9 @@ export const getAllIngredientAmount = async (_req, res) => {
             }
             ]
         });
-        if(ingredients){
-            res.send(ingredients);
-        } else {
-            res.sendStatus(404);
-        }
+        res.send(ingredients);
     } catch (err) {
-        console.error(err);
-        res.sendStatus(500);
+        return errorHandeling(res, err);
     }
 }
 
@@ -52,13 +47,16 @@ export const addIngredientAmount = async (req, res) => {
                 recipe: recipe,
                 food: food,
                 quantity: quantity
+            },
+            select: {
+                recipe: true,
+                food: true
             }
         });
         res.status(201).send({ingredientamount});
     }
-    catch(err){
-        console.error(err);
-        res.sendStatus(500);
+    catch (err) {
+        return errorHandeling(res, err);
     }
 }
 
@@ -80,9 +78,8 @@ export const updateIngredientAmount = async (req, res) => {
         });
         res.sendStatus(204);
     }
-    catch(err){
-        console.error(err);
-        res.sendStatus(500);
+    catch (err) {
+        return errorHandeling(res, err);
     }
 }
 
@@ -99,8 +96,7 @@ export const deleteIngredientAmount = async (req, res) => {
         });
         res.sendStatus(204);
     }
-    catch(e){
-        console.error(e);
-        res.sendStatus(500);
+    catch (err) {
+        return errorHandeling(res, err);
     }
 }
