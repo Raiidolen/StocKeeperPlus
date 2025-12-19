@@ -75,7 +75,7 @@ Une fois que les logs se stabilisent :
 
 ## Connexion
 
-Les identifiants de test (Administrateur et Utilisateur) sont fournis dans le fichier **`login.txt`** joint à ce projet.
+Les identifiants de test Administrateur sont fournis dans le fichier **`login.txt`** joint à ce projet.
 
 ## Arrêt du projet
 
