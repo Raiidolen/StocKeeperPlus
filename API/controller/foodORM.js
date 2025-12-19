@@ -175,7 +175,7 @@ export const addFood = async (req, res) => {
             }
         }
 
-        await prisma.food.create({
+        const {id} = await prisma.food.create({
             data: {
                 label,
                 diet,
@@ -185,7 +185,7 @@ export const addFood = async (req, res) => {
                 imagepath
             }
         });
-        res.sendStatus(204);
+        res.status(201).send({id});
     } catch (err) {
         return errorHandeling(res, err);
     }
