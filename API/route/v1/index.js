@@ -10,16 +10,18 @@ import {default as ingredientAmountRouter} from './ingredientAmount.js'
 import {default as metaDataRouter} from './metaData.js'
 
 import 'dotenv/config';
+import { checkJWT } from '../../middleware/identification/checkJWT.js';
+import { checkAdmin } from '../../middleware/identification/checkAdmin.js';
 const router = Router();
 
 router.use('/auth', authRouter);
-router.use('/user', userRouter);
-router.use('/food', foodRouter);
-router.use('/recipe', recipeRouter);
-router.use('/store', storeRouter);
-router.use('/foodUser', foodUserRouter);
-router.use('/foodStore', foodStoreRouter);
-router.use('/ingredientAmount', ingredientAmountRouter);
-router.use('/', metaDataRouter);
+router.use('/user', checkJWT, checkAdmin, userRouter);
+router.use('/food', checkJWT, checkAdmin, foodRouter);
+router.use('/recipe', checkJWT, checkAdmin, recipeRouter);
+router.use('/store', checkJWT, checkAdmin, storeRouter);
+router.use('/foodUser', checkJWT, checkAdmin, foodUserRouter);
+router.use('/foodStore', checkJWT, checkAdmin, foodStoreRouter);
+router.use('/ingredientAmount', checkJWT, checkAdmin, ingredientAmountRouter);
+router.use('/', checkJWT, checkAdmin, metaDataRouter);
 
 export default router;

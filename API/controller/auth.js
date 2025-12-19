@@ -41,7 +41,14 @@ export const login = async (req, res) => {
       maxAge: 30 * 60 * 60 * 1000
     })
 
-    res.status(200).json({ message: "Connexion réussie" });
+    res.status(200).json({
+                          "message": "Connexion réussie",
+                          "user": {
+                            "email": "admin@example.com",
+                            "isadmin": true
+                          
+                          }
+                        });
   } catch (err) {
     console.error("Erreur login :", err);
     res.sendStatus(500);
