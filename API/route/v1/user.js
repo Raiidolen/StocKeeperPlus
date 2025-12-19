@@ -362,7 +362,7 @@ router.delete('/me', deleteMyUser);
 router.get('/all', checkAdmin, getAllUser); 
 router.get('/get/:mail', checkAdmin, PVM.searchedUser, getUser); 
 router.post('/', checkAdmin, PVM.userToAdd, addUser); 
-router.delete('/', checkAdmin, deleteUser); 
+router.delete('/', checkAdmin,PVM.userToDelete, deleteUser); 
 router.patch('/', checkAdmin, PVM.userToUpdate, updateUser); 
 
 export default router;
