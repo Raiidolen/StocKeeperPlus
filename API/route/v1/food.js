@@ -13,10 +13,6 @@
  *      responses:
  *          201:
  *              description: food created
- *              content:
- *                  application/json:
- *                      schema:
- *                          $ref: '#/components/schemas/FoodIDSchema'
  *          400:
  *              description: validation errors
  *              content:
