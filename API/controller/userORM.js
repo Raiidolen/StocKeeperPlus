@@ -243,3 +243,19 @@ export const deleteUser = async (req, res) => {
         return errorHandeling(res, err);
     }
 };
+
+export const deleteMyUser = async (req, res) => {
+    try {
+        const mailFromToken = req.user.email;
+
+        await prisma.user.delete({
+            where: {
+                mail: mailFromToken
+            }
+        });
+
+        res.sendStatus(204);
+    } catch (err) {
+        return errorHandeling(res, err);
+    }
+};
