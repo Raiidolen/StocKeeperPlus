@@ -175,7 +175,7 @@ export const addFood = async (req, res) => {
             }
         }
 
-        const {id} = await prisma.food.create({
+        const id = await prisma.food.create({
             data: {
                 label,
                 diet,
@@ -183,6 +183,9 @@ export const addFood = async (req, res) => {
                 measuringunit,
                 barcode,
                 imagepath
+            },
+            select: {
+                id: true
             }
         });
         res.status(201).send({id});

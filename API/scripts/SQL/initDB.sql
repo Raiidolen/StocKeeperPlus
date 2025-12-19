@@ -111,3 +111,6 @@ CREATE TABLE FoodUser (
         REFERENCES "User"(mail)
         ON DELETE CASCADE
 );
+
+INSERT INTO "User" (mail, username, password, isadmin)
+VALUES ('admin@test.com', 'ADMIN', '$argon2id$v=19$m=65536,t=3,p=4$cLOZUs/hOdfwZVRoi69Dfw$8UlTS5+Ebg9lQtwArBoilwfwV5K6PZon0bVsquCL+0k', true);
