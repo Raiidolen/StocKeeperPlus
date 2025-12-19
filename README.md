@@ -7,8 +7,8 @@ Bienvenue sur la documentation de l'API **StocKeeper+**. Cette application est u
 * **Authentification & Utilisateurs** : Inscription, connexion (JWT), gestion de profil et rôles (Admin/User).
 * **Gestion des Stocks** : Suivi des aliments possédés par l'utilisateur (quantité, date de péremption, lieu de stockage).
 * **Produits & Magasins** : Base de données de produits alimentaires (code-barres, nutriscore) et association avec les magasins (prix).
-* **Recettes** : Gestion des recettes avec calcul des apports caloriques et ingrédients nécessaires.
-* **Tâches planifiées** : Scripts automatiques (Cron jobs) pour la maintenance ou les notifications.
+* **Recettes** : Gestion des recettes
+* **Tâches planifiées** : Scripts automatiques (Cron jobs) pour les notifications.
 * **Documentation** : Génération de documentation via Swagger.
 
 ## 🛠 Technologies Utilisées
