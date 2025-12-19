@@ -51,7 +51,7 @@
  *              nutriscore:
  *                  type: string
  *                  maxLength: 1
- *                  pattern: "^[A-Ea-e]$"
+ *                  pattern: "^[A-E]$"
  *              measuringunit:
  *                  type: string
  *              barcode:
