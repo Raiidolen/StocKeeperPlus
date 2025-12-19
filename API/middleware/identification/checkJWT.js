@@ -1,6 +1,11 @@
 /**
  * @swagger
  * components:
+ *  securitySchemes:
+ *      cookieAuth:
+ *          type: apiKey
+ *          in: cookie
+ *          name: jwt
  *  responses:
  *      UnauthorizedError:
  *          description: Access token is missing or invalid

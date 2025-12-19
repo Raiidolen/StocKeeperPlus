@@ -1,10 +1,3 @@
--- ===============================
--- Script de création de la base StocKeeper+
--- Basé sur le schéma UML fourni
--- Relançable sans erreur
--- ===============================
-
--- Suppression des tables existantes (ordre inverse des dépendances)
 DROP TABLE IF EXISTS FoodStore CASCADE;
 DROP TABLE IF EXISTS IngredientAmount CASCADE;
 DROP TABLE IF EXISTS Recipe CASCADE;
@@ -13,21 +6,13 @@ DROP TABLE IF EXISTS Store CASCADE;
 DROP TABLE IF EXISTS "User" CASCADE;
 DROP TABLE IF EXISTS FoodUser CASCADE;
 
--- ===============================
--- Création des tables
--- ===============================
-
--- TABLE: User
--- Contient les informations des utilisateurs
 CREATE TABLE "User" (
-    mail VARCHAR(255) PRIMARY KEY,     -- Email unique
+    mail VARCHAR(255) PRIMARY KEY,
     username VARCHAR(100) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     isadmin BOOLEAN NOT NULL
 );
 
--- TABLE: Store
--- Contient les magasins disponibles
 CREATE TABLE Store (
     id SERIAL PRIMARY KEY,
     label VARCHAR(255) NOT NULL,
@@ -35,8 +20,6 @@ CREATE TABLE Store (
     latitude DECIMAL(9,6) NOT NULL
 );
 
--- TABLE: Food
--- Contient les aliments
 CREATE TABLE Food (
     id SERIAL PRIMARY KEY,
     label VARCHAR(255) NOT NULL,
@@ -47,8 +30,6 @@ CREATE TABLE Food (
     imagepath VARCHAR(200)
 );
 
--- TABLE: Recipe
--- Contient les recettes
 CREATE TABLE Recipe (
     id SERIAL PRIMARY KEY,
     label VARCHAR(255) NOT NULL,
@@ -58,8 +39,6 @@ CREATE TABLE Recipe (
     timeToMake INTEGER
 );
 
--- TABLE: IngredientAmount
--- Association entre Recipe et Food avec la quantité requise
 CREATE TABLE IngredientAmount (
     recipe INTEGER NOT NULL,
     food INTEGER NOT NULL,
@@ -75,8 +54,6 @@ CREATE TABLE IngredientAmount (
         ON DELETE CASCADE
 );
 
--- TABLE: FoodStore
--- Association entre Food et Store avec quantité disponible et prix
 CREATE TABLE FoodStore (
     food INTEGER NOT NULL,
     store INTEGER NOT NULL,
@@ -93,8 +70,6 @@ CREATE TABLE FoodStore (
         ON DELETE CASCADE
 );
 
--- TABLE: FoodUser
--- Association entre Food et User pour gérer stock personnel
 CREATE TABLE FoodUser (
     food INTEGER NOT NULL,
     user_mail VARCHAR(255) NOT NULL,

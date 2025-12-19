@@ -2,6 +2,8 @@
  * @swagger
  * /food:
  *  post:
+ *      security:
+ *          - cookieAuth: []
  *      tags:
  *          - Food
  *      requestBody:
@@ -62,6 +64,8 @@
  * @swagger
  * /food:
  *  patch:
+ *      security:
+ *          - cookieAuth: []
  *      tags:
  *          - Food
  *      requestBody:
@@ -97,6 +101,8 @@
  *                                          field:
  *                                              type: string
  *                                              example: "id"
+ *          401:
+ *              $ref: '#/components/responses/UnauthorizedError'
  *          404:
  *              description: validation errors
  *              content:
@@ -111,8 +117,6 @@
  *                                  type: array
  *                                  items:
  *                                      type: object
- *          401:
- *              $ref: '#/components/responses/UnauthorizedError'
  *          500:
  *              description: Error server
  *              content:
@@ -132,13 +136,15 @@
  * @swagger
  * /food/get/{id}:
  *  get:
+ *      security:
+ *          - cookieAuth: []
  *      tags:
  *          - Food
  *      parameters:
  *         - in: path
  *           name: id
  *           schema:
- *             $ref: '#/components/schemas/FoodIDSchema'
+ *             type: integer
  *           required: true
  *           description: Numeric ID of the food to get
  *      responses:
@@ -206,13 +212,15 @@
  * @swagger
  * /food/barcode/{barcode}:
  *  get:
+ *      security:
+ *          - cookieAuth: []
  *      tags:
  *          - Food
  *      parameters:
  *         - in: path
  *           name: barcode
  *           schema:
- *             $ref: '#/components/schemas/FoodBarcodeSchema'
+ *             type: string
  *           required: true
  *           description: Barcode of the food
  *      responses:
@@ -280,6 +288,8 @@
  * @swagger
  * /food/all:
  *  get:
+ *      security:
+ *          - cookieAuth: []
  *      tags:
  *          - Food
  *      responses:
@@ -311,6 +321,8 @@
  * @swagger
  * /food:
  *  delete:
+ *      security:
+ *          - cookieAuth: []
  *      tags:
  *          - Food
  *      requestBody:
@@ -346,6 +358,8 @@
  *                                          field:
  *                                              type: string
  *                                              example: "id"
+ *          401:
+ *              $ref: '#/components/responses/UnauthorizedError'
  *          404:
  *              description: validation errors
  *              content:
