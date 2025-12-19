@@ -1,13 +1,30 @@
-export function errorHandeling(res, error, genericMessage) {
-    // Tentative de récupérer les messages détaillés
-    const validationErrors = error.messages || error.errors || [];
-    
-    // Le message générique utilisé par authFetch
-    const message = genericMessage || "Opération échouée :";
+import { Prisma } from '../../generated/prisma/client.js';
 
-    // Envoyer la réponse 400 avec le format standardisé
-    return res.status(400).json({ 
+export function errorHandeling(res, error, genericMessage) {
+    
+    let message = genericMessage || "Une erreur est survenue";
+    let details = error.messages || error.errors || [];
+
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+        switch (error.code) {
+            case 'P2002':
+                message = "Cette liaison existe déjà.";
+                break;
+            case 'P2003':
+                message = "Erreur de relation : un élément lié n'existe pas.";
+                break;
+            case 'P2025':
+                message = "L'élément demandé n'a pas été trouvé.";
+                statusCode = 404;
+                break;
+            default:
+                message = `Erreur base de données (${error.code})`;
+        }
+        
+    }
+
+    return res.status(500).json({ 
         message: message,
-        details: validationErrors 
+        details: details 
     });
 }

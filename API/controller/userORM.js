@@ -50,10 +50,6 @@
  *  responses:
  *      addUser:
  *          description: user created
- *          content:
- *              application/json:
- *                  schema:
- *                      $ref: '#/components/schemas/userIDSchema'
  */
 /**
  * @swagger
@@ -71,6 +67,7 @@
  */
 
 import prisma from '../database/databaseORM.js';
+import { errorHandeling } from '../utils/errorHandeling.js';
 import { hashing } from '../utils/hashUtils.js';
 
 export const userPublicFields = {
@@ -93,8 +90,7 @@ export const getUser = async (req, res)=> {
             res.sendStatus(404);
         }
     } catch (err) {
-        console.error(err);
-        res.sendStatus(500);
+        return errorHandeling(res, err);
     }
 };
 
@@ -112,8 +108,7 @@ export const getAllUser = async (_req, res)=> {
             res.sendStatus(404);
         }
     } catch (err) {
-        console.error(err);
-        res.sendStatus(500);
+        return errorHandeling(res, err);
     }
 }
 
@@ -121,21 +116,17 @@ export const addUser = async (req, res) => {
     try {
         const {mail, username, password, isadmin} = req.val;
         const hashedPassword = await hashing(password);
-        const {idMail} = await prisma.user.create({
+        await prisma.user.create({
             data: {
                 mail,
                 username,
                 password: hashedPassword,
                 isadmin
-            },
-            select: {
-                mail: true
             }
         });
-        res.status(201).send({mail});
+        res.sendStatus(204);
     } catch (err) {
-        console.error(err);
-        res.sendStatus(500);
+        return errorHandeling(res, err);
     }
 };
 
@@ -158,9 +149,8 @@ export const updateUser = async (req, res) => {
         });
 
         res.sendStatus(204);
-    } catch (e) {
-        console.error(e);
-        res.sendStatus(500);
+    } catch (err) {
+        return errorHandeling(res, err);
     }
 };
 
@@ -173,8 +163,7 @@ export const deleteUser = async (req, res) => {
             }
         });
         res.sendStatus(204);
-    } catch (e) {
-        console.error(e);
-        res.sendStatus(500);
+    } catch (err) {
+        return errorHandeling(res, err);
     }
 };

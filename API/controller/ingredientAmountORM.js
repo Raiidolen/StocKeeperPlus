@@ -1,4 +1,5 @@
 import prisma from '../database/databaseORM.js';
+import { errorHandeling } from '../utils/errorHandeling.js';
 
 export const getIngredientAmount = async (req, res) => {
     try {
@@ -16,9 +17,8 @@ export const getIngredientAmount = async (req, res) => {
             res.sendStatus(404);
         }
     }
-    catch(err){
-        console.error(err);
-        res.sendStatus(500);
+    catch (err) {
+        return errorHandeling(res, err);
     }
 };
 
@@ -39,8 +39,7 @@ export const getAllIngredientAmount = async (_req, res) => {
             res.sendStatus(404);
         }
     } catch (err) {
-        console.error(err);
-        res.sendStatus(500);
+        return errorHandeling(res, err);
     }
 }
 
@@ -54,11 +53,10 @@ export const addIngredientAmount = async (req, res) => {
                 quantity: quantity
             }
         });
-        res.status(201).send({ingredientamount});
+        res.send(ingredientamount);
     }
-    catch(err){
-        console.error(err);
-        res.sendStatus(500);
+    catch (err) {
+        return errorHandeling(res, err);
     }
 }
 
@@ -80,9 +78,8 @@ export const updateIngredientAmount = async (req, res) => {
         });
         res.sendStatus(204);
     }
-    catch(err){
-        console.error(err);
-        res.sendStatus(500);
+    catch (err) {
+        return errorHandeling(res, err);
     }
 }
 
@@ -99,8 +96,7 @@ export const deleteIngredientAmount = async (req, res) => {
         });
         res.sendStatus(204);
     }
-    catch(e){
-        console.error(e);
-        res.sendStatus(500);
+    catch (err) {
+        return errorHandeling(res, err);
     }
 }

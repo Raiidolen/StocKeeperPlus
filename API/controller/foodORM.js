@@ -72,10 +72,6 @@
  *  responses:
  *      addFood:
  *          description: food created
- *          content:
- *              application/json:
- *                  schema:
- *                      $ref: '#/components/schemas/FoodIDSchema'
  */
 /**
  * @swagger
@@ -97,6 +93,7 @@ import fs from 'fs';
 import path from 'path';
 import { v4 as uuidv4 } from 'uuid';
 import fetch from 'node-fetch';
+import { errorHandeling } from '../utils/errorHandeling.js';
 
 export const getFood = async (req, res)=> {
     try {
@@ -111,8 +108,7 @@ export const getFood = async (req, res)=> {
             res.sendStatus(404);
         }
     } catch (err) {
-        console.error(err);
-        res.sendStatus(500);
+        errorHandeling(err, res);
     }
 };
 
@@ -129,8 +125,7 @@ export const getFoodByBarcode = async (req, res)=> {
             res.sendStatus(404);
         }
     } catch (err) {
-        console.error(err);
-        res.sendStatus(500);
+        return errorHandeling(res, err);
     }
 };
 
@@ -147,8 +142,7 @@ export const getAllFood = async (_req, res)=> {
             res.sendStatus(404);
         }
     } catch (err) {
-        console.error(err);
-        res.sendStatus(500);
+        return errorHandeling(res, err);
     }
 }
 
@@ -180,13 +174,13 @@ export const addFood = async (req, res) => {
                         imagepath = `/images/${fileName}`;
                     }
                 }
-            } catch (e) {
-                console.error(e.message);
+            } catch (err) {
+                console.error(err.message);
                 res.sendStatus(500);
             }
         }
 
-        const {id} = await prisma.food.create({
+        await prisma.food.create({
             data: {
                 label,
                 diet,
@@ -194,15 +188,11 @@ export const addFood = async (req, res) => {
                 measuringunit,
                 barcode,
                 imagepath
-            },
-            select: {
-                id: true
             }
         });
-        res.status(201).send({id});
-    } catch (e) {
-        console.error(e);
-        res.sendStatus(500);
+        res.sendStatus(204);
+    } catch (err) {
+        return errorHandeling(res, err);
     }
 };
 
@@ -223,9 +213,8 @@ export const updateFood = async (req, res) => {
             }
         });
         res.sendStatus(204);
-    } catch (e) {
-        console.error(e);
-        res.sendStatus(500);
+    } catch (err) {
+        return errorHandeling(res, err);
     }
 };
 
@@ -261,8 +250,7 @@ export const deleteFood = async (req, res) => {
         });
 
         res.sendStatus(204);
-    } catch (e) {
-        console.error(e);
-        res.sendStatus(500);
+    } catch (err) {
+        return errorHandeling(res, err);
     }
 };

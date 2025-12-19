@@ -1,4 +1,5 @@
 import prisma from '../database/databaseORM.js';
+import { errorHandeling } from '../utils/errorHandeling.js';
 
 export const getRecipe = async (req, res) => {
   try {
@@ -17,12 +18,9 @@ export const getRecipe = async (req, res) => {
 
     if (recipe) {
       return res.send(recipe);
-    } else {
-      return res.sendStatus(404);
-    }
+    } 
   } catch (err) {
-    console.error(err);
-    res.sendStatus(500);
+    return errorHandeling(res, err);
   }
 };
 
@@ -39,9 +37,8 @@ export const getAllRecipe = async (_req, res) => {
       res.sendStatus(404);
     }
   }
-  catch(err) {
-    console.error(err);
-    res.sendStatus(500);
+  catch (err) {
+    return errorHandeling(res, err);
   }
 }
 
@@ -93,8 +90,7 @@ export const addRecipe = async (req, res) => {
 
     res.status(201).json({ id: createdRecipe.id });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Erreur lors de la création de la recette" });
+    return errorHandeling(res, err);
   }
 };
 
@@ -193,10 +189,9 @@ export const updateRecipe = async (req, res) => {
       }
     });
 
-    res.status(200).json({ message: "Recette mise à jour avec succès" });
+    res.sendStatus(204);
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Erreur lors de la mise à jour de la recette" });
+    return errorHandeling(res, err);
   }
 };
 
@@ -207,12 +202,8 @@ export const deleteRecipe = async (req, res) => {
       where: { id },
     });
 
-    res.status(200).json({ message: "Recette supprimée avec succès" });
+    res.sendStatus(204);
   } catch (err) {
-    if (err.code === 'P2025') {
-      return res.status(404).json({ error: "Recette introuvable" });
-    }
-    console.error(err);
-    res.status(500).json({ error: "Erreur lors de la suppression de la recette" });
+    return errorHandeling(res, err);
   }
 };

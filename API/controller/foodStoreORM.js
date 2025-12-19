@@ -1,4 +1,5 @@
 import prisma from '../database/databaseORM.js';
+import { errorHandeling } from '../utils/errorHandeling.js';
 
 export const getFoodStore = async (req, res)=> {
     try {
@@ -16,9 +17,8 @@ export const getFoodStore = async (req, res)=> {
         } else {
             res.sendStatus(404);
         }
-    } catch (e) {
-        console.error(e);
-        res.sendStatus(500);
+    } catch (err) {
+        return errorHandeling(res, err);
     }
 };
 
@@ -38,9 +38,8 @@ export const getAllFoodStores = async (_req, res)=> {
         } else {
             res.sendStatus(404);
         }
-    } catch (e) {
-        console.error(e);
-        res.sendStatus(500);
+    } catch (err) {
+        return errorHandeling(res, err);
     }
 };
 
@@ -56,9 +55,8 @@ export const addFoodStore = async (req, res) => {
             }
         });
         res.status(201).send({foodStore});
-    } catch (e) {
-        console.error(e);
-        res.sendStatus(500).send({ error: e.message });
+    } catch (err) {
+        return errorHandeling(res, err);
     }
 };
 
@@ -80,9 +78,8 @@ export const updateFoodStore= async (req, res) => {
             }
         });
         res.sendStatus(204);
-    } catch (e) {
-        console.error(e);
-        res.sendStatus(500);
+    } catch (err) {
+        return errorHandeling(res, err);
     }
 };
 
@@ -98,8 +95,7 @@ export const deleteFoodStore = async (req, res) => {
             }
         });
         res.sendStatus(204);
-    } catch (e) {
-        console.error(e);
-        res.sendStatus(500);
+    } catch (err) {
+        return errorHandeling(res, err);
     }
 };

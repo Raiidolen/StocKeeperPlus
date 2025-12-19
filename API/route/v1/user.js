@@ -11,12 +11,8 @@
  *                  schema:
  *                      $ref: '#/components/schemas/userToAddSchema'
  *      responses:
- *          201:
+ *          204:
  *              description: user created
- *              content:
- *                  application/json:
- *                      schema:
- *                          $ref: '#/components/schemas/userIDSchema'
  *          400:
  *              description: validation errors
  *              content:
