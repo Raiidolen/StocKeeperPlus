@@ -2,6 +2,8 @@
  * @swagger
  * /user:
  *  post:
+ *      security:
+ *          - cookieAuth: []
  *      tags:
  *          - User
  *      requestBody:
@@ -62,6 +64,8 @@
  * @swagger
  * /user:
  *  patch:
+ *      security:
+ *          - cookieAuth: []
  *      tags:
  *          - User
  *      requestBody:
@@ -97,6 +101,8 @@
  *                                          field:
  *                                              type: string
  *                                              example: "mail"
+ *          401:
+ *              $ref: '#/components/responses/UnauthorizedError'
  *          404:
  *              description: validation errors
  *              content:
@@ -111,8 +117,6 @@
  *                                  type: array
  *                                  items:
  *                                      type: object
- *          401:
- *              $ref: '#/components/responses/UnauthorizedError'
  *          500:
  *              description: Error server
  *              content:
@@ -132,13 +136,15 @@
  * @swagger
  * /user/get/{mail}:
  *  get:
+ *      security:
+ *          - cookieAuth: []
  *      tags:
  *          - User
  *      parameters:
  *         - in: path
  *           name: mail
  *           schema:
- *             $ref: '#/components/schemas/UserIDSchema'
+ *             type: string
  *           required: true
  *           description: String ID of the user to get
  *      responses:
@@ -216,6 +222,8 @@
  * @swagger
  * /user/all:
  *  get:
+ *      security:
+ *          - cookieAuth: []
  *      tags:
  *          - User
  *      responses:
@@ -257,6 +265,8 @@
  * @swagger
  * /user:
  *  delete:
+ *      security:
+ *          - cookieAuth: []
  *      tags:
  *          - User
  *      requestBody:
@@ -292,6 +302,8 @@
  *                                          field:
  *                                              type: string
  *                                              example: "mail"
+ *          401:
+ *              $ref: '#/components/responses/UnauthorizedError'
  *          404:
  *              description: validation errors
  *              content:

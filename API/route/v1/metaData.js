@@ -19,7 +19,6 @@ router.get("/metadata", async (req, res) => {
     for (const model of allowedModels) {
       const tableName = model === "User" ? "User" : model.toLowerCase();
 
-      // Colonnes
       const columns = await prisma.$queryRaw`
         SELECT column_name
         FROM information_schema.columns
@@ -28,7 +27,6 @@ router.get("/metadata", async (req, res) => {
         ORDER BY ordinal_position;
       `;
 
-      // Primary Keys
       const primaryKeys = await prisma.$queryRaw`
         SELECT kcu.column_name
         FROM information_schema.table_constraints tc
@@ -40,7 +38,6 @@ router.get("/metadata", async (req, res) => {
         ORDER BY kcu.ordinal_position;
       `;
 
-      // Foreign Keys
       const foreignKeys = await prisma.$queryRaw`
         SELECT
           kcu.column_name AS fk_column,
