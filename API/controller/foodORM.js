@@ -72,6 +72,13 @@
  *  responses:
  *      addFood:
  *          description: food created
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                              properties:
+ *                                  id:
+ *                                      type: integer                          
  */
 /**
  * @swagger

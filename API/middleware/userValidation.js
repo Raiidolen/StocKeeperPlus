@@ -18,9 +18,25 @@ export const userValidatorMiddleware = {
             return errorHandeling(res, e);
         }
     },
+    userToAddNoAdmin: async(req, res, next) => {
+        try {
+            req.val  = await userValidator.userToAddNoAdmin.validate(req.body);
+            next();
+        } catch (e) {
+            return errorHandeling(res, e);
+        }
+    },
     userToUpdate: async(req, res, next) => {
         try {
             req.val  = await userValidator.userToUpdate.validate(req.body);
+            next();
+        } catch (e) {
+            return errorHandeling(res, e);
+        }
+    },
+    userToUpdateMe: async(req, res, next) => {
+        try {
+            req.val  = await userValidator.userToUpdateMe.validate(req.body);
             next();
         } catch (e) {
             return errorHandeling(res, e);
