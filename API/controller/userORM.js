@@ -121,7 +121,7 @@ export const addUser = async (req, res) => {
                 isadmin
             }
         });
-        return errorHandeling(res, { code: 'P2025' });
+        res.status(201).send({mail});
     } catch (err) {
         return errorHandeling(res, err);
     }
