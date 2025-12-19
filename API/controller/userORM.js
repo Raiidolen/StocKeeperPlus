@@ -91,7 +91,7 @@ export const getUser = async (req, res)=> {
         if(user){
             res.send(user);
         } else {
-            res.sendStatus(404);
+            return errorHandeling(res, { code: 'P2025' });
         }
     } catch (err) {
         return errorHandeling(res, err);
@@ -106,11 +106,8 @@ export const getAllUser = async (_req, res)=> {
             },
             select: userPublicFields
         });
-        if(users){
-            res.send(users);
-        } else {
-            res.sendStatus(404);
-        }
+
+        res.send(users);
     } catch (err) {
         return errorHandeling(res, err);
     }
@@ -131,7 +128,7 @@ export const addUser = async (req, res) => {
                 mail: true
             }
         });
-        res.sendStatus(204);
+        return errorHandeling(res, { code: 'P2025' });
     } catch (err) {
         return errorHandeling(res, err);
     }

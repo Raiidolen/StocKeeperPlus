@@ -31,11 +31,8 @@ export const getAllRecipe = async (_req, res) => {
         id: 'asc',
       }
     });
-    if(recipes){
-      res.send(recipes);
-    } else {
-      res.sendStatus(404);
-    }
+
+    res.send(recipes);
   }
   catch (err) {
     return errorHandeling(res, err);

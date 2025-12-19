@@ -20,7 +20,7 @@ export const getFoodUser = async (req, res)=> {
                 expirationdate: formatDate(foodUser.expirationdate)
             });
         } else {
-            res.sendStatus(404);
+            return errorHandeling(res, { code: 'P2025' });
         }
     } catch (err) {
         return errorHandeling(res, err);
@@ -38,16 +38,14 @@ export const getAllFoodUser = async (_req, res)=> {
             }
             ]
         });
-        if(foodsUser){
-            res.send(
-                foodsUser.map(f => ({
-                    ...f,
-                    expirationdate: formatDate(f.expirationdate)
-                }))
-            );
-        } else {
-            res.sendStatus(404);
-        }
+
+        res.send(
+            foodsUser.map(f => ({
+                ...f,
+                expirationdate: formatDate(f.expirationdate)
+            }))
+        );
+
     } catch (err) {
         return errorHandeling(res, err);
     }

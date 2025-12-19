@@ -109,7 +109,7 @@ export const getFood = async (req, res)=> {
         if(food){
             res.send(food);
         } else {
-            res.sendStatus(404);
+            return errorHandeling(res, { code: 'P2025' });
         }
     } catch (err) {
         errorHandeling(err, res);
@@ -126,7 +126,7 @@ export const getFoodByBarcode = async (req, res)=> {
         if(food){
             res.send(food);
         } else {
-            res.sendStatus(404);
+           return errorHandeling(res, { code: 'P2025' });
         }
     } catch (err) {
         return errorHandeling(res, err);
@@ -140,11 +140,7 @@ export const getAllFood = async (_req, res)=> {
                 id: 'asc',
             }
         });
-        if(foods){
-            res.send(foods);
-        } else {
-            res.sendStatus(404);
-        }
+        res.send(foods);
     } catch (err) {
         return errorHandeling(res, err);
     }
@@ -179,8 +175,7 @@ export const addFood = async (req, res) => {
                     }
                 }
             } catch (e) {
-                console.error(e.message);
-                res.sendStatus(500);
+                return errorHandeling(res, err);
             }
         }
 
@@ -235,7 +230,7 @@ export const deleteFood = async (req, res) => {
         });
 
         if (!food) {
-            return res.sendStatus(404);
+            return errorHandeling(res, { code: 'P2025' });
         }
 
         if (
