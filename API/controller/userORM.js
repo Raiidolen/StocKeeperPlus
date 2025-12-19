@@ -29,7 +29,40 @@
  *          content:
  *              application/json:
  *                  schema:
- *                      $ref: '#/components/schemas/User'
+ *                      type: object
+ *                      properties:
+ *                          mail:
+ *                              type: string
+ *                              format: email
+ *                              example: username@gmail.com
+ *                          username:
+ *                              type: string
+ *                              example: username
+ *                          isadmin:
+ *                              type: boolean
+ *                              example: false
+ */
+/**
+ * @swagger
+ * components:
+ *  responses:
+ *      getMyUser:
+ *          description: the information of the user connected
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      type: object
+ *                      properties:
+ *                          mail:
+ *                              type: string
+ *                              format: email
+ *                              example: username@gmail.com
+ *                          username:
+ *                              type: string
+ *                              example: username
+ *                          isadmin:
+ *                              type: boolean
+ *                              example: false
  */
 /**
  * @swagger
@@ -42,7 +75,18 @@
  *                  schema:
  *                      type: array
  *                      items:
- *                          $ref: '#/components/schemas/User'
+ *                          type: object
+ *                          properties:
+ *                              mail:
+ *                                  type: string
+ *                                  format: email
+ *                                  example: username@gmail.com
+ *                              username:
+ *                                  type: string
+ *                                  example: username
+ *                              isadmin:
+ *                                  type: boolean
+ *                                  example: false
  */
 /**
  * @swagger
@@ -50,13 +94,27 @@
  *  responses:
  *      addUser:
  *          description: user created
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                              properties:
- *                                  idMail:
- *                                      type: string
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      type: object
+ *                      properties:
+ *                          idMail:
+ *                              type: string
+ */
+/**
+ * @swagger
+ * components:
+ *  responses:
+ *      addUserNoAdmin:
+ *          description: user created (not an admin)
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      type: object
+ *                      properties:
+ *                          idMail:
+ *                              type: string
  */
 /**
  * @swagger
@@ -69,8 +127,22 @@
  * @swagger
  * components:
  *  responses:
+ *      updateMyUser:
+ *          description: user connected updated
+ */
+/**
+ * @swagger
+ * components:
+ *  responses:
  *      deleteUser:
  *          description: user deleted
+ */
+/**
+ * @swagger
+ * components:
+ *  responses:
+ *      deleteMyUser:
+ *          description: user connected deleted
  */
 
 import prisma from '../database/databaseORM.js';
@@ -109,13 +181,8 @@ export const getMyUser = async (req, res) => {
             where: {
                 mail: userMail
             },
-            select: {
-                mail: true,
-                username: true,
-                isadmin: true
-            }
+            select: userPublicFields
         });
-        console.log("helo");
 
         if (!user) {
             return res.status(404).send({ message: "Utilisateur non trouvé" });
@@ -181,7 +248,7 @@ export const addUserNoAdmin = async (req, res) => {
             }
         });
 
-        res.status(201).send({ idMail });
+        res.status(201).send(idMail);
     } catch (err) {
         return errorHandeling(res, err);
     }
