@@ -69,8 +69,8 @@ docker compose up --build
 
 Une fois que les logs se stabilisent :
 
-* **Frontend (Site Web)** : Accessible à l'adresse [http://localhost:5173](https://www.google.com/search?q=http://localhost:5173)
-* **Backend (API)** : Accessible à l'adresse [http://localhost:3001](https://www.google.com/search?q=http://localhost:3001)
+* **Frontend (Site Web)** : Accessible à l'adresse [http://localhost:5173]
+* **Backend (API)** : Accessible à l'adresse [http://localhost:3001]
 * **Base de données** : Initialisée automatiquement sur le port `5432`.
 
 ## Connexion
