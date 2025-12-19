@@ -15,7 +15,7 @@ export const getFoodStore = async (req, res)=> {
         if(foodStore){
             res.send(foodStore);
         } else {
-            res.sendStatus(404);
+            return errorHandeling(res, { code: 'P2025' });
         }
     } catch (err) {
         return errorHandeling(res, err);
@@ -33,11 +33,7 @@ export const getAllFoodStores = async (_req, res)=> {
             }
             ]
         });
-        if(foodStores){
-            res.send(foodStores);
-        } else {
-            res.sendStatus(404);
-        }
+        res.send(foodStores);
     } catch (err) {
         return errorHandeling(res, err);
     }

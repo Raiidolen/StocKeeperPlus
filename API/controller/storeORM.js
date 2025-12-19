@@ -23,11 +23,7 @@ export const getStore = async (req, res)=> {
 export const getAllStores = async (_req, res)=> {
     try {
         const stores = await prisma.store.findMany();
-        if(stores){
-            res.send(stores);
-        }else {
-            res.sendStatus(404);
-        }
+        res.send(stores);
     } catch (err) {
         return errorHandeling(res, err);
     }
