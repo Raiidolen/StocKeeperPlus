@@ -2,7 +2,7 @@
  * @swagger
  * components:
  *  schemas:
- *      userIDSchema:
+ *      UserIDSchema:
  *          type: object
  *          properties:
  *              mail:
@@ -14,7 +14,7 @@
  * @swagger
  * components:
  *  schemas:
- *      userToAddSchema:
+ *      UserToAddSchema:
  *          type: object
  *          properties:
  *              mail:
@@ -37,7 +37,7 @@
  * @swagger
  * components:
  *  schemas:
- *      userToUpdateSchema:
+ *      UserToUpdateSchema:
  *          type: object
  *          properties:
  *              mail:
