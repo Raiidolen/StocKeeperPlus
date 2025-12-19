@@ -64,7 +64,7 @@ export const addStore = async (req, res) => {
             },
             select: { id: true }
         });
-        res.status(201).send({ id });
+        res.status(201).send(id);
     } catch (err) {
         return errorHandeling(res, err);
     }

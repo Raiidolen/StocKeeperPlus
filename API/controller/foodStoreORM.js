@@ -48,6 +48,10 @@ export const addFoodStore = async (req, res) => {
                 store,
                 quantity,
                 price
+            },
+            select: {
+                food: true,
+                store: true
             }
         });
         res.status(201).send({foodStore});
