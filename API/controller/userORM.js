@@ -50,6 +50,13 @@
  *  responses:
  *      addUser:
  *          description: user created
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                              properties:
+ *                                  idMail:
+ *                                      type: string
  */
 /**
  * @swagger
