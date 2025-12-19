@@ -45,6 +45,8 @@
  *                                              example: "barcode"
  *          401:
  *              $ref: '#/components/responses/UnauthorizedError'
+ *          403:
+ *              $ref: '#/components/responses/ForbiddenError'
  *          500:
  *              description: Error server
  *              content:
@@ -103,6 +105,8 @@
  *                                              example: "id"
  *          401:
  *              $ref: '#/components/responses/UnauthorizedError'
+ *          403:
+ *              $ref: '#/components/responses/ForbiddenError'
  *          404:
  *              description: validation errors
  *              content:
@@ -178,6 +182,8 @@
  *                                          field:
  *                                              type: string
  *                                              example: "id"
+ *          401:
+ *              $ref: '#/components/responses/UnauthorizedError'
  *          404:
  *              description: validation errors
  *              content:
@@ -220,7 +226,7 @@
  *         - in: path
  *           name: barcode
  *           schema:
- *             type: string
+ *             $ref: '#/components/schemas/FoodBarcodeSchema'
  *           required: true
  *           description: Barcode of the food
  *      responses:
@@ -254,6 +260,8 @@
  *                                          field:
  *                                              type: string
  *                                              example: "barcode"
+ *          401:
+ *              $ref: '#/components/responses/UnauthorizedError'
  *          404:
  *              description: validation errors
  *              content:
@@ -301,6 +309,26 @@
  *                          type: array
  *                          items:
  *                              $ref: '#/components/schemas/Food'
+ *          
+ *          401:
+ *              $ref: '#/components/responses/UnauthorizedError'
+ *          400:
+ *              description: validation errors
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                              message:
+ *                                  type: string
+ *                                  example: "Une erreur est survenue"
+ *                              details:
+ *                                  type: array
+ *                                  items:
+ *                                      type: object
+ *                                      properties:
+ *                                          message:
+ *                                              type: string
  *          500:
  *              description: Error server
  *              content:
@@ -360,6 +388,8 @@
  *                                              example: "id"
  *          401:
  *              $ref: '#/components/responses/UnauthorizedError'
+ *          403:
+ *              $ref: '#/components/responses/ForbiddenError'
  *          404:
  *              description: validation errors
  *              content:
@@ -407,11 +437,11 @@ import { checkAdmin } from '../../middleware/identification/checkAdmin.js';
 
 const router = Router();
 
-router.post('/',checkAdmin , PVM.foodToAdd, addFood);
-router.patch('/', PVM.foodToUpdate, updateFood);
+router.post('/', checkAdmin, PVM.foodToAdd, addFood);
+router.patch('/', checkAdmin, PVM.foodToUpdate, updateFood);
 router.get('/get/:id', PVM.searchedFood, getFood);
 router.get('/barcode/:barcode', PVM.searchedFoodByBarcode, getFoodByBarcode);
 router.get('/all', getAllFood);
-router.delete('/', PVM.foodToDelete, deleteFood);
+router.delete('/', checkAdmin, PVM.foodToDelete, deleteFood);
 
 export default router;
