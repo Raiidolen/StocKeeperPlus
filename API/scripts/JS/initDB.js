@@ -2,12 +2,12 @@ import {readFileSync} from "node:fs";
 import {pool} from "../../database/database.js";
 
 const initDB = readFileSync(
-    './API/scripts/SQL/initDB.sql',
+    './API/scripts/SQL/01_initDB.sql',
     {encoding: "utf-8"}
 );
 
 const fillingDB = readFileSync(
-    './API/scripts/SQL/fillingDB.sql',
+    './API/scripts/SQL/02_fillingDB.sql',
     {encoding: "utf-8"}
 );
 
