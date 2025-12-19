@@ -113,15 +113,18 @@ export const addUser = async (req, res) => {
     try {
         const {mail, username, password, isadmin} = req.val;
         const hashedPassword = await hashing(password);
-        await prisma.user.create({
+        const {idMail} = await prisma.user.create({
             data: {
                 mail,
                 username,
                 password: hashedPassword,
                 isadmin
+            },
+            select: {
+                mail: true
             }
         });
-        return errorHandeling(res, { code: 'P2025' });
+        res.status(201).send({idMail});
     } catch (err) {
         return errorHandeling(res, err);
     }

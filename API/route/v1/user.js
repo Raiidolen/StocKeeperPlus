@@ -9,10 +9,14 @@
  *          content:
  *              application/json:
  *                  schema:
- *                      $ref: '#/components/schemas/userToAddSchema'
+ *                      $ref: '#/components/schemas/UserToAddSchema'
  *      responses:
- *          204:
+ *          201:
  *              description: user created
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          $ref: '#/components/schemas/UserIDSchema'
  *          400:
  *              description: validation errors
  *              content:
@@ -22,51 +26,7 @@
  *                          properties:
  *                              message:
  *                                  type: string
- *                                  example: "Opération échouée :"
- *                              details:
- *                                  type: array
- *                                  items:
- *                                      type: object
- *                                      properties:
- *                                          message:
- *                                              type: string
- *                                              example: "The username field must be defined"
- *                                          rule:
- *                                              type: string
- *                                              example: "required"
- *                                          field:
- *                                              type: string
- *                                              example: "username"
- *          401:
- *              $ref: '#/components/responses/UnauthorizedError'
- *          500:
- *              description: Error server
- */
-/**
- * @swagger
- * /user:
- *  patch:
- *      tags:
- *          - User
- *      requestBody:
- *          required: true
- *          content:
- *              application/json:
- *                  schema:
- *                      $ref: '#/components/schemas/userToUpdateSchema'
- *      responses:
- *          204:
- *              description: user updated
- *          400:
- *              description: validation errors
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          properties:
- *                              message:
- *                                  type: string
- *                                  example: "Opération échouée :"
+ *                                  example: "Une erreur est survenue"
  *                              details:
  *                                  type: array
  *                                  items:
@@ -85,6 +45,88 @@
  *              $ref: '#/components/responses/UnauthorizedError'
  *          500:
  *              description: Error server
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                              message:
+ *                                  type: string
+ *                                  example: "Une erreur est survenue"
+ *                              details:
+ *                                  type: array
+ *                                  items:
+ *                                      type: object
+ */
+/**
+ * @swagger
+ * /user:
+ *  patch:
+ *      tags:
+ *          - User
+ *      requestBody:
+ *          required: true
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/UserToUpdateSchema'
+ *      responses:
+ *          204:
+ *              description: user updated
+ *          400:
+ *              description: validation errors
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                              message:
+ *                                  type: string
+ *                                  example: "Une erreur est survenue"
+ *                              details:
+ *                                  type: array
+ *                                  items:
+ *                                      type: object
+ *                                      properties:
+ *                                          message:
+ *                                              type: string
+ *                                              example: "The mail field must be defined"
+ *                                          rule:
+ *                                              type: string
+ *                                              example: "required"
+ *                                          field:
+ *                                              type: string
+ *                                              example: "mail"
+ *          404:
+ *              description: validation errors
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                              message:
+ *                                  type: string
+ *                                  example: "L'élément demandé n'a pas été trouvé."
+ *                              details:
+ *                                  type: array
+ *                                  items:
+ *                                      type: object
+ *          401:
+ *              $ref: '#/components/responses/UnauthorizedError'
+ *          500:
+ *              description: Error server
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                              message:
+ *                                  type: string
+ *                                  example: "Une erreur est survenue"
+ *                              details:
+ *                                  type: array
+ *                                  items:
+ *                                      type: object
  */
 /**
  * @swagger
@@ -96,7 +138,7 @@
  *         - in: path
  *           name: mail
  *           schema:
- *             $ref: '#/components/schemas/userIDSchema'
+ *             $ref: '#/components/schemas/UserIDSchema'
  *           required: true
  *           description: String ID of the user to get
  *      responses:
@@ -126,7 +168,7 @@
  *                          properties:
  *                              message:
  *                                  type: string
- *                                  example: "Opération échouée :"
+ *                                  example: "Une erreur est survenue"
  *                              details:
  *                                  type: array
  *                                  items:
@@ -134,7 +176,7 @@
  *                                      properties:
  *                                          message:
  *                                              type: string
- *                                              example: "The mail field must be defined"
+ *                                              example: "The mail field must be a valid email address"
  *                                          rule:
  *                                              type: string
  *                                              example: "email"
@@ -142,9 +184,33 @@
  *                                              type: string
  *                                              example: "mail"
  *          404:
- *              description: user not found
+ *              description: validation errors
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                              message:
+ *                                  type: string
+ *                                  example: "L'élément demandé n'a pas été trouvé."
+ *                              details:
+ *                                  type: array
+ *                                  items:
+ *                                      type: object
  *          500:
  *              description: Error server
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                              message:
+ *                                  type: string
+ *                                  example: "Une erreur est survenue"
+ *                              details:
+ *                                  type: array
+ *                                  items:
+ *                                      type: object
  */
 /**
  * @swagger
@@ -174,6 +240,18 @@
  *                                      example: false
  *          500:
  *              description: Error server
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                              message:
+ *                                  type: string
+ *                                  example: "Une erreur est survenue"
+ *                              details:
+ *                                  type: array
+ *                                  items:
+ *                                      type: object
  */
 /**
  * @swagger
@@ -186,7 +264,7 @@
  *          content:
  *              application/json:
  *                  schema:
- *                      $ref: '#/components/schemas/userIDSchema'
+ *                      $ref: '#/components/schemas/UserIDSchema'
  *      responses:
  *          204:
  *              description: user deleted
@@ -199,7 +277,7 @@
  *                          properties:
  *                              message:
  *                                  type: string
- *                                  example: "Opération échouée :"
+ *                                  example: "Une erreur est survenue"
  *                              details:
  *                                  type: array
  *                                  items:
@@ -207,7 +285,7 @@
  *                                      properties:
  *                                          message:
  *                                              type: string
- *                                              example: "The mail field must be defined"
+ *                                              example: "The mail field must be a valid email address"
  *                                          rule:
  *                                              type: string
  *                                              example: "required"
@@ -215,9 +293,33 @@
  *                                              type: string
  *                                              example: "mail"
  *          404:
- *              description: user not found
+ *              description: validation errors
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                              message:
+ *                                  type: string
+ *                                  example: "L'élément demandé n'a pas été trouvé."
+ *                              details:
+ *                                  type: array
+ *                                  items:
+ *                                      type: object
  *          500:
  *              description: Error server
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                              message:
+ *                                  type: string
+ *                                  example: "Une erreur est survenue"
+ *                              details:
+ *                                  type: array
+ *                                  items:
+ *                                      type: object
  */
 
 import Router from 'express';

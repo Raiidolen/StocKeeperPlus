@@ -11,8 +11,12 @@
  *                  schema:
  *                      $ref: '#/components/schemas/FoodToAddSchema'
  *      responses:
- *          204:
+ *          201:
  *              description: food created
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          $ref: '#/components/schemas/FoodIDSchema'
  *          400:
  *              description: validation errors
  *              content:
@@ -22,7 +26,7 @@
  *                          properties:
  *                              message:
  *                                  type: string
- *                                  example: "Opération échouée :"
+ *                                  example: "Une erreur est survenue"
  *                              details:
  *                                  type: array
  *                                  items:
@@ -41,8 +45,19 @@
  *              $ref: '#/components/responses/UnauthorizedError'
  *          500:
  *              description: Error server
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                              message:
+ *                                  type: string
+ *                                  example: "Une erreur est survenue"
+ *                              details:
+ *                                  type: array
+ *                                  items:
+ *                                      type: object
  */
-
 /**
  * @swagger
  * /food:
@@ -67,7 +82,7 @@
  *                          properties:
  *                              message:
  *                                  type: string
- *                                  example: "Opération échouée :"
+ *                                  example: "Une erreur est survenue"
  *                              details:
  *                                  type: array
  *                                  items:
@@ -82,12 +97,37 @@
  *                                          field:
  *                                              type: string
  *                                              example: "id"
+ *          404:
+ *              description: validation errors
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                              message:
+ *                                  type: string
+ *                                  example: "L'élément demandé n'a pas été trouvé."
+ *                              details:
+ *                                  type: array
+ *                                  items:
+ *                                      type: object
  *          401:
  *              $ref: '#/components/responses/UnauthorizedError'
  *          500:
  *              description: Error server
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                              message:
+ *                                  type: string
+ *                                  example: "Une erreur est survenue"
+ *                              details:
+ *                                  type: array
+ *                                  items:
+ *                                      type: object
  */
-
 /**
  * @swagger
  * /food/get/{id}:
@@ -117,7 +157,7 @@
  *                          properties:
  *                              message:
  *                                  type: string
- *                                  example: "Opération échouée :"
+ *                                  example: "Une erreur est survenue"
  *                              details:
  *                                  type: array
  *                                  items:
@@ -125,7 +165,7 @@
  *                                      properties:
  *                                          message:
  *                                              type: string
- *                                              example: "The id field must be defined"
+ *                                              example: "The id field must be a number"
  *                                          rule:
  *                                              type: string
  *                                              example: "number"
@@ -133,9 +173,33 @@
  *                                              type: string
  *                                              example: "id"
  *          404:
- *              description: food not found
+ *              description: validation errors
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                              message:
+ *                                  type: string
+ *                                  example: "L'élément demandé n'a pas été trouvé."
+ *                              details:
+ *                                  type: array
+ *                                  items:
+ *                                      type: object
  *          500:
  *              description: Error server
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                              message:
+ *                                  type: string
+ *                                  example: "Une erreur est survenue"
+ *                              details:
+ *                                  type: array
+ *                                  items:
+ *                                      type: object
  */
 
 /**
@@ -167,7 +231,7 @@
  *                          properties:
  *                              message:
  *                                  type: string
- *                                  example: "Opération échouée :"
+ *                                  example: "Une erreur est survenue"
  *                              details:
  *                                  type: array
  *                                  items:
@@ -183,9 +247,33 @@
  *                                              type: string
  *                                              example: "barcode"
  *          404:
- *              description: food not found
+ *              description: validation errors
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                              message:
+ *                                  type: string
+ *                                  example: "L'élément demandé n'a pas été trouvé."
+ *                              details:
+ *                                  type: array
+ *                                  items:
+ *                                      type: object
  *          500:
  *              description: Error server
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                              message:
+ *                                  type: string
+ *                                  example: "Une erreur est survenue"
+ *                              details:
+ *                                  type: array
+ *                                  items:
+ *                                      type: object
  */
 
 /**
@@ -205,6 +293,18 @@
  *                              $ref: '#/components/schemas/Food'
  *          500:
  *              description: Error server
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                              message:
+ *                                  type: string
+ *                                  example: "Une erreur est survenue"
+ *                              details:
+ *                                  type: array
+ *                                  items:
+ *                                      type: object
  */
 
 /**
@@ -231,7 +331,7 @@
  *                          properties:
  *                              message:
  *                                  type: string
- *                                  example: "Opération échouée :"
+ *                                  example: "Une erreur est survenue"
  *                              details:
  *                                  type: array
  *                                  items:
@@ -247,9 +347,33 @@
  *                                              type: string
  *                                              example: "id"
  *          404:
- *              description: food not found
+ *              description: validation errors
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                              message:
+ *                                  type: string
+ *                                  example: "L'élément demandé n'a pas été trouvé."
+ *                              details:
+ *                                  type: array
+ *                                  items:
+ *                                      type: object
  *          500:
  *              description: Error server
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                              message:
+ *                                  type: string
+ *                                  example: "Une erreur est survenue"
+ *                              details:
+ *                                  type: array
+ *                                  items:
+ *                                      type: object
  */
 
 
