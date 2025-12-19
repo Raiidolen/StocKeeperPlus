@@ -103,6 +103,8 @@
  *                                      properties:
  *                                          message:
  *                                              type: string
+ *          401:
+ *              $ref: '#/components/responses/UnauthorizedError'
  *          404:
  *              description: validation errors
  *              content:
@@ -519,6 +521,23 @@
  *                                  isadmin:
  *                                      type: boolean
  *                                      example: false
+ *          400:
+ *              description: validation errors
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                              message:
+ *                                  type: string
+ *                                  example: "Une erreur est survenue"
+ *                              details:
+ *                                  type: array
+ *                                  items:
+ *                                      type: object
+ *                                      properties:
+ *                                          message:
+ *                                              type: string
  *          401:
  *              $ref: '#/components/responses/UnauthorizedError'
  *          403:

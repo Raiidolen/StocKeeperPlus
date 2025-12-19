@@ -24,7 +24,7 @@
  *              nutriscore:
  *                  type: string
  *                  maxLength: 1
- *                  pattern: "^[A-Ea-e]$"
+ *                  pattern: "^[A-E]$"
  *              measuringunit:
  *                  type: string
  *              barcode:
@@ -90,7 +90,7 @@ const foodBarcodeSchema = vine.object({
 const foodToAddSchema = vine.object({
     label: vine.string().trim(),
     diet: vine.string().trim().optional(),
-    nutriscore: vine.string().regex(new RegExp('^[A-E]+$')).trim().maxLength(1).optional(),
+    nutriscore: vine.string().regex(new RegExp('^[A-E]$')).trim().maxLength(1).optional(),
     measuringunit: vine.string().trim(),
     barcode: vine.string().regex(/^(?:\d{8}|\d{13})$/).trim()
 });
@@ -99,7 +99,7 @@ const foodToUpdateSchema = vine.object({
     id: vine.number(),
     label: vine.string().trim().optional(),
     diet: vine.string().trim().optional(),
-    nutriscore: vine.string().regex(new RegExp('^[A-E]+$')).trim().maxLength(1).optional(),
+    nutriscore: vine.string().regex(new RegExp('^[A-E]$')).trim().maxLength(1).optional(),
     measuringunit: vine.string().trim().optional(),
     barcode: vine.string().regex(/^(?:\d{8}|\d{13})$/).trim().optional(),
     imagepath: vine.string().trim().optional(),
