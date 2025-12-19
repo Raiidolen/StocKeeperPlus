@@ -14,7 +14,7 @@ export const getIngredientAmount = async (req, res) => {
         if(ingredientamount){
             res.send(ingredientamount);
         } else {
-            res.sendStatus(404);
+            return errorHandeling(res, { code: 'P2025' });
         }
     }
     catch (err) {
@@ -33,11 +33,7 @@ export const getAllIngredientAmount = async (_req, res) => {
             }
             ]
         });
-        if(ingredients){
-            res.send(ingredients);
-        } else {
-            res.sendStatus(404);
-        }
+        res.send(ingredients);
     } catch (err) {
         return errorHandeling(res, err);
     }

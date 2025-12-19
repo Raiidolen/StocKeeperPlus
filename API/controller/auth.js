@@ -38,7 +38,7 @@ export const login = async (req, res) => {
       httpOnly: true,
       secure:false,
       sameSite: "Lax",
-      maxAge: 8 * 60 * 60 * 1000 // car le temps est en mili sec
+      maxAge: 30 * 60 * 60 * 1000
     })
 
     res.status(200).json({ message: "Connexion réussie" });
