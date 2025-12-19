@@ -2,7 +2,7 @@
 
 Bienvenue sur la documentation de l'API **StocKeeper+**. Cette application est une API RESTful construite avec Node.js et Express, conçue pour gérer les stocks alimentaires, les listes de courses, les recettes et les informations nutritionnelles des utilisateurs.
 
-## 🚀 Fonctionnalités Principales
+## Fonctionnalités Principales
 
 * **Authentification & Utilisateurs** : Inscription, connexion (JWT), gestion de profil et rôles (Admin/User).
 * **Gestion des Stocks** : Suivi des aliments possédés par l'utilisateur (quantité, date de péremption, lieu de stockage).
@@ -11,7 +11,7 @@ Bienvenue sur la documentation de l'API **StocKeeper+**. Cette application est u
 * **Tâches planifiées** : Scripts automatiques (Cron jobs) pour les notifications.
 * **Documentation** : Génération de documentation via Swagger.
 
-## 🛠 Technologies Utilisées
+## Technologies Utilisées
 
 * **Runtime** : [Node.js](https://nodejs.org/)
 * **Framework** : [Express.js](https://expressjs.com/)
@@ -30,72 +30,78 @@ Bienvenue sur la documentation de l'API **StocKeeper+**. Cette application est u
 
 * **Services Tiers** : [Firebase Admin SDK](https://firebase.google.com/) (Gestion backend Firebase)
 
-## 📋 Prérequis
+## Prérequis
 
-Avant de commencer, assurez-vous d'avoir installé :
+Pour lancer ce projet, vous avez uniquement besoin de :
 
-* [Node.js](https://nodejs.org/) (v18 ou supérieur recommandé)
-* [PostgreSQL](https://www.postgresql.org/) (Serveur local ou distant)
-* Un projet [Firebase](https://firebase.google.com/) configuré.
+* **Docker Desktop** (ou Docker Engine + Docker Compose) installé et lancé sur votre machine.
 
-## ⚙️ Installation
+*Aucune installation de Node.js ou PostgreSQL n'est nécessaire sur votre machine hôte, tout est géré par les conteneurs.*
 
-1. **Cloner le projet**
-```bash
-à préciser
+## Structure du Projet
 
-```
+Le projet est organisé comme suit :
 
-## 🔧 Configuration
+* `api/` : Code source du Backend (Node.js/Express).
+* `website/` : Code source du Frontend (React/Vite).
+* `compose.yml` : Fichier d'orchestration Docker.
+* `serviceAccountKey.json` : Clé de sécurité pour Firebase (nécessaire au démarrage).
+* `.env` : Variables d'environnement pour l'API (dans le dossier api).
 
-### 1. Variables d'environnement (.env)
+## Installation & Démarrage
 
-Créez un fichier `.env` à la racine du projet et configurez les variables suivantes (basées sur `database.js` et `prisma/schema.prisma`) :
+### 1. Préparation
 
-```env
-# Configuration du Serveur
-PORT=3001
+Assurez-vous que le fichier `serviceAccountKey.json` est bien présent à la racine de ce dossier (au même niveau que ce README).
 
-# Configuration PostgreSQL (pour le pool pg dans database.js)
-HOSTDB=localhost
-USERDB=votre_user_postgres
-PASSWORDDB=votre_mot_de_passe
-DBNAME=stockeeper_db
+### 2. Lancement
 
-# Configuration Prisma
-DATABASE_URL="postgresql://votre_user_postgres:votre_mot_de_passe@localhost:5432/stockeeper_db?schema=public"
-
-# Secrets JWT
-JWT_SECRET=votre_secret_tres_long_et_securise
-
-```
-
-
-## 💾 Base de Données
-
-Pour initialiser la base de données avec les tables et les données de départ, utilisez la commande suivante (définie dans `package.json`) :
+Ouvrez un terminal à la racine du dossier StocKeeperPlusProject et exécutez l'unique commande suivante :
 
 ```bash
-npm run initDB
+docker compose up --build
 
 ```
 
-*Cette commande exécute le script `API/scripts/JS/initDB.js`.*
+*La première fois, cette étape peut prendre quelques minutes le temps que Docker télécharge les images et installe les dépendances.*
 
-## ▶️ Démarrage
+### 3. Vérification
 
-### Mode Développement
+Une fois que les logs se stabilisent :
 
-Utilise `nodemon` pour recharger le serveur automatiquement à chaque modification.
+* **Frontend (Site Web)** : Accessible à l'adresse [http://localhost:5173](https://www.google.com/search?q=http://localhost:5173)
+* **Backend (API)** : Accessible à l'adresse [http://localhost:3001](https://www.google.com/search?q=http://localhost:3001)
+* **Base de données** : Initialisée automatiquement sur le port `5432`.
+
+## Connexion
+
+Les identifiants de test (Administrateur et Utilisateur) sont fournis dans le fichier **`login.txt`** joint à ce projet.
+
+## Arrêt du projet
+
+Pour arrêter proprement les conteneurs, faites `Ctrl + C` dans le terminal ou ouvrez un nouveau terminal et lancez :
 
 ```bash
-npm run dev
+docker compose down
 
 ```
 
-Le serveur sera accessible sur `http://localhost:3001`.
+## Dépannage
 
-## 📚 Documentation API
+* **Erreur de base de données / Utilisateur inconnu** :
+Si vous rencontrez des erreurs de connexion à la base de données (ex: rôle "john" n'existe pas ou tables manquantes), c'est souvent dû à un ancien volume Docker persistant.
+**Solution :**
+```bash
+docker compose down
+docker volume rm monprojetstockeeper_db_data  # (ou le nom exact du volume)
+docker compose up --build
+
+```
+
+
+* **Ports déjà utilisés** :
+Assurez-vous qu'aucun autre service n'utilise les ports `3001`, `5173` ou `5432` sur votre machine avant de lancer la commande.
+## Documentation API
 
 L'API utilise Swagger pour la documentation. Pour générer la documentation à jour :
 
@@ -106,23 +112,3 @@ npm run genDoc
 
 Le fichier de spécification sera généré dans `swagger/spec.json`.
 
-## 📂 Structure du Projet
-
-```text
-StocKeeperPlus-Developpement/
-├── API/
-│   ├── controller/      # Logique métier et interactions BDD (ORM maison)
-│   ├── database/        # Connexion PostgreSQL
-│   ├── middleware/      # Validateurs (VineJS) et Auth (JWT/Admin)
-│   ├── route/           # Définitions des routes (v1)
-│   ├── scripts/         # Scripts d'initialisation (JS & SQL)
-│   ├── utils/           # Utilitaires (Cron, Hash, JWT, ErrorHandling)
-│   └── server.js        # Point d'entrée de l'application
-├── generated/           # Artefacts générés par Prisma
-├── prisma/              # Schéma Prisma et migrations
-├── swagger/             # Configuration Swagger
-├── uploads/             # Dossier de stockage des images
-├── package.json         # Dépendances et scripts
-└── README.md            # Ce fichier
-
-```
