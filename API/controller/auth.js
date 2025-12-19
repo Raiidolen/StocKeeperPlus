@@ -32,7 +32,7 @@ export const login = async (req, res) => {
     }
 
     const payload = { email: person.email, role: person.role };
-    const jwt = sign(payload, { expiresIn: "8h" });
+    const jwt = sign(payload, { expiresIn: "30h" });
 
     res.cookie("jwt", jwt, {
       httpOnly: true,
@@ -41,16 +41,15 @@ export const login = async (req, res) => {
       maxAge: 30 * 60 * 60 * 1000
     })
 
-    res.status(200).json({
-                          "message": "Connexion réussie",
-                          "user": {
-                            "email": "admin@example.com",
-                            "isadmin": true
-                          
-                          }
-                        });
+    res.status(200).json({message: "Connexion réussie", payload});
   } catch (err) {
     console.error("Erreur login :", err);
     res.sendStatus(500);
   }
+};
+
+export const logout = (req, res) => {
+    
+    res.cookie('jwt', '', { maxAge: 0, httpOnly: true });
+    res.status(200).json({ message: "Déconnexion réussie" });
 };
