@@ -63,12 +63,13 @@ export const addFoodUser = async (req, res) => {
                 quantity,
                 storagetype,
                 expirationdate: exp
+            },
+            select: {
+                food: true,
+                user_mail: true
             }
         });
-        res.status(201).send({
-            ...foodUser,
-            expirationdate: formatDate(foodUser.expirationdate)
-        });
+        res.status(201).send({foodUser});
     } catch (err) {
         return errorHandeling(res, err);
     }
