@@ -50,10 +50,6 @@
  *  responses:
  *      addUser:
  *          description: user created
- *          content:
- *              application/json:
- *                  schema:
- *                      $ref: '#/components/schemas/userIDSchema'
  */
 /**
  * @swagger
@@ -117,15 +113,12 @@ export const addUser = async (req, res) => {
     try {
         const {mail, username, password, isadmin} = req.val;
         const hashedPassword = await hashing(password);
-        const {idMail} = await prisma.user.create({
+        await prisma.user.create({
             data: {
                 mail,
                 username,
                 password: hashedPassword,
                 isadmin
-            },
-            select: {
-                mail: true
             }
         });
         return errorHandeling(res, { code: 'P2025' });
