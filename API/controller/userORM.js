@@ -130,6 +130,30 @@ export const addUser = async (req, res) => {
     }
 };
 
+export const addUserNoAdmin = async (req, res) => {
+    try {
+        
+        const { mail, username, password } = req.val;
+        const hashedPassword = await hashing(password);
+
+        const idMail = await prisma.user.create({
+            data: {
+                mail,
+                username,
+                password: hashedPassword,
+                isadmin: false // Sécurité : on force la valeur ici
+            },
+            select: {
+                mail: true
+            }
+        });
+
+        res.status(201).send({ idMail });
+    } catch (err) {
+        return errorHandeling(res, err);
+    }
+};
+
 export const updateUser = async (req, res) => {
     try {
         const { mail, username, password, isadmin } = req.val;
