@@ -188,7 +188,7 @@ export const addFood = async (req, res) => {
                 id: true
             }
         });
-        res.status(201).send({id});
+        res.status(201).send(id);
     } catch (err) {
         return errorHandeling(res, err);
     }

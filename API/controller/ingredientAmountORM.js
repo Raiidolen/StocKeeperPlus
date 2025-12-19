@@ -47,9 +47,13 @@ export const addIngredientAmount = async (req, res) => {
                 recipe: recipe,
                 food: food,
                 quantity: quantity
+            },
+            select: {
+                recipe: true,
+                food: true
             }
         });
-        res.send(ingredientamount);
+        res.status(201).send({ingredientamount});
     }
     catch (err) {
         return errorHandeling(res, err);

@@ -124,7 +124,7 @@ export const addUser = async (req, res) => {
                 mail: true
             }
         });
-        res.status(201).send({idMail});
+        res.status(201).send(idMail);
     } catch (err) {
         return errorHandeling(res, err);
     }
