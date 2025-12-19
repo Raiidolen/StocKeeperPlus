@@ -72,10 +72,6 @@
  *  responses:
  *      addFood:
  *          description: food created
- *          content:
- *              application/json:
- *                  schema:
- *                      $ref: '#/components/schemas/FoodIDSchema'
  */
 /**
  * @swagger
@@ -178,13 +174,13 @@ export const addFood = async (req, res) => {
                         imagepath = `/images/${fileName}`;
                     }
                 }
-            } catch (e) {
-                console.error(e.message);
+            } catch (err) {
+                console.error(err.message);
                 res.sendStatus(500);
             }
         }
 
-        const {id} = await prisma.food.create({
+        await prisma.food.create({
             data: {
                 label,
                 diet,
@@ -192,12 +188,9 @@ export const addFood = async (req, res) => {
                 measuringunit,
                 barcode,
                 imagepath
-            },
-            select: {
-                id: true
             }
         });
-        res.status(201).send({id});
+        res.sendStatus(204);
     } catch (err) {
         return errorHandeling(res, err);
     }
