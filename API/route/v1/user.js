@@ -341,16 +341,28 @@ import {
     updateUser,
     getUser,
     getAllUser,
-    deleteUser
+    deleteUser,
+    addUserNoAdmin,
+    getMyUser,
+    updateMyUser,
+    deleteMyUser
 }  from  '../../controller/userORM.js'
 import {userValidatorMiddleware as PVM} from '../../middleware/userValidation.js';
+import { checkAdmin } from '../../middleware/identification/checkAdmin.js';
 
 const router = Router();
 
-router.post('/', PVM.userToAdd, addUser);
-router.patch('/', PVM.userToUpdate, updateUser);
-router.get('/get/:mail', PVM.searchedUser, getUser);
-router.get('/all', getAllUser);
-router.delete('/', PVM.userToDelete, deleteUser);
+
+router.post('/register', PVM.userToAddNoAdmin, addUserNoAdmin); 
+
+router.get('/me', getMyUser); 
+router.patch('/me', PVM.userToUpdateMe, updateMyUser); 
+router.delete('/me', deleteMyUser);
+
+router.get('/all', checkAdmin, getAllUser); 
+router.get('/get/:mail', checkAdmin, PVM.searchedUser, getUser); 
+router.post('/', checkAdmin, PVM.userToAdd, addUser); 
+router.delete('/', checkAdmin, deleteUser); 
+router.patch('/', checkAdmin, PVM.userToUpdate, updateUser); 
 
 export default router;

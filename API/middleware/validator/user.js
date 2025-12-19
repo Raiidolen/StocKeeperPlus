@@ -67,6 +67,13 @@ const userToAddSchema = vine.object({
     isadmin: vine.boolean()
 });
 
+export const registerSchema = vine.object({
+    mail: vine.string().trim().email(),
+    username: vine.string().trim(),
+    password: vine.string().trim().minLength(5)
+    
+});
+
 const userToUpdateSchema = vine.object({
     mail: vine.string().trim().email(),
     username: vine.string().trim().optional(),
@@ -74,9 +81,18 @@ const userToUpdateSchema = vine.object({
     isadmin: vine.boolean().optional()
 });
 
+export const updateMeSchema = vine.object({
+    username: vine.string().trim().optional(),
+    password: vine.string().trim().minLength(5).optional()
+});
+
+
+
 
 export const
     searchedUser = vine.compile(userIDSchema),
     userToAdd = vine.compile(userToAddSchema),
+    userToAddNoAdmin = vine.compile(registerSchema),
     userToUpdate = vine.compile(userToUpdateSchema),
-    userToDelete = vine.compile(userIDSchema);
+    userToDelete = vine.compile(userIDSchema),
+    userToUpdateMe = vine.compile(updateMeSchema);
