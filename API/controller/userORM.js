@@ -113,7 +113,7 @@ export const addUser = async (req, res) => {
     try {
         const {mail, username, password, isadmin} = req.val;
         const hashedPassword = await hashing(password);
-        const {idMail} = await prisma.user.create({
+        const idMail = await prisma.user.create({
             data: {
                 mail,
                 username,
